@@ -20,13 +20,13 @@ class PermissionRoleSeeder extends Seeder
          * Registro de los roles por defecto
          */
         $adminRole = Role::create([
-            'name' => 'admin',
+            'name' => 'administrador',
         ]);
         $teacherRole = Role::create([
-            'name' => 'teacher',
+            'name' => 'profesor',
         ]);
         $studentRole = Role::create([
-            'name' => 'student',
+            'name' => 'estudiante',
         ]);
 
 
@@ -36,15 +36,15 @@ class PermissionRoleSeeder extends Seeder
          */
         //  Módulo: Profesor
         $listTeachers = Permission::create([
-            'name' => 'list teachers',
+            'name' => 'list.teachers',
         ]);
 
         // Módulo: Contenido
         $listContent = Permission::create([
-            'name' => 'list content',
+            'name' => 'list.content',
         ]);
         $createContent = Permission::create([
-            'name' => 'create content'
+            'name' => 'create.content'
         ]);
 
         /**

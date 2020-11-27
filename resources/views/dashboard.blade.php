@@ -2,6 +2,10 @@
     <x-slot name="header">
         <h2 class="font-semibold text-xl text-gray-800 leading-tight">
             {{ __('Dashboard') }}
+            @foreach (Auth::user()->roles as $role)
+                {{ $role->name }}
+            @endforeach
+            
         </h2>
     </x-slot>
 

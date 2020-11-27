@@ -28,7 +28,7 @@ class UserSeeder extends Seeder
 
         ]);
         // Se asigna el rol de administrador al usuario registrado anteriormente
-        $adminUser->assignRole('admin');
+        $adminUser->assignRole('administrador');
 
         /**
          * Profesores
@@ -36,7 +36,7 @@ class UserSeeder extends Seeder
         $teachers = User::factory(5)
             ->create()
             ->each(function (User $teacherUser) {
-                $teacherUser->assignRole('teacher');
+                $teacherUser->assignRole('profesor');
             });
 
         /**
@@ -45,7 +45,7 @@ class UserSeeder extends Seeder
         $students = User::factory(10)
             ->create()
             ->each(function (User $studentUser) {
-                $studentUser->assignRole('student');
+                $studentUser->assignRole('estudiante');
             });
     }
 }
