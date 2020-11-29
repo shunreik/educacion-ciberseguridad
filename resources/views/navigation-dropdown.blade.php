@@ -16,6 +16,9 @@
                         Inicio
                         {{-- {{ __('Dashboard') }} --}}
                     </x-jet-nav-link>
+                    <x-jet-nav-link href="{{ route('student') }}" :active="request()->routeIs('student')">
+                        Estudiantes
+                    </x-jet-nav-link>
                 </div>
             </div>
 
