@@ -1,7 +1,10 @@
 <x-app-layout>
     <x-slot name="header">
         <h2 class="font-semibold text-xl text-gray-800 leading-tight">
-            {{ __('Profile') }}
+            Perfil
+            @foreach (Auth::user()->roles as $role)
+                {{ ucfirst($role->name) }}
+            @endforeach
         </h2>
     </x-slot>
 

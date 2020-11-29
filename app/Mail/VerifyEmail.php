@@ -33,8 +33,8 @@ class VerifyEmail extends VerifyEmailBase
     protected function buildMailMessage($url)
     {
         return (new MailMessage)
-            ->subject('Verificar la dirección de correo electrónico')
-            ->greeting('Bienvenido a educación en ciberseguridad')
+            ->subject('Verificación de correo electrónico')
+            ->greeting('Verificación de correo electrónico')
             ->line('Por favor, haga clic en el botón de abajo para verificar su dirección de correo electrónico.')
             ->action('Verificar la dirección de correo electrónico', $url)
             ->line('Si no ha creado una cuenta, no se requiere ninguna otra acción.')
