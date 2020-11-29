@@ -1,6 +1,8 @@
 <?php
 
+use App\Http\Livewire\UserComponent;
 use Illuminate\Support\Facades\Route;
+use Livewire\Livewire;
 
 /*
 |--------------------------------------------------------------------------
@@ -22,6 +24,8 @@ Route::middleware(['auth:sanctum', 'verified'])->get('/dashboard', function () {
     return view('dashboard');
 })->name('dashboard');
 
-Route::get('student', function(){
-    return 'Ingresaste a la opción de estudiante';
-})->name('student');
+Route::get('students', UserComponent::class)->name('student');
+// Route::get('students', StudentComponent::class)->name('student');
+// Route::get('students', function(){
+//     return view('livewire.user-component');
+// })->name('student');
