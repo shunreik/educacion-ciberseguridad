@@ -53,11 +53,13 @@
                   <div class="flex justify-center">
                     @if ($role === 'estudiante')
                       <a href="#" class="text-gray-600 hover:text-gray-900 mx-3">Ver</a>
+
                       @if ($user->isUserActive($role))
-                          <a href="#" class="text-pink-600 hover:text-pink-900 mx-3">Desactivar</a>
+                          <button wire:click="confirmDisable({{ $user->id }})" class="text-pink-600 hover:text-pink-900 mx-3">Desactivar</button>
                         @else
-                          <a href="#" class="text-green-600 hover:text-green-900 mx-3">Activar</a>
+                          <button wire:click="confirmActive({{ $user->id }})" class="text-green-600 hover:text-green-900 mx-3">Activar</button>
                       @endif
+                      
                     @endif
                     @if ($role === 'profesor')
                       <a href="#" class="text-gray-600 hover:text-gray-900 mx-3">Ver</a>
@@ -68,7 +70,6 @@
                 </td>
               </tr>
               @endforeach
-
             </tbody>
           </table>
         </div>
