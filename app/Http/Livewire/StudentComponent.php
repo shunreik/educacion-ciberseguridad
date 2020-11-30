@@ -12,9 +12,9 @@ class StudentComponent extends Component
     use WithPagination;
 
     public $view = "show";
-    public $confirmingDisable, $confirmingActive = false;
+    public $confirmingDisable, $confirmingActive, $showMode = false;
 
-    public $userId, $username;
+    public $userId, $nickname, $photo, $name, $surname, $email, $verifiedMail, $dateRegistration, $dateVerified;
 
     public function render()
     {
@@ -25,11 +25,27 @@ class StudentComponent extends Component
         ]);
     }
 
+    public function show($id){
+        $this->view = 'show';//Se cambia a la vista de ver
+        $this->showMode = true; //Se presenta el modal con la información del usuario
+        $student = User::find($id);
+        $this->nickname = $student->nickname;
+        $this->photo = $student->profile_photo_url;
+        $this->name = $student->name;
+        $this->surname = $student->surname;
+        $this->email = $student->email;
+        $this->verifiedMail = $student->hasVerifiedEmail();
+        $this->dateRegistration = $student->created_at->format('d M Y - H:i:s');
+        if($this->verifiedMail){
+            $this->dateVerified = $student->email_verified_at->format('d M Y - H:i:s');
+        }
+    }
+
     public function confirmDisable($id){
         $this->view = 'disable';
         $student = User::find($id);
         $this->userId = $student->id;
-        $this->username = $student->nickname;
+        $this->nickname = $student->nickname;
         $this->confirmingDisable = true;
     }
 
@@ -44,7 +60,7 @@ class StudentComponent extends Component
         $this->view = 'active';
         $student = User::find($id);
         $this->userId = $student->id;
-        $this->username = $student->nickname;
+        $this->nickname = $student->nickname;
         $this->confirmingActive = true;
     }
 

@@ -19,6 +19,7 @@
 
                         <x-table.users :users=$students role='estudiante'/>
 
+                        {{-- Se presentan los modaldes acorde a la opción seleccionada por el usuario en el componente table-user --}}
                         @include("livewire.student.$view")
 
                     </div>

@@ -1,10 +1,10 @@
 <x-jet-dialog-modal wire:model="confirmingDisable">
     <x-slot name="title">
-        <h1 class="uppercase">Confirmar desactivación de usuario</h1>
+        <h1 class="uppercase">Confirmar desactivación del estudiante</h1>
     </x-slot>
 
     <x-slot name="content">
-        El usuario <span class="font-bold">{{ $username }}</span> va ser desactivado, impidiendo su acceso a la aplicación web.
+        El usuario <span class="font-bold">{{ $nickname }}</span> va ser desactivado, impidiendo su acceso a la aplicación web.
     </x-slot>
 
     <x-slot name="footer">

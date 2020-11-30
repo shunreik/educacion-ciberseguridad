@@ -52,8 +52,7 @@
                 <td class="px-6 py-4 whitespace-nowrap text-sm font-medium">
                   <div class="flex justify-center">
                     @if ($role === 'estudiante')
-                      <a href="#" class="text-gray-600 hover:text-gray-900 mx-3">Ver</a>
-
+                      <button wire:click="show({{ $user->id }})" class="text-gray-600 hover:text-gray-900 mx-3">Ver</button>
                       @if ($user->isUserActive($role))
                           <button wire:click="confirmDisable({{ $user->id }})" class="text-pink-600 hover:text-pink-900 mx-3">Desactivar</button>
                         @else
