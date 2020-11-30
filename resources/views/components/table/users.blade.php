@@ -1,4 +1,4 @@
-@props(['users'])
+@props(['users', 'role'])
 <!-- This example requires Tailwind CSS v2.0+ -->
 <div class="flex flex-col mt-4">
     <div class="-my-2 overflow-x-auto sm:-mx-6 lg:-mx-8">
@@ -7,31 +7,17 @@
           <table class="min-w-full divide-y divide-gray-200">
             <thead>
               <tr>
-                <th scope="col" class="px-6 py-3 bg-gray-50 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                  Username
-                </th>
-                <th scope="col" class="px-6 py-3 bg-gray-50 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                  Apellido
-                </th>
-                <th scope="col" class="px-6 py-3 bg-gray-50 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                  Nombre
-                </th>
-                <th scope="col" class="px-6 py-3 bg-gray-50 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                  Correo
-                </th>
-                <th scope="col" class="px-6 py-3 bg-gray-50 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                  Estado
-                </th>
-                {{-- <th scope="col" class="px-6 py-3 bg-gray-50 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                  Opciones
-                </th> --}}
-                <th scope="col" class="px-6 py-3 bg-gray-50">
-                  <span class="sr-only">Edit</span>
-                </th>
+                <x-table.th content='Username'/>
+                <x-table.th content='Apellido'/>
+                <x-table.th content='Nombre'/>
+                <x-table.th content='Correo'/>
+                <x-table.th content='Estado'/>
+                <x-table.th content='Opciones'/>
               </tr>
             </thead>
             <tbody class="bg-white divide-y divide-gray-200">
 
+              {{-- {{var_dump($users[0]->isUserActive('estudiante'))}} --}}
               @foreach ($users as $user)
               {{-- {{var_dump($user->name)}} --}}
               <tr>
@@ -57,14 +43,27 @@
                   <div class="text-sm text-gray-900">{{ $user->email }}</div>
                 </td>
                 <td class="px-6 py-4 whitespace-nowrap">
-                  <span class="px-2 inline-flex text-xs leading-5 font-semibold rounded-full bg-green-100 text-green-800">
-                    Active
-                  </span>
+                  @if ($user->isUserActive($role))
+                    <x-badge-user-status message='Activo'/>
+                  @else
+                    <x-badge-user-status color='pink' message='Inactivo'/>
+                  @endif
                 </td>
                 <td class="px-6 py-4 whitespace-nowrap text-sm font-medium">
                   <div class="flex justify-center">
-                    <a href="#" class="text-gray-600 hover:text-gray-900 mx-3">Ver</a>
-                    <a href="#" class="text-pink-600 hover:text-pink-900 mx-3">Desactivar</a>
+                    @if ($role === 'estudiante')
+                      <a href="#" class="text-gray-600 hover:text-gray-900 mx-3">Ver</a>
+                      @if ($user->isUserActive($role))
+                          <a href="#" class="text-pink-600 hover:text-pink-900 mx-3">Desactivar</a>
+                        @else
+                          <a href="#" class="text-green-600 hover:text-green-900 mx-3">Activar</a>
+                      @endif
+                    @endif
+                    @if ($role === 'profesor')
+                      <a href="#" class="text-gray-600 hover:text-gray-900 mx-3">Ver</a>
+                      <a href="#" class="text-blue-600 hover:text-blue-900 mx-3">Editar</a>
+                      <a href="#" class="text-pink-600 hover:text-pink-900 mx-3">Desactivar</a>
+                    @endif
                   </div>
                 </td>
               </tr>
@@ -75,7 +74,6 @@
         </div>
         <div class="my-3">
           {{-- Personalización del paginator de tailwind --}}
-          {{-- {{ $users->links('vendor.pagination.tailwind') }} --}}
           {{ $users->links() }}
         </div>
       </div>
