@@ -35,15 +35,17 @@ class StudentComponent extends Component
         $this->view = 'show';//Se cambia a la vista de ver
         $this->showMode = true; //Se presenta el modal con la información del usuario
         $student = User::find($id);
-        $this->nickname = $student->nickname;
-        $this->photo = $student->profile_photo_url;
-        $this->name = $student->name;
-        $this->surname = $student->surname;
-        $this->email = $student->email;
-        $this->verifiedMail = $student->hasVerifiedEmail();
-        $this->dateRegistration = $student->created_at->format('d M Y - H:i:s');
-        if($this->verifiedMail){
-            $this->dateVerified = $student->email_verified_at->format('d M Y - H:i:s');
+        if($student->hasRole('estudiante')){
+            $this->nickname = $student->nickname;
+            $this->photo = $student->profile_photo_url;
+            $this->name = $student->name;
+            $this->surname = $student->surname;
+            $this->email = $student->email;
+            $this->verifiedMail = $student->hasVerifiedEmail();
+            $this->dateRegistration = $student->created_at->format('d M Y - H:i:s');
+            if($this->verifiedMail){
+                $this->dateVerified = $student->email_verified_at->format('d M Y - H:i:s');
+            }
         }
     }
 
@@ -51,11 +53,13 @@ class StudentComponent extends Component
      * Método que muestra el modal para confirmar la desactivación del estudiante
      */
     public function confirmDisable($id){
-        $this->view = 'disable';
         $student = User::find($id);
-        $this->userId = $student->id;
-        $this->nickname = $student->nickname;
-        $this->confirmingDisable = true;
+        if($student->hasRole('estudiante')){
+            $this->view = 'disable';
+            $this->userId = $student->id;
+            $this->nickname = $student->nickname;
+            $this->confirmingDisable = true;
+        }
     }
 
     /**
@@ -72,11 +76,13 @@ class StudentComponent extends Component
      * Método que muestra el modal para confirmar activación del estudiante
      */
     public function confirmActive($id){
-        $this->view = 'active';
         $student = User::find($id);
-        $this->userId = $student->id;
-        $this->nickname = $student->nickname;
-        $this->confirmingActive = true;
+        if($student->hasRole('estudiante')){
+            $this->view = 'active';
+            $this->userId = $student->id;
+            $this->nickname = $student->nickname;
+            $this->confirmingActive = true;
+        }
     }
 
     /**
