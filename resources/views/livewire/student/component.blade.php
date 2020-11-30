@@ -13,8 +13,15 @@
                             Listado de estudiantes registrados
                         </div>
 
-                        <div class="mt-4 text-gray-500">
+                        <div class="mt-4 text-gray-500 mb-2">
                             A continuación puedes obsevar el listado de estudiantes registrados.
+                        </div>
+
+                        <div class="flex justify-center mb-4">
+                            {{-- Opciones de filtrado --}}
+                            <x-jet-button class="mx-1 md:mx-3" wire:click='allUsers'>Todos</x-jet-button>
+                            <x-jet-button class="mx-1  md:mx-3  bg-green-800 hover:bg-green-700" wire:click='activatedUsers'>Activos</x-jet-button>
+                            <x-jet-button class="mx-1  md:mx-3  bg-pink-800 hover:bg-pink-700" wire:click="disabledUsers">Inactivos</x-jet-button>
                         </div>
 
                         <x-table.users :users=$students role='estudiante'/>

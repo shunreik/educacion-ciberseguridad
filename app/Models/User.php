@@ -81,7 +81,7 @@ class User extends Authenticatable implements MustVerifyEmail, CanResetPassword
             config('permission.table_names.model_has_roles'),
             config('permission.column_names.model_morph_key'),
             'role_id'
-        )->withPivot('status');
+        )->withPivot(['status']);
     }
     //Se modifica la asignación de roles al modelo
     /**
