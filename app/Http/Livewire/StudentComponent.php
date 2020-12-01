@@ -15,13 +15,16 @@ class StudentComponent extends Component
     public $confirmingDisable, $confirmingActive, $showMode = false;
     public $userId, $nickname, $photo, $name, $surname, $email, $verifiedMail, $dateRegistration, $dateVerified;
     public $userFilteringOptions = 'all';//las opciones de filtrado son all|only
+    //opciones de filtrado de usuario
+    public $all = true;
+    public $actived = false, $disabled = false;
 
     /**
      * Método que renderiza la vista principal
      */
     public function render()
     {
-        $students = $this->filterUsers($this->userFilteringOptions);
+        $students = $this->filterUsers();
 
         return view('livewire.student.component', [
             'students' => $students,
@@ -110,38 +113,44 @@ class StudentComponent extends Component
      * Método que permite listar a todos los estudiantes
      */
     public function allUsers(){
-        $this->userFilteringOptions = 'all';
+        $this->all = true;
+        $this->actived = false;
+        $this->disabled = false;
     }
 
     /**
      * Método que permite el filtrado de estudiantes activos
      */
     public function activatedUsers(){
-        $this->userFilteringOptions = 'actived';
+        $this->actived = true;
+        $this->disabled = false;
+        $this->all = false;
     }
 
     /**
      * Método que permitr el filtrado de estudiantes desactivados
      */
     public function disabledUsers(){
-        $this->userFilteringOptions = 'disabled';
+        $this->disabled = true;
+        $this->actived = false;
+        $this->all = false;
     }
 
         /**
      * Método que filtra a los estudiantes el módo de filtrado,
      * esta función recibe las opciones de filtrado de usuario
      */
-    public function filterUsers($mode){
+    public function filterUsers(){
         $role = Role::where('name', 'estudiante')->first();
         $students = $role->users();
 
-        if($mode === 'all'){
+        if($this->all){
             $students = $students;
         }
-        if($mode === 'actived'){
+        if($this->actived){
             $students = $students->wherePivot('status', true);
         }
-        if($mode === 'disabled'){
+        if($this->disabled){
             $students = $students->wherePivot('status', false);
         }
 

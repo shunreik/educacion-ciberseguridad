@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Livewire\StudentComponent;
+use App\Http\Livewire\TeacherComponent;
 use App\Http\Livewire\UserComponent;
 use Illuminate\Support\Facades\Route;
 use Livewire\Livewire;
@@ -26,3 +27,4 @@ Route::middleware(['auth:sanctum', 'verified'])->get('/dashboard', function () {
 })->name('dashboard');
 
 Route::get('students', StudentComponent::class)->name('student')->middleware('auth', 'verified');
+Route::get('teachers', TeacherComponent::class)->name('teacher')->middleware('auth', 'verified');

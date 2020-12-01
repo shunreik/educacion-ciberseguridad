@@ -7,12 +7,12 @@
           <table class="min-w-full divide-y divide-gray-200">
             <thead>
               <tr>
-                <x-table.th content='Username'/>
-                <x-table.th content='Apellido'/>
-                <x-table.th content='Nombre'/>
-                <x-table.th content='Correo'/>
-                <x-table.th content='Estado'/>
-                <x-table.th content='Opciones'/>
+                <x-tables.th content='Username'/>
+                <x-tables.th content='Apellido'/>
+                <x-tables.th content='Nombre'/>
+                <x-tables.th content='Correo'/>
+                <x-tables.th content='Estado'/>
+                <x-tables.th content='Opciones'/>
               </tr>
             </thead>
             <tbody class="bg-white divide-y divide-gray-200">

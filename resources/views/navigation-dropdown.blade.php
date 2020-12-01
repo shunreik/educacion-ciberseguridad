@@ -14,10 +14,12 @@
                 <div class="hidden space-x-8 sm:-my-px sm:ml-10 sm:flex">
                     <x-jet-nav-link href="{{ route('dashboard') }}" :active="request()->routeIs('dashboard')">
                         Inicio
-                        {{-- {{ __('Dashboard') }} --}}
                     </x-jet-nav-link>
                     <x-jet-nav-link href="{{ route('student') }}" :active="request()->routeIs('student')">
                         Estudiantes
+                    </x-jet-nav-link>
+                    <x-jet-nav-link href="{{ route('teacher') }}" :active="request()->routeIs('teacher')">
+                        Profesores
                     </x-jet-nav-link>
                 </div>
             </div>
