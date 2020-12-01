@@ -128,7 +128,12 @@
         <div class="pt-2 pb-3 space-y-1">
             <x-jet-responsive-nav-link href="{{ route('dashboard') }}" :active="request()->routeIs('dashboard')">
                 Inicio
-                {{-- {{ __('Dashboard') }} --}}
+            </x-jet-responsive-nav-link>
+            <x-jet-responsive-nav-link href="{{ route('student') }}" :active="request()->routeIs('student')">
+                Estudiantes
+            </x-jet-responsive-nav-link>
+            <x-jet-responsive-nav-link href="{{ route('teacher') }}" :active="request()->routeIs('teacher')">
+                Profesores
             </x-jet-responsive-nav-link>
         </div>
 

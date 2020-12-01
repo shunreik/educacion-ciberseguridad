@@ -1,9 +1,12 @@
 
 <div>
     <x-slot name="header">
-        <h2 class="font-semibold text-xl text-gray-800 leading-tight">
-            Módulo Profesores
-        </h2>
+        <div class="flex items-center" >
+            <h2 class="flex-grow font-semibold text-xl text-gray-800 leading-tight ">
+                Módulo Profesores
+            </h2>
+            <x-jet-button>Agregar profesor</x-jet-button>
+        </div>
     </x-slot>
     <div class="py-12">
         <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
@@ -12,17 +15,18 @@
                     <div class="mt-2 text-2xl">
                         Listado de profesores registrados
                     </div>
-
                     <div class="mt-4 text-gray-500 mb-2">
                         A continuación puedes obsevar el listado de profesores registrados.
                     </div>
 
                     {{-- Opciones de filtrado --}}
-                    {{-- <div class="flex justify-center mb-4">
-                        <x-jet-button class="mx-1 md:mx-3" wire:click='allUsers'>Todos</x-jet-button>
-                        <x-jet-button class="mx-1  md:mx-3  bg-green-800 hover:bg-green-700" wire:click='activatedUsers'>Activos</x-jet-button>
-                        <x-jet-button class="mx-1  md:mx-3  bg-pink-800 hover:bg-pink-700" wire:click="disabledUsers">Inactivos</x-jet-button>
-                    </div> --}}
+                    <div class="flex justify-center mb-4">
+                        <x-filters.status>
+                            <x-buttons.filter class="active">Todos</x-buttons.filter>
+                            <x-buttons.filter color="green">Activos</x-buttons.filter>
+                            <x-buttons.filter color="pink">Inactivos</x-buttons.filter>
+                        </x-filters.status>
+                    </div>
 
                     <x-tables.users :users=$teachers role='profesor'/>
 
