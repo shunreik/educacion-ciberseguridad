@@ -15,12 +15,21 @@
                     <x-jet-nav-link href="{{ route('dashboard') }}" :active="request()->routeIs('dashboard')">
                         Inicio
                     </x-jet-nav-link>
+
+                    @can('manage.students')
                     <x-jet-nav-link href="{{ route('student') }}" :active="request()->routeIs('student')">
                         Estudiantes
                     </x-jet-nav-link>
+                    @endcan
+                    
+
+                    @can('manage.teachers')
                     <x-jet-nav-link href="{{ route('teacher') }}" :active="request()->routeIs('teacher')">
                         Profesores
                     </x-jet-nav-link>
+                    @endcan
+                    
+                    
                 </div>
             </div>
 
@@ -129,12 +138,19 @@
             <x-jet-responsive-nav-link href="{{ route('dashboard') }}" :active="request()->routeIs('dashboard')">
                 Inicio
             </x-jet-responsive-nav-link>
+
+            @can('manage.students')
             <x-jet-responsive-nav-link href="{{ route('student') }}" :active="request()->routeIs('student')">
                 Estudiantes
             </x-jet-responsive-nav-link>
+            @endcan
+
+            @can('manage.teachers')
             <x-jet-responsive-nav-link href="{{ route('teacher') }}" :active="request()->routeIs('teacher')">
                 Profesores
             </x-jet-responsive-nav-link>
+            @endcan
+
         </div>
 
         <!-- Responsive Settings Options -->

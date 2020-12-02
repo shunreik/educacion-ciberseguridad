@@ -35,8 +35,11 @@ class PermissionRoleSeeder extends Seeder
          * Registro de los permisos por módulo
          */
         //  Módulo: Profesor
-        $listTeachers = Permission::create([
-            'name' => 'list.teachers',
+        $manageTeachers = Permission::create([
+            'name' => 'manage.teachers',
+        ]);
+        $manageStudents = Permission::create([
+            'name' => 'manage.students',
         ]);
 
         // Módulo: Contenido
@@ -52,7 +55,8 @@ class PermissionRoleSeeder extends Seeder
          * Se asignan los permisos registrados a los roles por defecto
          */
         $adminRole->syncPermissions([
-            $listTeachers,
+            $manageTeachers,
+            $manageStudents,
         ]);
         $teacherRole->syncPermissions([
             $createContent,
