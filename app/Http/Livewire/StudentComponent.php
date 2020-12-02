@@ -72,6 +72,7 @@ class StudentComponent extends Component
         $student = User::find($this->userId);
         $this->updateRoleStatus($student, 'estudiante', false);
         $this->confirmingDisable = false;
+        session()->flash('success', 'Estudiante desactivado correctamente');
     }
 
     /**
@@ -94,6 +95,7 @@ class StudentComponent extends Component
         $student = User::find($this->userId);
         $this->updateRoleStatus($student, 'estudiante', true);
         $this->confirmingActive = false;
+        session()->flash('success', 'Estudiante activado correctamente');
     }
 
     /**

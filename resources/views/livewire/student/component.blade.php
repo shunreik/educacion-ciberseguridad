@@ -5,6 +5,15 @@
         </h2>
     </x-slot>
 
+    @if (session()->has('success'))
+        <x-alerts.toast wire:model="alert">
+            <x-slot name="message">{{ session('success') }}</x-slot>
+            <button type="button" wire:click="$refresh" class="text-green-700">
+                <span class="">&times;</span>
+            </button>
+        </x-alerts.toast>
+    @endif
+
     <div class="py-12">
         <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
             <div class="bg-white overflow-hidden shadow-xl sm:rounded-lg">
