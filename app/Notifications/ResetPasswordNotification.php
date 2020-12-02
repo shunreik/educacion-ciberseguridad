@@ -1,34 +1,15 @@
 <?php
 
-namespace App\Mail;
+namespace App\Notifications;
 
 use Illuminate\Bus\Queueable;
-use Illuminate\Contracts\Queue\ShouldQueue;
-use Illuminate\Mail\Mailable;
-use Illuminate\Queue\SerializesModels;
-use Illuminate\Auth\Notifications\ResetPassword as ResetPasswordBase;
 use Illuminate\Notifications\Messages\MailMessage;
+use Illuminate\Auth\Notifications\ResetPassword as ResetPasswordBase;
 use Illuminate\Support\Facades\Lang;
 
 class ResetPasswordNotification extends ResetPasswordBase
 {
-    use Queueable, SerializesModels;
-
-    /**
-     * The password reset token.
-     *
-     * @var string
-     */
-    public $token;
-    /**
-     * Create a new message instance.
-     *
-     * @return void
-     */
-    public function __construct($token)
-    {
-        $this->token = $token;
-    }
+    use Queueable;
 
     //Se modifica el mensaje de restablecimiento de contrasenia
     /**

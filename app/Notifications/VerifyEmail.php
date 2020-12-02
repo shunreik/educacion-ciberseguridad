@@ -1,29 +1,16 @@
 <?php
 
-namespace App\Mail;
+namespace App\Notifications;
 
 use Illuminate\Bus\Queueable;
-use Illuminate\Contracts\Queue\ShouldQueue;
-use Illuminate\Mail\Mailable;
-use Illuminate\Queue\SerializesModels;
-use Illuminate\Auth\Notifications\VerifyEmail as VerifyEmailBase;
 use Illuminate\Notifications\Messages\MailMessage;
+use Illuminate\Auth\Notifications\VerifyEmail as VerifyEmailBase;
 
 class VerifyEmail extends VerifyEmailBase
 {
-    use Queueable, SerializesModels;
+    use Queueable;
 
-    /**
-     * Create a new message instance.
-     *
-     * @return void
-     */
-    public function __construct()
-    {
-        //
-    }
-
-    //Se configura el contenido del mensaje del correo de verificación de direción email
+     //Se configura el contenido del mensaje del correo de verificación de direción email
     /**
      * Get the verify email notification mail message for the given URL.
      *
