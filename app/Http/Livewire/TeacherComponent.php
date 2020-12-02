@@ -18,7 +18,8 @@ class TeacherComponent extends Component
     public $showMode = false,
         $createMode = false,
         $editMode = false,
-        $disableMode = false;
+        $disableMode = false,
+        $activeMode = false;
     public $userId, $nickname, $photo, $name, $surname, $email, $verifiedMail, $dateRegistration, $dateVerified;
 
     public function render()
@@ -145,6 +146,24 @@ class TeacherComponent extends Component
         $this->disableMode = false;
         $this->default();
         session()->flash('success', 'Profesor desactivado correctamente');
+    }
+
+    public function confirmActive($id)
+    {
+        $this->view = 'active';
+        $this->activeMode = true;
+        $teacher = User::find($id);
+        $this->userId = $teacher->id;
+        $this->nickname = $teacher->nickname;
+    }
+
+    public function active()
+    {
+        $teacher = User::find($this->userId);
+        $this->updateRoleStatus($teacher, 'profesor', true);
+        $this->activeMode = false;
+        $this->default();
+        session()->flash('success', 'Profesor activado correctamente');
     }
 
     /**

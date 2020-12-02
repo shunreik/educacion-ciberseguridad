@@ -66,7 +66,7 @@
                       @if ($user->isUserActive($role))
                           <button wire:click="confirmDisable({{ $user->id }})" class="text-pink-600 hover:text-pink-900 mx-3">Desactivar</button>
                         @else
-                          {{-- <button wire:click="confirmActive({{ $user->id }})" class="text-green-600 hover:text-green-900 mx-3">Activar</button> --}}
+                          <button wire:click="confirmActive({{ $user->id }})" class="text-green-600 hover:text-green-900 mx-3">Activar</button>
                       @endif
                     @endif
 
