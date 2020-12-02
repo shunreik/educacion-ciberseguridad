@@ -17,7 +17,8 @@ class TeacherComponent extends Component
     public $view = 'show';
     public $showMode = false,
         $createMode = false,
-        $editMode = false;
+        $editMode = false,
+        $disableMode = false;
     public $userId, $nickname, $photo, $name, $surname, $email, $verifiedMail, $dateRegistration, $dateVerified;
 
     public function render()
@@ -70,7 +71,7 @@ class TeacherComponent extends Component
             'password' => Hash::make($password),
         ]);
         $teacher->assignRole('profesor');
-        $teacher->notify(new VerifyTeacherEmail($teacher->email, $password));//se envía un correo al profesor registrado
+        $teacher->notify(new VerifyTeacherEmail($teacher->email, $password)); //se envía un correo al profesor registrado
         $this->default();
         session()->flash('success', 'Profesor registrado correctamente');
         $this->createMode = false;
@@ -102,16 +103,16 @@ class TeacherComponent extends Component
         $teacher->nickname = $this->getFullName($this->name,  $this->surname);
 
         if ($teacher->email !== $this->email) {
-            $password = Str::random(8);//se genera un nuevo password
+            $password = Str::random(8); //se genera un nuevo password
             $teacher->email = $this->email;
             $teacher->email_verified_at = null;
             $teacher->password = Hash::make($password);
             $sendMail = true;
         }
 
-        $teacher->save();//Se actualiza el registro del profesor
+        $teacher->save(); //Se actualiza el registro del profesor
 
-        if($sendMail){
+        if ($sendMail) {
             //Se envía el correo electrónico
             $teacher->notify(new VerifyTeacherEmail($teacher->email, $password, 'Actualización de profesor'));
         }
@@ -126,6 +127,37 @@ class TeacherComponent extends Component
         $first_name = explode(' ', $name);
         $last_name = explode(' ', $surname);
         return "$first_name[0] $last_name[0]";
+    }
+
+    public function confirmDisable($id)
+    {
+        $this->view = "disable";
+        $this->disableMode = true;
+        $teacher = User::find($id);
+        $this->userId = $teacher->id;
+        $this->nickname = $teacher->nickname;
+    }
+
+    public function disable()
+    {
+        $teacher = User::find($this->userId);
+        $this->updateRoleStatus($teacher, 'profesor', false);
+        $this->disableMode = false;
+        $this->default();
+        session()->flash('success', 'Profesor desactivado correctamente');
+    }
+
+    /**
+     * Método que actualiza el estado del rol asigando al profesor
+     */
+    public function updateRoleStatus($user, $roleToUpdate, $status)
+    {
+        $userRoles = $user->roles;
+        foreach ($userRoles as $role) {
+            if ($role->name === $roleToUpdate) {
+                $user->roles()->updateExistingPivot($role->id, ['status' => $status]);
+            }
+        }
     }
 
     public function

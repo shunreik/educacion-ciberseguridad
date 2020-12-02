@@ -62,7 +62,12 @@
                     @if ($role === 'profesor')
                       <button wire:click="show({{ $user->id }})" class="text-gray-600 hover:text-gray-900 mx-3">Ver</button>
                       <button wire:click="edit({{ $user->id }})" class="text-blue-600 hover:text-blue-900 mx-3">Editar</button>
-                      <a href="#" class="text-pink-600 hover:text-pink-900 mx-3">Desactivar</a>
+                      {{-- <a href="#" class="text-pink-600 hover:text-pink-900 mx-3">Desactivar</a> --}}
+                      @if ($user->isUserActive($role))
+                          <button wire:click="confirmDisable({{ $user->id }})" class="text-pink-600 hover:text-pink-900 mx-3">Desactivar</button>
+                        @else
+                          {{-- <button wire:click="confirmActive({{ $user->id }})" class="text-green-600 hover:text-green-900 mx-3">Activar</button> --}}
+                      @endif
                     @endif
 
                   </div>
