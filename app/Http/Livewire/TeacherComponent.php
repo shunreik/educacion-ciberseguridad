@@ -21,12 +21,14 @@ class TeacherComponent extends Component
         $disableMode = false,
         $activeMode = false;
     public $userId, $nickname, $photo, $name, $surname, $email, $verifiedMail, $dateRegistration, $dateVerified;
+    //opciones de filtrado de usuario
+    public $all = true,
+        $actived = false,
+        $disabled = false;
 
     public function render()
     {
-        $roleTeacher = Role::where('name', 'profesor')->first();
-        $teachers = $roleTeacher->users()->paginate(10);
-
+        $teachers = $this->filterUsers();
         return view('livewire.teacher.component', [
             'teachers' => $teachers,
         ]);
@@ -191,5 +193,53 @@ class TeacherComponent extends Component
         $this->verifiedMail = '';
         $this->dateRegistration = '';
         $this->dateVerified = '';
+    }
+
+    /**
+     * Método que permite listar a todos los estudiantes
+     */
+    public function allUsers()
+    {
+        $this->all = true;
+        $this->actived = false;
+        $this->disabled = false;
+    }
+
+    /**
+     * Método que permite el filtrado de profesores activos
+     */
+    public function activatedUsers()
+    {
+        $this->actived = true;
+        $this->disabled = false;
+        $this->all = false;
+    }
+
+    /**
+     * Método que permitr el filtrado de profesores desactivados
+     */
+    public function disabledUsers()
+    {
+        $this->disabled = true;
+        $this->actived = false;
+        $this->all = false;
+    }
+
+    public function filterUsers()
+    {
+        $roleTeacher = Role::where('name', 'profesor')->first();
+        $teachers = $roleTeacher->users();
+
+        if ($this->all) {
+            $teachers = $teachers;
+        }
+        if ($this->actived) {
+            $teachers = $teachers->wherePivot('status', true);
+        }
+        if ($this->disabled) {
+            $teachers = $teachers->wherePivot('status', false);
+        }
+
+        return $teachers->orderBy('surname', 'asc')->paginate(10);
     }
 }

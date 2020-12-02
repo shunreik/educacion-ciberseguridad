@@ -49,9 +49,9 @@
                     {{-- Opciones de filtrado --}}
                     <div class="flex justify-center mb-4">
                         <x-filters.status>
-                            <x-buttons.filter class="active">Todos</x-buttons.filter>
-                            <x-buttons.filter color="green">Activos</x-buttons.filter>
-                            <x-buttons.filter color="pink">Inactivos</x-buttons.filter>
+                            <x-buttons.filter class="{{$all ? 'active' : ''}}" wire:click='allUsers'>Todos</x-buttons.filter>
+                            <x-buttons.filter color='green' class="{{$actived ? 'active' : ''}}" wire:click='activatedUsers'>Activos</x-buttons.filter>
+                            <x-buttons.filter color='pink' class="{{$disabled ? 'active' : ''}}" wire:click="disabledUsers">Inactivos</x-buttons.filter>
                         </x-filters.status>
                     </div>
                    
