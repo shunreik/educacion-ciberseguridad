@@ -17,9 +17,7 @@
             </thead>
             <tbody class="bg-white divide-y divide-gray-200">
 
-              {{-- {{var_dump($users[0]->isUserActive('estudiante'))}} --}}
               @foreach ($users as $user)
-              {{-- {{var_dump($user->name)}} --}}
               <tr>
                 <td class="px-6 py-4 whitespace-nowrap">
                   <div class="flex items-center">
@@ -51,6 +49,7 @@
                 </td>
                 <td class="px-6 py-4 whitespace-nowrap text-sm font-medium">
                   <div class="flex justify-center">
+
                     @if ($role === 'estudiante')
                       <button wire:click="show({{ $user->id }})" class="text-gray-600 hover:text-gray-900 mx-3">Ver</button>
                       @if ($user->isUserActive($role))
@@ -62,10 +61,10 @@
                     @endif
                     @if ($role === 'profesor')
                       <button wire:click="show({{ $user->id }})" class="text-gray-600 hover:text-gray-900 mx-3">Ver</button>
-                      {{-- <a href="#" class="text-gray-600 hover:text-gray-900 mx-3">Ver</a> --}}
-                      <a href="#" class="text-blue-600 hover:text-blue-900 mx-3">Editar</a>
+                      <button wire:click="edit({{ $user->id }})" class="text-blue-600 hover:text-blue-900 mx-3">Editar</button>
                       <a href="#" class="text-pink-600 hover:text-pink-900 mx-3">Desactivar</a>
                     @endif
+
                   </div>
                 </td>
               </tr>

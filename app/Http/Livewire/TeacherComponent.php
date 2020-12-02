@@ -15,7 +15,8 @@ class TeacherComponent extends Component
 
     public $view = 'show';
     public $showMode = false,
-        $createMode = false;
+        $createMode = false,
+        $editMode = false;
     public $userId, $nickname, $photo, $name, $surname, $email, $verifiedMail, $dateRegistration, $dateVerified;
 
     public function render()
@@ -30,7 +31,7 @@ class TeacherComponent extends Component
 
     public function show($id)
     {
-        $this->view="show";
+        $this->view = "show";
         $this->showMode = true;
         $teacher = User::find($id);
         $this->nickname = $teacher->nickname;
@@ -73,6 +74,49 @@ class TeacherComponent extends Component
         $this->createMode = false;
     }
 
+    public function edit($id)
+    {
+        $this->view = 'edit';
+        $this->editMode = true;
+        $teacher = User::find($id);
+        $this->userId = $teacher->id;
+        $this->name = $teacher->name;
+        $this->surname = $teacher->surname;
+        $this->email = $teacher->email;
+    }
+
+    public function update()
+    {
+        $sendMail = false;
+        $this->validate([
+            'name' => ['required', 'string', 'max:255'],
+            'surname' => ['required', 'string', 'max:255'],
+            'email' => ['required', 'string', 'email', 'max:255', "unique:users,email,$this->userId"],
+        ]);
+
+        $teacher = User::find($this->userId);
+        $teacher->name = $this->name;
+        $teacher->surname = $this->surname;
+        $teacher->nickname = $this->getFullName($this->name,  $this->surname);
+
+        if ($teacher->email !== $this->email) {
+            $teacher->email = $this->email;
+            $teacher->email_verified_at = null;
+            $sendMail = true;
+        }
+
+        $teacher->save();//Se actualiza el registro del profesor
+
+        if($sendMail){
+            //Se envía el correo electrónico
+            $password = Str::random(8);//se genera un nuevo password
+        }
+
+        $this->default();
+        session()->flash('success', 'Profesor actualizado correctamente');
+        $this->editMode = false;
+    }
+
     public function getFullName($name, $surname)
     {
         $first_name = explode(' ', $name);
@@ -83,6 +127,7 @@ class TeacherComponent extends Component
     public function
     default()
     {
+        $this->userId = '';
         $this->nickname = '';
         $this->photo = '';
         $this->name = '';
