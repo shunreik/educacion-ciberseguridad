@@ -61,7 +61,8 @@
                       
                     @endif
                     @if ($role === 'profesor')
-                      <a href="#" class="text-gray-600 hover:text-gray-900 mx-3">Ver</a>
+                      <button wire:click="show({{ $user->id }})" class="text-gray-600 hover:text-gray-900 mx-3">Ver</button>
+                      {{-- <a href="#" class="text-gray-600 hover:text-gray-900 mx-3">Ver</a> --}}
                       <a href="#" class="text-blue-600 hover:text-blue-900 mx-3">Editar</a>
                       <a href="#" class="text-pink-600 hover:text-pink-900 mx-3">Desactivar</a>
                     @endif

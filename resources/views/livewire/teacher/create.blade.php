@@ -10,7 +10,7 @@
 
     <x-slot name="footer">
 
-        <x-jet-secondary-button wire:click="default">
+        <x-jet-secondary-button wire:click="$set('createMode', false)">
             {{-- wire:click="$toggle('showMode')" wire:loading.attr="disabled" --}}
             Cancelar
         </x-jet-secondary-button>

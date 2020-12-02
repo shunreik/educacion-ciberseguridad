@@ -12,12 +12,11 @@ use Livewire\WithPagination;
 class TeacherComponent extends Component
 {
     use WithPagination;
-    
+
     public $view = 'show';
     public $showMode = false,
         $createMode = false;
-    public $name, $surname, $email;
-    // public $alert = false;
+    public $userId, $nickname, $photo, $name, $surname, $email, $verifiedMail, $dateRegistration, $dateVerified;
 
     public function render()
     {
@@ -29,10 +28,28 @@ class TeacherComponent extends Component
         ]);
     }
 
+    public function show($id)
+    {
+        $this->view="show";
+        $this->showMode = true;
+        $teacher = User::find($id);
+        $this->nickname = $teacher->nickname;
+        $this->photo = $teacher->profile_photo_url;
+        $this->name = $teacher->name;
+        $this->surname = $teacher->surname;
+        $this->email = $teacher->email;
+        $this->verifiedMail = $teacher->hasVerifiedEmail();
+        $this->dateRegistration = $teacher->created_at->format('d M Y - H:i:s');
+        if ($this->verifiedMail) {
+            $this->dateVerified = $teacher->email_verified_at->format('d M Y - H:i:s');
+        }
+    }
+
     public function create()
     {
         $this->view = 'create';
         $this->createMode = true;
+        $this->default();
     }
 
     public function store()
@@ -53,20 +70,26 @@ class TeacherComponent extends Component
         $teacher->assignRole('profesor');
         $this->default();
         session()->flash('success', 'Profesor registrado correctamente');
-        // $this->alert = true;
+        $this->createMode = false;
     }
 
-    public function getFullName($name, $surname){
+    public function getFullName($name, $surname)
+    {
         $first_name = explode(' ', $name);
         $last_name = explode(' ', $surname);
         return "$first_name[0] $last_name[0]";
     }
 
-    public function default()
+    public function
+    default()
     {
+        $this->nickname = '';
+        $this->photo = '';
         $this->name = '';
         $this->surname = '';
         $this->email = '';
-        $this->createMode = false;
+        $this->verifiedMail = '';
+        $this->dateRegistration = '';
+        $this->dateVerified = '';
     }
 }
