@@ -21,7 +21,7 @@ class ResetPasswordNotification extends ResetPasswordBase
     protected function buildMailMessage($url)
     {
         return (new MailMessage)
-            ->subject('Restablecimiento de contraseña')
+            ->subject(env('APP_NAME').' - Restablecimiento de contraseña')
             ->greeting('Restablecimiento de contraseña')
             ->line('Está recibiendo este correo electrónico porque recibimos una solicitud de restablecimiento de contraseña para su cuenta.')
             ->action('Restablecer contraseña', $url)

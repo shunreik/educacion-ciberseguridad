@@ -3,6 +3,7 @@
 namespace App\Http\Livewire;
 
 use App\Models\User;
+use App\Notifications\VerifyTeacherEmail;
 use Illuminate\Support\Facades\Hash;
 use Livewire\Component;
 use Spatie\Permission\Models\Role;
@@ -69,6 +70,7 @@ class TeacherComponent extends Component
             'password' => Hash::make($password),
         ]);
         $teacher->assignRole('profesor');
+        $teacher->notify(new VerifyTeacherEmail($teacher->email, $password));//se envía un correo al profesor registrado
         $this->default();
         session()->flash('success', 'Profesor registrado correctamente');
         $this->createMode = false;
@@ -100,8 +102,10 @@ class TeacherComponent extends Component
         $teacher->nickname = $this->getFullName($this->name,  $this->surname);
 
         if ($teacher->email !== $this->email) {
+            $password = Str::random(8);//se genera un nuevo password
             $teacher->email = $this->email;
             $teacher->email_verified_at = null;
+            $teacher->password = Hash::make($password);
             $sendMail = true;
         }
 
@@ -109,7 +113,7 @@ class TeacherComponent extends Component
 
         if($sendMail){
             //Se envía el correo electrónico
-            $password = Str::random(8);//se genera un nuevo password
+            $teacher->notify(new VerifyTeacherEmail($teacher->email, $password, 'Actualización de profesor'));
         }
 
         $this->default();
