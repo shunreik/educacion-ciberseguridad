@@ -14,7 +14,6 @@ class StudentComponent extends Component
     public $view = "show";
     public $confirmingDisable, $confirmingActive, $showMode = false;
     public $userId, $nickname, $photo, $name, $surname, $email, $verifiedMail, $dateRegistration, $dateVerified;
-    public $userFilteringOptions = 'all';//las opciones de filtrado son all|only
     //opciones de filtrado de usuario
     public $all = true;
     public $actived = false, $disabled = false;

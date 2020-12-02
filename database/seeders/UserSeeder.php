@@ -33,7 +33,7 @@ class UserSeeder extends Seeder
         /**
          * Profesores
          */
-        $teachers = User::factory(5)
+        $teachers = User::factory(15)
             ->create()
             ->each(function (User $teacherUser) {
                 $teacherUser->assignRole('profesor');
@@ -42,7 +42,7 @@ class UserSeeder extends Seeder
         /**
          * Estudiantes
          */
-        $students = User::factory(10)
+        $students = User::factory(15)
             ->create()
             ->each(function (User $studentUser) {
                 $studentUser->assignRole('estudiante');

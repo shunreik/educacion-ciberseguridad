@@ -1,0 +1,1 @@
+Modal para visualizar un registro

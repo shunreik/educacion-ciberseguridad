@@ -1,14 +1,41 @@
-
 <div>
     <x-slot name="header">
         <div class="flex items-center" >
             <h2 class="flex-grow font-semibold text-xl text-gray-800 leading-tight ">
                 Módulo Profesores
             </h2>
-            <x-jet-button>Agregar profesor</x-jet-button>
+            
         </div>
     </x-slot>
-    <div class="py-12">
+    
+    @if (session()->has('success'))
+        <x-alerts.toast wire:model="alert">
+            <x-slot name="message">{{ session('success') }}</x-slot>
+            <button type="button" wire:click="$refresh" class="text-green-700">
+                <span class="">&times;</span>
+            </button>
+        </x-alerts.toast>
+    @endif
+
+    <div class="pt-12">
+        <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
+            <div class="bg-white overflow-hidden shadow-xl sm:rounded-lg">
+                <div class="p-6 sm:px-20 bg-white border-b border-gray-200">
+                    <div class="mt-2 text-2xl">
+                        Registrar profesor
+                    </div>
+                    <div class="flex items-center" >
+                        <div class="flex-grow mt-4 text-gray-500 mb-2">
+                            Puedes registrar a un nuevo profesor seleccionando la siguiente opción.
+                        </div>
+                        <x-jet-button type='button' wire:click='create' wire:loading.attr="disabled">Agregar profesor</x-jet-button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="py-5">
         <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
             <div class="bg-white overflow-hidden shadow-xl sm:rounded-lg">
                 <div class="p-6 sm:px-20 bg-white border-b border-gray-200">
@@ -27,11 +54,11 @@
                             <x-buttons.filter color="pink">Inactivos</x-buttons.filter>
                         </x-filters.status>
                     </div>
-
+                   
                     <x-tables.users :users=$teachers role='profesor'/>
 
                     {{-- Se presentan los modaldes acorde a la opción seleccionada por el usuario en el componente table-user --}}
-                    {{-- @include("livewire.student.$view") --}}
+                    @include("livewire.teacher.$view")
 
                 </div>
             </div>
