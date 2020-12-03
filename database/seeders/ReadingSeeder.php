@@ -15,12 +15,6 @@ class ReadingSeeder extends Seeder
     public function run()
     {
         // Registro de prueba
-        Reading::create([
-            'title'=>'Lectura de prueba',
-            'description'=>'Descripción de prueba',
-            'user_id'=>20,
-            'topic_id'=>1,
-            'level_id'=>1,
-        ]);
+        Reading::factory(20)->create();
     }
 }
