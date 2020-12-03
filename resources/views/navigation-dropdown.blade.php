@@ -29,6 +29,9 @@
                     </x-jet-nav-link>
                     @endcan
                     
+                    <x-jet-nav-link href="{{ route('reading') }}" :active="request()->routeIs('reading')">
+                        Lecturas
+                    </x-jet-nav-link>
                     
                 </div>
             </div>
@@ -150,6 +153,11 @@
                 Profesores
             </x-jet-responsive-nav-link>
             @endcan
+
+            <x-jet-responsive-nav-link href="{{ route('reading') }}" :active="request()->routeIs('reading')">
+                Lecturas
+            </x-jet-responsive-nav-link>
+
 
         </div>
 

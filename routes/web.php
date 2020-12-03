@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Livewire\ReadingComponent;
 use App\Http\Livewire\StudentComponent;
 use App\Http\Livewire\TeacherComponent;
 use App\Http\Livewire\UserComponent;
@@ -29,6 +30,7 @@ Route::middleware(['auth:sanctum', 'verified'])->get('/dashboard', function () {
 Route::middleware(['auth:sanctum', 'verified'])->group(function(){
     Route::get('students', StudentComponent::class)->name('student')->middleware('can:manage.students');
     Route::get('teachers', TeacherComponent::class)->name('teacher')->middleware('can:manage.teachers');
+    Route::get('readings', ReadingComponent::class)->name('reading');
 });
 
 Route::get('logout', function () {
