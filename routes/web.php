@@ -1,11 +1,9 @@
 <?php
 
-use App\Http\Livewire\ReadingComponent;
+use App\Http\Livewire\Reading\ReadingComponent;
 use App\Http\Livewire\StudentComponent;
 use App\Http\Livewire\TeacherComponent;
-use App\Http\Livewire\UserComponent;
 use Illuminate\Support\Facades\Route;
-use Livewire\Livewire;
 
 /*
 |--------------------------------------------------------------------------

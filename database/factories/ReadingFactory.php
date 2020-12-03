@@ -32,6 +32,7 @@ class ReadingFactory extends Factory
         return [
             'title' => $this->faker->sentence($nbWords = 6, $variableNbWords = true),
             'description' => $this->faker->realText($maxNbChars = 200, $indexSize = 2),
+            'status' => true, //todas las lectutas van a ser públicas
             'user_id'=>$teachers->random(),//se obtiene un profesor al azar
             'topic_id'=>$topics->random(),//se obtiene una temática al azar
             'level_id'=>$levels->random(),//se obtiene un nivel al azar

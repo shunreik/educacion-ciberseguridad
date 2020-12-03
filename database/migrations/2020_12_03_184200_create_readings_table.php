@@ -17,6 +17,7 @@ class CreateReadingsTable extends Migration
             $table->id();
             $table->string('title');
             $table->text('description');
+            $table->boolean('status');//privado o público
 
             //Claves foráneas
             $table->foreignId('user_id')->constrained('users')->onDelete('cascade');
