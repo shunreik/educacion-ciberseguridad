@@ -216,16 +216,26 @@ class User extends Authenticatable implements MustVerifyEmail, CanResetPassword
      * @return bool
      * 
      */
-    public function isUserActive($findRole){
+    public function isUserActive($findRole)
+    {
         $rolesUser = $this->roles;
         $roleStatus = false;
 
         foreach ($rolesUser as $role) {
-            if( $role->name == $findRole){
+            if ($role->name == $findRole) {
                 $roleStatus = $role->pivot->status;
             }
         }
 
         return $roleStatus;
+    }
+
+    /**
+     * Relaciones entre modelos
+     */
+    //Un usuario pude tener registradas varias lecturas a su nombre
+    public function readings()
+    {
+        return $this->hasMany(Reading::class);
     }
 }

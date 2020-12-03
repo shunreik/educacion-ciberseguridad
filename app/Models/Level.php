@@ -30,4 +30,12 @@ class Level extends Model
     //weighing -.ponderación del nivel, es decir, cuanto vale o su peso o valor ante otros niveles
    protected $fillable = ['name', 'weighing'];
 
+   /**
+    * Relaciones entre modelos
+    */
+    //Un nivel puede tener varias lectururas
+    public function readings()
+    {
+        return $this->hasMany(Reading::class);
+    }
 }

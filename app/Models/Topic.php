@@ -29,4 +29,13 @@ class Topic extends Model
     */
    protected $fillable = ['title', 'description'];
 
+   /**
+    * Relaciones entre modelos
+    */
+    //Una temática puede tener varias lectururas
+    public function readings()
+    {
+        return $this->hasMany(Reading::class);
+    }
+
 }

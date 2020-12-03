@@ -17,10 +17,30 @@ class Reading extends Model
     protected $table = 'readings';
 
     /**
-    * The attributes that are mass assignable.
-    *
-    * @var array
-    */
-   protected $fillable = ['title', 'description'];
-   
+     * The attributes that are mass assignable.
+     *
+     * @var array
+     */
+    protected $fillable = ['title', 'description'];
+
+    /**
+     * Relaciones entre modelos
+     */
+    //Una lectura le pertenece a un usuario
+    public function user()
+    {
+        return $this->belongsTo(User::class);
+    }
+
+    //Una lectura le pertenece a una temática
+    public function topic()
+    {
+        return $this->belongsTo(Topic::class);
+    }
+
+    //Una lectura le pertenece a un nivel
+    public function level()
+    {
+        return $this->belongsTo(Level::class);
+    }
 }
