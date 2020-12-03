@@ -5,16 +5,16 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class Topic extends Model
+class Level extends Model
 {
     use HasFactory;
 
-     /**
+    /**
      * The table associated with the model.
      *
      * @var string
      */
-    protected $table = 'topics';
+    protected $table = 'levels';
     /**
      * Indicates if the model should be timestamped.
      *
@@ -27,6 +27,7 @@ class Topic extends Model
     *
     * @var array
     */
-   protected $fillable = ['title', 'description'];
+    //weighing -.ponderación del nivel, es decir, cuanto vale o su peso o valor ante otros niveles
+   protected $fillable = ['name', 'weighing'];
 
 }
