@@ -38,9 +38,9 @@
                                 <div class="col-span-6 sm:col-span-5">
                                   <x-jet-label for="topic" value="Temática" />
                                   <select name="topic" id="topic" class="form-select rounded-md shadow-sm mt-1 w-full">
-                                    <option value="value1" selected>Value 1</option> 
-                                    <option value="value2">Value 2</option>
-                                    <option value="value3">Value 3</option>
+                                    @foreach ($topics as $topic)
+                                      <option value="{{ $topic->id}}" >{{ $topic->title}}</option> 
+                                    @endforeach
                                   </select>
                                   <x-jet-input-error for="topic" class="mt-2" />
                                 </div>
@@ -49,9 +49,9 @@
                                 <div class="col-span-6 sm:col-span-5">
                                   <x-jet-label for="level" value="Nivel" />
                                   <select name="level" id="level" class="form-select w-full rounded-md shadow-sm mt-1">
-                                    <option value="value1" selected>Value 1</option> 
-                                    <option value="value2">Value 2</option>
-                                    <option value="value3">Value 3</option>
+                                    @foreach ($levels as $level)
+                                      <option value="{{ $level->id}}" >{{ $level->name}}</option> 
+                                    @endforeach
                                   </select>
                                   <x-jet-input-error for="level" class="mt-2" />
                                 </div>
