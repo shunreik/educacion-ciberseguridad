@@ -1,5 +1,6 @@
 
-var oldImages = ['https://images.pexels.com/photos/1805164/pexels-photo-1805164.jpeg', 'https://images.pexels.com/photos/731022/pexels-photo-731022.jpeg'];
+var oldImages = [];
+// var oldImages = ['https://images.pexels.com/photos/1805164/pexels-photo-1805164.jpeg', 'https://images.pexels.com/photos/731022/pexels-photo-731022.jpeg'];
 var newImages = [];
 
 
@@ -14,7 +15,7 @@ if (document.getElementById("multi-upload")) {
     // and capture the selected files
     const hidden = document.getElementById("hidden-input");
 
-    renderOldImage(oldImages);
+    // renderOldImage(oldImages);
     document.getElementById("upload").onclick = () => hidden.click();
 
     hidden.onchange = (e) => {
@@ -117,4 +118,6 @@ function renderOldImage(images) {
         empty.classList.add("hidden");
     }
 }
+
+export{newImages}
 

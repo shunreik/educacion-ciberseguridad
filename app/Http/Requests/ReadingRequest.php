@@ -3,6 +3,7 @@
 namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
+use Illuminate\Validation\Rule;
 
 class ReadingRequest extends FormRequest
 {
@@ -24,8 +25,12 @@ class ReadingRequest extends FormRequest
     public function rules()
     {
         return [
+            'topic_id' => 'required|exists:topics,id',
+            'level_id' => 'required|exists:levels,id',
             'title' => 'required',
             'description' => 'required',
+            'newImages' => 'nullable|array|max:3',//se permiten máximo hasta 3 imágenes
+            'newImages.*' => 'nullable|image|mimes:jpeg,jpg,png|max:1024', // 1MB Max
         ];
     }
 }

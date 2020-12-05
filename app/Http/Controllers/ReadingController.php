@@ -28,6 +28,6 @@ class ReadingController extends Controller
     public function store(ReadingRequest $request)
     {
         $validate = $request->validated();
-        return $validate;
+        return response()->json(['success' => 'Registro almacenado', 'reading' => $validate]);
     }
 }

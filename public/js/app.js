@@ -21261,9 +21261,13 @@ module.exports = function(module) {
 
 __webpack_require__(/*! ./bootstrap */ "./resources/js/bootstrap.js");
 
-__webpack_require__(/*! alpinejs */ "./node_modules/alpinejs/dist/alpine.js");
+__webpack_require__(/*! alpinejs */ "./node_modules/alpinejs/dist/alpine.js"); //Components
 
-__webpack_require__(/*! ./multi-image-upload */ "./resources/js/multi-image-upload.js");
+
+__webpack_require__(/*! ./multi-image-upload */ "./resources/js/multi-image-upload.js"); //Actions - Axios
+
+
+__webpack_require__(/*! ./create-reading */ "./resources/js/create-reading.js");
 
 /***/ }),
 
@@ -21299,20 +21303,136 @@ window.axios.defaults.headers.common['X-Requested-With'] = 'XMLHttpRequest';
 
 /***/ }),
 
+/***/ "./resources/js/create-reading.js":
+/*!****************************************!*\
+  !*** ./resources/js/create-reading.js ***!
+  \****************************************/
+/*! no exports provided */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _multi_image_upload__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./multi-image-upload */ "./resources/js/multi-image-upload.js");
+
+
+var axios = __webpack_require__(/*! axios */ "./node_modules/axios/index.js");
+
+var sendNewImages = _multi_image_upload__WEBPACK_IMPORTED_MODULE_0__["newImages"]; //Se verifica que tenga el formulario de creación de lectura
+
+if (document.getElementById("form-create-reading")) {
+  //se obtiene al formulario
+  var fromCreate = document.getElementById("form-create-reading"); //Se obtiene hacia donde esta enrutado el formulario
+
+  var url = fromCreate.getAttribute('action'); //Se obtienen los elementos inputs o textArea del formulario
+
+  var topicElem = document.getElementById("topic");
+  var levelElem = document.getElementById("level");
+  var titleElem = document.getElementById("title");
+  var descriptionElem = document.getElementById("description");
+  var uploadElem = document.getElementById("upload"); //Al enviar el formulario
+
+  fromCreate.addEventListener('submit', function (e) {
+    e.preventDefault(); //Se espera que se llenen los campos requeridos
+    //Se agrega el data del formData
+
+    var formData = new FormData(fromCreate);
+    sendNewImages.forEach(function (image) {
+      formData.append('newImages[]', image);
+    });
+    console.log(formData.getAll('newImages[]'));
+    console.log(sendNewImages);
+    var confing = {
+      headers: {
+        'Content-Type': 'multipart/form-data'
+      }
+    };
+    axios.post(url, formData, confing).then(function (response) {
+      // handle success
+      console.log(response.data);
+      topicElem.nextElementSibling.classList.add('hidden');
+      levelElem.nextElementSibling.classList.add('hidden');
+      titleElem.nextElementSibling.classList.add('hidden');
+      descriptionElem.nextElementSibling.classList.add('hidden');
+      uploadElem.nextElementSibling.classList.add('hidden');
+      console.log('Registro guardado');
+    })["catch"](function (error) {
+      if (error.response) {
+        if (error.response.data.errors) {
+          //se obtienen los errores de validaciones de laravel (Request)
+          var errorsForm = error.response.data.errors;
+          console.log(error.response.data.errors);
+
+          if (errorsForm.hasOwnProperty('topic_id')) {
+            topicElem.nextElementSibling.classList.remove('hidden');
+            topicElem.nextElementSibling.innerHTML = errorsForm['topic_id'][0];
+          } else {
+            topicElem.nextElementSibling.classList.add('hidden');
+          }
+
+          if (errorsForm.hasOwnProperty('level_id')) {
+            levelElem.nextElementSibling.classList.remove('hidden');
+            levelElem.nextElementSibling.innerHTML = errorsForm['level_id'][0];
+          } else {
+            levelElem.nextElementSibling.classList.add('hidden');
+          }
+
+          if (errorsForm.hasOwnProperty('title')) {
+            titleElem.nextElementSibling.classList.remove('hidden');
+            titleElem.nextElementSibling.innerHTML = errorsForm['title'][0];
+          } else {
+            titleElem.nextElementSibling.classList.add('hidden');
+          }
+
+          if (errorsForm.hasOwnProperty('description')) {
+            descriptionElem.nextElementSibling.classList.remove('hidden');
+            descriptionElem.nextElementSibling.innerHTML = errorsForm['description'][0];
+          } else {
+            descriptionElem.nextElementSibling.classList.add('hidden');
+          }
+
+          if (errorsForm.hasOwnProperty('newImages')) {
+            uploadElem.nextElementSibling.classList.remove('hidden');
+            uploadElem.nextElementSibling.innerHTML = errorsForm['newImages'][0];
+          } else {
+            uploadElem.nextElementSibling.classList.add('hidden');
+          }
+
+          for (var index = 0; index < 3; index++) {
+            // const element = array[index];
+            console.log('newImages.' + index);
+
+            if (errorsForm.hasOwnProperty('newImages.' + index)) {
+              console.log(errorsForm['newImages.' + index][0]);
+              uploadElem.nextElementSibling.classList.remove('hidden');
+              uploadElem.nextElementSibling.innerHTML = errorsForm['newImages.' + index][0];
+            }
+          }
+        }
+      }
+    });
+  });
+}
+
+/***/ }),
+
 /***/ "./resources/js/multi-image-upload.js":
 /*!********************************************!*\
   !*** ./resources/js/multi-image-upload.js ***!
   \********************************************/
-/*! no static exports found */
-/***/ (function(module, exports) {
+/*! exports provided: newImages */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
 
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "newImages", function() { return newImages; });
 function _createForOfIteratorHelper(o, allowArrayLike) { var it; if (typeof Symbol === "undefined" || o[Symbol.iterator] == null) { if (Array.isArray(o) || (it = _unsupportedIterableToArray(o)) || allowArrayLike && o && typeof o.length === "number") { if (it) o = it; var i = 0; var F = function F() {}; return { s: F, n: function n() { if (i >= o.length) return { done: true }; return { done: false, value: o[i++] }; }, e: function e(_e) { throw _e; }, f: F }; } throw new TypeError("Invalid attempt to iterate non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."); } var normalCompletion = true, didErr = false, err; return { s: function s() { it = o[Symbol.iterator](); }, n: function n() { var step = it.next(); normalCompletion = step.done; return step; }, e: function e(_e2) { didErr = true; err = _e2; }, f: function f() { try { if (!normalCompletion && it["return"] != null) it["return"](); } finally { if (didErr) throw err; } } }; }
 
 function _unsupportedIterableToArray(o, minLen) { if (!o) return; if (typeof o === "string") return _arrayLikeToArray(o, minLen); var n = Object.prototype.toString.call(o).slice(8, -1); if (n === "Object" && o.constructor) n = o.constructor.name; if (n === "Map" || n === "Set") return Array.from(o); if (n === "Arguments" || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(n)) return _arrayLikeToArray(o, minLen); }
 
 function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len = arr.length; for (var i = 0, arr2 = new Array(len); i < len; i++) { arr2[i] = arr[i]; } return arr2; }
 
-var oldImages = ['https://images.pexels.com/photos/1805164/pexels-photo-1805164.jpeg', 'https://images.pexels.com/photos/731022/pexels-photo-731022.jpeg'];
+var oldImages = []; // var oldImages = ['https://images.pexels.com/photos/1805164/pexels-photo-1805164.jpeg', 'https://images.pexels.com/photos/731022/pexels-photo-731022.jpeg'];
+
 var newImages = [];
 
 if (document.getElementById("multi-upload")) {
@@ -21322,8 +21442,7 @@ if (document.getElementById("multi-upload")) {
   var imageTempl = document.getElementById("image-template"); // click the hidden input of type file if the visible button is clicked
   // and capture the selected files
 
-  var hidden = document.getElementById("hidden-input");
-  renderOldImage(oldImages);
+  var hidden = document.getElementById("hidden-input"); // renderOldImage(oldImages);
 
   document.getElementById("upload").onclick = function () {
     return hidden.click();
@@ -21446,6 +21565,8 @@ function renderOldImage(images) {
     empty.classList.add("hidden");
   }
 }
+
+
 
 /***/ }),
 

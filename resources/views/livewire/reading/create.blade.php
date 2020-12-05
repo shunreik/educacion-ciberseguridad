@@ -14,7 +14,7 @@
             </x-jet-section-title>
         
             <div class="mt-5 md:mt-0 md:col-span-2">
-                <form action="{{route('store.reading')}}" method="POST" id='form-create-reading'>
+                <form action="{{route('store.reading')}}" method="POST" id='form-create-reading' enctype="multipart/form-data">
                     @csrf
                     <div class="shadow overflow-hidden sm:rounded-md">
                         <div class="px-4 py-5 bg-white sm:p-6">
@@ -23,46 +23,45 @@
                                 <!-- Tile -->
                                 <div class="col-span-6 sm:col-span-5">
                                     <x-jet-label for="title" value="Título" />
-                                    <x-jet-input type="text" id="title" name='title' class="mt-1 block w-full" autocomplete="name" value="{{ old('title') }}" required/>
-                                    <x-jet-input-error for="title" class="mt-2" />
+                                    <x-jet-input type="text" id="title" name='title' class="mt-1 block w-full" autocomplete="name" value="{{ old('title') }}" />
+                                    {{-- <x-jet-input-error for="title" class="mt-2" /> --}}
+                                    <p class="mt-2 text-sm text-red-600 hidden"></p>
                                 </div>
 
                                 <!-- Description -->
                                 <div class="col-span-6 sm:col-span-5">
                                     <x-jet-label for="description" value="Description" />
                                     <textarea name="description" id="description" class="resize border rounded-md mt-1 block w-full" rows="10">{{ old('description') }}</textarea>
-                                    <x-jet-input-error for="description" class="mt-2" />
+                                    <p class="mt-2 text-sm text-red-600 hidden"></p>
                                 </div>
 
                                 <!-- Topic -->
                                 <div class="col-span-6 sm:col-span-5">
                                   <x-jet-label for="topic" value="Temática" />
-                                  <select name="topic" id="topic" class="form-select rounded-md shadow-sm mt-1 w-full">
+                                  <select name="topic_id" id="topic" class="form-select rounded-md shadow-sm mt-1 w-full">
                                     @foreach ($topics as $topic)
                                       <option value="{{ $topic->id}}" >{{ $topic->title}}</option> 
                                     @endforeach
                                   </select>
-                                  <x-jet-input-error for="topic" class="mt-2" />
+                                  <p class="mt-2 text-sm text-red-600 hidden"></p>
                                 </div>
 
                                 <!-- Level -->
                                 <div class="col-span-6 sm:col-span-5">
                                   <x-jet-label for="level" value="Nivel" />
-                                  <select name="level" id="level" class="form-select w-full rounded-md shadow-sm mt-1">
+                                  <select name="level_id" id="level" class="form-select w-full rounded-md shadow-sm mt-1">
                                     @foreach ($levels as $level)
                                       <option value="{{ $level->id}}" >{{ $level->name}}</option> 
                                     @endforeach
                                   </select>
-                                  <x-jet-input-error for="level" class="mt-2" />
+                                  <p class="mt-2 text-sm text-red-600 hidden"></p>
                                 </div>
 
                                 <!-- Imágenes-->
                                 <div class="col-span-6 sm:col-span-5">
                                     <x-jet-label for="images" value="Imágenes (Opcional)" />
-
                                     <!-- scroll area -->
                                 <section class="h-full overflow-auto p-8 w-full flex flex-col" id="multi-upload">
-                                
 
                                   <ul id="gallery-upload" class="flex flex-1 flex-wrap">
                                       {{-- Agregar imágenes del reading--}}
@@ -77,6 +76,7 @@
                                     
                                     <span class="ml-2">Subir imágenes</span>
                                   </button>
+                                  <p class="mt-2 text-sm text-red-600 hidden"></p>
                                     
                                     <ul id="gallery" class="flex flex-1 flex-wrap mt-2">
                                           {{-- Agregar imágenes --}}
