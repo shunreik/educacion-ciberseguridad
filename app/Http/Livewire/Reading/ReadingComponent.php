@@ -16,6 +16,6 @@ class ReadingComponent extends Component
     }
 
     public function create(){
-        // return redirect()->route('create.reading');
+        return redirect()->route('create.reading');
     }
 }

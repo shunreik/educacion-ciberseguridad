@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\ReadingController;
 use App\Http\Livewire\Reading\ReadingComponent;
 use App\Http\Livewire\StudentComponent;
 use App\Http\Livewire\TeacherComponent;
@@ -30,7 +31,9 @@ Route::middleware(['auth:sanctum', 'verified'])->group(function(){
     Route::get('students', StudentComponent::class)->name('student')->middleware('can:manage.students');
     Route::get('teachers', TeacherComponent::class)->name('teacher')->middleware('can:manage.teachers');
     Route::get('readings', ReadingComponent::class)->name('reading');
-    Route::get('upload', UploadImage::class)->name('upload');
+    Route::get('reading/create', [ReadingController::class, 'create'])->name('create.reading');
+    Route::post('reading/store', [ReadingController::class, 'store'])->name('store.reading');
+    Route::get('test', UploadImage::class);
 });
 
 Route::get('logout', function () {
