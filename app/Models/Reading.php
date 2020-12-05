@@ -43,4 +43,13 @@ class Reading extends Model
     {
         return $this->belongsTo(Level::class);
     }
+
+    /***
+     * Relaciones polimórficas
+     * Get all of the post's images.
+     */
+    public function images()
+    {
+        return $this->morphMany(Image::class, 'imageable');
+    }
 }
