@@ -19,6 +19,7 @@
                     <div class="shadow overflow-hidden sm:rounded-md">
                         <div class="px-4 py-5 bg-white sm:p-6">
                             <div class="grid grid-cols-6 gap-6">
+
                                 <!-- Tile -->
                                 <div class="col-span-6 sm:col-span-5">
                                     <x-jet-label for="title" value="Título" />
@@ -32,6 +33,29 @@
                                     <textarea name="description" id="description" class="resize border rounded-md mt-1 block w-full" rows="10">{{ old('description') }}</textarea>
                                     <x-jet-input-error for="description" class="mt-2" />
                                 </div>
+
+                                <!-- Topic -->
+                                <div class="col-span-6 sm:col-span-5">
+                                  <x-jet-label for="topic" value="Temática" />
+                                  <select name="topic" id="topic" class="form-select rounded-md shadow-sm mt-1 w-full">
+                                    <option value="value1" selected>Value 1</option> 
+                                    <option value="value2">Value 2</option>
+                                    <option value="value3">Value 3</option>
+                                  </select>
+                                  <x-jet-input-error for="topic" class="mt-2" />
+                                </div>
+
+                                <!-- Level -->
+                                <div class="col-span-6 sm:col-span-5">
+                                  <x-jet-label for="level" value="Nivel" />
+                                  <select name="level" id="level" class="form-select w-full rounded-md shadow-sm mt-1">
+                                    <option value="value1" selected>Value 1</option> 
+                                    <option value="value2">Value 2</option>
+                                    <option value="value3">Value 3</option>
+                                  </select>
+                                  <x-jet-input-error for="level" class="mt-2" />
+                                </div>
+
                                 <!-- Imágenes-->
                                 <div class="col-span-6 sm:col-span-5">
                                     <x-jet-label for="images" value="Imágenes (Opcional)" />
@@ -39,8 +63,13 @@
                                     <!-- scroll area -->
                                 <section class="h-full overflow-auto p-8 w-full flex flex-col" id="multi-upload">
                                 
+
+                                  <ul id="gallery-upload" class="flex flex-1 flex-wrap">
+                                      {{-- Agregar imágenes del reading--}}
+                                  </ul>
+
                                   <input id="hidden-input" type="file" multiple class="hidden" />
-                                  <button id="upload" type="button" class="mt-2 rounded-sm px-3 py-1 bg-gray-200 hover:bg-gray-300 focus:shadow-outline focus:outline-none  inline-flex items-center justify-center">
+                                  <button id="upload" type="button" class="m-0 rounded-sm px-3 py-1 bg-gray-200 hover:bg-gray-300 focus:shadow-outline focus:outline-none  inline-flex items-center justify-center">
                                     <svg class=" bg-gray-200" height="18" viewBox="0 0 24 24" width="18" xmlns="http://www.w3.org/2000/svg">
                                       <path d="M0 0h24v24H0z" fill="none"/>
                                         <path d="M9 16h6v-6h4l-7-7-7 7h4zm-4 2h14v2H5z"/>
@@ -48,21 +77,16 @@
                                     
                                     <span class="ml-2">Subir imágenes</span>
                                   </button>
-
-        
-                                    <ul id="gallery-upload" class="flex flex-1 flex-wrap mt-3 pb-0">
-                                        {{-- Agregar imágenes --}}
-                                    </ul>
-                                      <ul id="gallery" class="flex flex-1 flex-wrap m-0 py-0">
+                                    
+                                    <ul id="gallery" class="flex flex-1 flex-wrap mt-2">
                                           {{-- Agregar imágenes --}}
-                                      </ul>
+                                    </ul>
+
                                     <div id="empty" class="h-full w-full text-center flex flex-col items-center justify-center">
                                       <img class="mx-auto w-32" src="https://user-images.githubusercontent.com/507615/54591670-ac0a0180-4a65-11e9-846c-e55ffce0fe7b.png" alt="no data" />
                                       <span class="text-small text-gray-500">Sin imágenes</span>
                                     </div>
                                 </section>
-
-
                                 </div>
                             </div>
                         </div>
@@ -80,12 +104,13 @@
 
     <template id="image-template">
         {{-- <li class="block p-1 w-1/2 sm:w-1/3 md:w-1/4 lg:w-1/6 xl:w-1/8 h-24"> --}}
-        <li class="block p-1 w-1/2 h-30">
+        <li class="block p-1 w-1/2 h-40">
+          {{-- group hasImage w-full h-full rounded-md focus:outline-none focus:shadow-outline bg-gray-100 cursor-pointer relative text-transparent hover:text-white shadow-sm --}}
           <article tabindex="0" class="group hasImage w-full h-full rounded-md focus:outline-none focus:shadow-outline bg-gray-100 cursor-pointer relative text-transparent hover:text-white shadow-sm">
             <img alt="upload preview" class="img-preview w-full h-full sticky object-cover rounded-md bg-fixed" />
     
             <section class="flex flex-col rounded-md text-xs break-words w-full h-full z-20 absolute top-0 py-2 px-3">
-              <h1 class="flex-1"></h1>
+              {{-- <h1 class="flex-1"></h1> --}}
               <div class="flex">
                 <span class="p-1">
                   <i>
@@ -107,34 +132,12 @@
         </li>
       </template>
 
-     <script>
-
-
-      </script>
-
-<style>
-    .hasImage:hover section {
-      background-color: rgba(5, 5, 5, 0.4);
-    }
-    .hasImage:hover button:hover {
-      background: rgba(5, 5, 5, 0.45);
-    }
-    
-    #overlay p,
-    i {
-      opacity: 0;
-    }
-    
-    #overlay.draggedover {
-      background-color: rgba(255, 255, 255, 0.7);
-    }
-    #overlay.draggedover p,
-    #overlay.draggedover i {
-      opacity: 1;
-    }
-    
-    .group:hover .group-hover\:text-blue-800 {
-      color: #2b6cb0;
-    }
-</style>
+      <style>
+        .hasImage:hover section {
+          background-color: rgba(5, 5, 5, 0.4);
+        }
+        .hasImage:hover button:hover {
+          background: rgba(5, 5, 5, 0.45);
+        }
+    </style>
 </x-app-layout>
