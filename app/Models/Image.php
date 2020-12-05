@@ -10,6 +10,15 @@ class Image extends Model
     use HasFactory;
 
     /**
+     * The attributes that are mass assignable.
+     *
+     * @var array
+     */
+    protected $fillable = [
+        'url',
+    ];
+    
+    /**
      * Relaciones polimórficas
     /**
      * Get the owning imageable model.
