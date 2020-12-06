@@ -1,4 +1,4 @@
-import { newImages } from './multi-image-upload';
+import { newImages, numberOfImagesAllowed } from './multi-image-upload';
 const axios = require('axios');
 
 var sendNewImages = newImages;
@@ -83,7 +83,7 @@ if (document.getElementById("form-create-reading")) {
                         uploadElem.nextElementSibling.classList.add('hidden');
                     }
 
-                    for (let index = 0; index < 3; index++) {
+                    for (let index = 0; index < numberOfImagesAllowed; index++) {
                         // const element = array[index];
                         console.log('newImages.' + index);
                         if (errorsForm.hasOwnProperty('newImages.' + index)) {

@@ -21402,7 +21402,7 @@ if (document.getElementById("form-create-reading")) {
             uploadElem.nextElementSibling.classList.add('hidden');
           }
 
-          for (var index = 0; index < 3; index++) {
+          for (var index = 0; index < _multi_image_upload__WEBPACK_IMPORTED_MODULE_0__["numberOfImagesAllowed"]; index++) {
             // const element = array[index];
             console.log('newImages.' + index);
 
@@ -21424,12 +21424,13 @@ if (document.getElementById("form-create-reading")) {
 /*!********************************************!*\
   !*** ./resources/js/multi-image-upload.js ***!
   \********************************************/
-/*! exports provided: newImages */
+/*! exports provided: newImages, numberOfImagesAllowed */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "newImages", function() { return newImages; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "numberOfImagesAllowed", function() { return numberOfImagesAllowed; });
 function _createForOfIteratorHelper(o, allowArrayLike) { var it; if (typeof Symbol === "undefined" || o[Symbol.iterator] == null) { if (Array.isArray(o) || (it = _unsupportedIterableToArray(o)) || allowArrayLike && o && typeof o.length === "number") { if (it) o = it; var i = 0; var F = function F() {}; return { s: F, n: function n() { if (i >= o.length) return { done: true }; return { done: false, value: o[i++] }; }, e: function e(_e) { throw _e; }, f: F }; } throw new TypeError("Invalid attempt to iterate non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."); } var normalCompletion = true, didErr = false, err; return { s: function s() { it = o[Symbol.iterator](); }, n: function n() { var step = it.next(); normalCompletion = step.done; return step; }, e: function e(_e2) { didErr = true; err = _e2; }, f: function f() { try { if (!normalCompletion && it["return"] != null) it["return"](); } finally { if (didErr) throw err; } } }; }
 
 function _unsupportedIterableToArray(o, minLen) { if (!o) return; if (typeof o === "string") return _arrayLikeToArray(o, minLen); var n = Object.prototype.toString.call(o).slice(8, -1); if (n === "Object" && o.constructor) n = o.constructor.name; if (n === "Map" || n === "Set") return Array.from(o); if (n === "Arguments" || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(n)) return _arrayLikeToArray(o, minLen); }
@@ -21439,12 +21440,15 @@ function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len 
 var oldImages = []; // var oldImages = ['https://images.pexels.com/photos/1805164/pexels-photo-1805164.jpeg', 'https://images.pexels.com/photos/731022/pexels-photo-731022.jpeg'];
 
 var newImages = [];
+var numberOfImagesAllowed = 3;
+var size = 1048576; //equivale a 1MB
 
 if (document.getElementById("multi-upload")) {
   var gallery = document.getElementById("gallery");
   var galleryUpload = document.getElementById("gallery-upload");
   var empty = document.getElementById("empty");
-  var imageTempl = document.getElementById("image-template"); // click the hidden input of type file if the visible button is clicked
+  var imageTempl = document.getElementById("image-template");
+  var uploadElem = document.getElementById("upload"); // click the hidden input of type file if the visible button is clicked
   // and capture the selected files
 
   var hidden = document.getElementById("hidden-input"); // renderOldImage(oldImages);
@@ -21455,13 +21459,43 @@ if (document.getElementById("multi-upload")) {
 
   hidden.onchange = function (e) {
     // console.log(e.target.files);
+    while (uploadElem.nextElementSibling.firstChild) {
+      uploadElem.nextElementSibling.removeChild(uploadElem.nextElementSibling.firstChild);
+    }
+
     var _iterator = _createForOfIteratorHelper(e.target.files),
         _step;
 
     try {
       for (_iterator.s(); !(_step = _iterator.n()).done;) {
         var file = _step.value;
-        addImage(file);
+        var allImages = newImages.concat(oldImages);
+
+        if (allImages.length < numberOfImagesAllowed) {
+          if (/\.(jpe?g|png)$/i.test(file.name)) {
+            if (file.size < size) {
+              addImage(file); // while (uploadElem.nextElementSibling.firstChild) uploadElem.nextElementSibling.removeChild(uploadElem.nextElementSibling.firstChild);
+
+              uploadElem.nextElementSibling.classList.add('hidden');
+            } else {
+              console.log('No cumple con el tamanio');
+              var message = document.createElement("p");
+              message.innerHTML = 'La imagen ' + file.name + ' pesa más del tamaño permitido.';
+              uploadElem.nextElementSibling.append(message);
+            }
+          } else {
+            console.log('No es una imágen');
+            var message = document.createElement("p");
+            message.innerHTML = 'El archivo ' + file.name + ' no es una imágen.';
+            uploadElem.nextElementSibling.append(message);
+          }
+        } else {
+          console.log('Superó el límite de imágenes permitidas');
+          var message = document.createElement("p");
+          message.innerHTML = 'Superó el límite de imágenes permitidas';
+          uploadElem.nextElementSibling.append(message);
+          break; //se termina el bucle
+        }
       }
     } catch (err) {
       _iterator.e(err);
@@ -21469,6 +21503,7 @@ if (document.getElementById("multi-upload")) {
       _iterator.f();
     }
 
+    uploadElem.nextElementSibling.classList.remove('hidden');
     renderNewImage(newImages);
   }; // event delegation to caputre delete events
   // fron the waste buckets in the file preview cards
