@@ -4,6 +4,15 @@
         Módulo Lectura
     </h2>
     @endslot
+    @if (session()->has('success'))
+        <x-alerts.toast wire:model="alert">
+            <x-slot name="message">{{ session('success') }}</x-slot>
+            <button type="button" wire:click="$refresh" class="text-green-700">
+                <span class="">&times;</span>
+            </button>
+        </x-alerts.toast>
+    @endif
+
 
     <div class="pt-12">
         <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">

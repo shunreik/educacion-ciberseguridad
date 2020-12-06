@@ -50,6 +50,6 @@ class ReadingController extends Controller
         }
 
         session()->flash('success', 'Lectura registrada correctamente');
-        return response()->json(['success' => 'Registro almacenado', 'reading' => $validate]);
+        return response()->json(['success' => 'Registro almacenado', 'reading' => $validate, 'redirect'=> route('reading')]);
     }
 }

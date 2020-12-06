@@ -21349,12 +21349,17 @@ if (document.getElementById("form-create-reading")) {
     axios.post(url, formData, confing).then(function (response) {
       // handle success
       console.log(response.data);
+      document.getElementById("save").disabled = true;
       topicElem.nextElementSibling.classList.add('hidden');
       levelElem.nextElementSibling.classList.add('hidden');
       titleElem.nextElementSibling.classList.add('hidden');
       descriptionElem.nextElementSibling.classList.add('hidden');
       uploadElem.nextElementSibling.classList.add('hidden');
-      console.log('Registro guardado');
+      console.log('Registro guardado'); // funciona como una redirección HTTP
+
+      if (response.data.redirect) {
+        window.location.replace(response.data.redirect);
+      }
     })["catch"](function (error) {
       if (error.response) {
         if (error.response.data.errors) {

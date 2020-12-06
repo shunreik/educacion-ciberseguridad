@@ -1,11 +1,8 @@
 <div>
     <x-slot name="header">
-        <div class="flex items-center" >
-            <h2 class="flex-grow font-semibold text-xl text-gray-800 leading-tight ">
-                Módulo Profesor
-            </h2>
-            
-        </div>
+        <h2 class="font-semibold text-xl text-gray-800 leading-tight ">
+            Módulo Profesor
+        </h2>
     </x-slot>
     
     @if (session()->has('success'))
