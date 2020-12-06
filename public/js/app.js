@@ -21269,6 +21269,8 @@ __webpack_require__(/*! ./multi-image-upload */ "./resources/js/multi-image-uplo
 
 __webpack_require__(/*! ./create-reading */ "./resources/js/create-reading.js");
 
+__webpack_require__(/*! ./update-reading */ "./resources/js/update-reading.js");
+
 /***/ }),
 
 /***/ "./resources/js/bootstrap.js":
@@ -21424,22 +21426,26 @@ if (document.getElementById("form-create-reading")) {
 /*!********************************************!*\
   !*** ./resources/js/multi-image-upload.js ***!
   \********************************************/
-/*! exports provided: newImages, numberOfImagesAllowed */
+/*! exports provided: newImages, oldImages, numberOfImagesAllowed, resetOldImages, resetRenderOldImages */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "newImages", function() { return newImages; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "oldImages", function() { return oldImages; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "numberOfImagesAllowed", function() { return numberOfImagesAllowed; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "resetOldImages", function() { return resetOldImages; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "resetRenderOldImages", function() { return resetRenderOldImages; });
 function _createForOfIteratorHelper(o, allowArrayLike) { var it; if (typeof Symbol === "undefined" || o[Symbol.iterator] == null) { if (Array.isArray(o) || (it = _unsupportedIterableToArray(o)) || allowArrayLike && o && typeof o.length === "number") { if (it) o = it; var i = 0; var F = function F() {}; return { s: F, n: function n() { if (i >= o.length) return { done: true }; return { done: false, value: o[i++] }; }, e: function e(_e) { throw _e; }, f: F }; } throw new TypeError("Invalid attempt to iterate non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."); } var normalCompletion = true, didErr = false, err; return { s: function s() { it = o[Symbol.iterator](); }, n: function n() { var step = it.next(); normalCompletion = step.done; return step; }, e: function e(_e2) { didErr = true; err = _e2; }, f: function f() { try { if (!normalCompletion && it["return"] != null) it["return"](); } finally { if (didErr) throw err; } } }; }
 
 function _unsupportedIterableToArray(o, minLen) { if (!o) return; if (typeof o === "string") return _arrayLikeToArray(o, minLen); var n = Object.prototype.toString.call(o).slice(8, -1); if (n === "Object" && o.constructor) n = o.constructor.name; if (n === "Map" || n === "Set") return Array.from(o); if (n === "Arguments" || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(n)) return _arrayLikeToArray(o, minLen); }
 
 function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len = arr.length; for (var i = 0, arr2 = new Array(len); i < len; i++) { arr2[i] = arr[i]; } return arr2; }
 
-var oldImages = []; // var oldImages = ['https://images.pexels.com/photos/1805164/pexels-photo-1805164.jpeg', 'https://images.pexels.com/photos/731022/pexels-photo-731022.jpeg'];
+var oldImages = [];
+var renderOldImages = [];
+var newImages = []; // var renderOldImages = ['https://images.pexels.com/photos/1805164/pexels-photo-1805164.jpeg', 'https://images.pexels.com/photos/731022/pexels-photo-731022.jpeg'];
 
-var newImages = [];
 var numberOfImagesAllowed = 3;
 var size = 1048576; //equivale a 1MB
 
@@ -21513,14 +21519,11 @@ if (document.getElementById("multi-upload")) {
     var target = _ref.target;
 
     if (target.classList.contains("delete")) {
-      // const group = target.dataset.group;
       var index = target.dataset.index;
       var id = target.dataset.id; //id del elemento li para eliminar
-      // console.log(group, index)
 
       newImages.splice(index, 1);
       document.getElementById(id).remove(id);
-      console.log(gallery.children.length);
       renderNewImage(newImages);
       console.log('Viejas imágenes', oldImages);
       console.log('Nuevas imágenes', newImages);
@@ -21535,8 +21538,9 @@ if (document.getElementById("multi-upload")) {
       var id = target.dataset.id; //id del elemento li para eliminar
 
       oldImages.splice(index, 1);
+      renderOldImages.splice(index, 1);
       document.getElementById(id).remove(id);
-      renderOldImage(oldImages);
+      renderOldImage(renderOldImages);
       console.log('Viejas imágenes', oldImages);
       console.log('Nuevas imágenes', newImages);
     }
@@ -21592,7 +21596,7 @@ function renderOldImage(images) {
 
     Object.assign(clone.querySelector("img"), {
       src: src,
-      alt: src
+      alt: index
     });
     galleryUpload.prepend(clone);
   });
@@ -21606,7 +21610,59 @@ function renderOldImage(images) {
   }
 }
 
+function resetOldImages() {
+  var array = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : [];
+  oldImages = oldImages.concat(array); // console.log(oldImages);
+}
 
+function resetRenderOldImages() {
+  var array = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : [];
+  renderOldImages = renderOldImages.concat(array); // console.log(oldImages);
+
+  renderOldImage(renderOldImages);
+}
+
+
+
+/***/ }),
+
+/***/ "./resources/js/update-reading.js":
+/*!****************************************!*\
+  !*** ./resources/js/update-reading.js ***!
+  \****************************************/
+/*! no exports provided */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _multi_image_upload__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./multi-image-upload */ "./resources/js/multi-image-upload.js");
+
+
+var axios = __webpack_require__(/*! axios */ "./node_modules/axios/index.js");
+
+var sendNewImages = _multi_image_upload__WEBPACK_IMPORTED_MODULE_0__["newImages"];
+var sendOldImages = _multi_image_upload__WEBPACK_IMPORTED_MODULE_0__["oldImages"]; //Se verifica que tenga el formulario de creación de lectura
+
+if (document.getElementById("form-update-reading")) {
+  //Se verifica que el elemento que contiene las imágenes antiguas exista
+  if (document.getElementById("infOldImages")) {
+    // let infOldImages = document.getElementById("infOldImages");
+    var info = document.querySelectorAll('#infOldImages > span');
+    var pathImages = []; //se almacenan las dirección de la imágen en el servidor
+
+    var srcImages = []; //se obtiene el elace de la imagen pública en el servidor
+
+    info.forEach(function (element) {
+      pathImages.push(element.dataset.path);
+      srcImages.push(element.textContent);
+    }); // console.log(pathImages, srcImages);
+
+    Object(_multi_image_upload__WEBPACK_IMPORTED_MODULE_0__["resetOldImages"])(pathImages);
+    Object(_multi_image_upload__WEBPACK_IMPORTED_MODULE_0__["resetRenderOldImages"])(srcImages);
+    sendOldImages = _multi_image_upload__WEBPACK_IMPORTED_MODULE_0__["oldImages"]; // console.log(oldImages);
+    // console.log(sendOldImages);
+  }
+}
 
 /***/ }),
 

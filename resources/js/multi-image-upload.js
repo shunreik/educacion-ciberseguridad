@@ -1,7 +1,8 @@
 
 var oldImages = [];
-// var oldImages = ['https://images.pexels.com/photos/1805164/pexels-photo-1805164.jpeg', 'https://images.pexels.com/photos/731022/pexels-photo-731022.jpeg'];
+var renderOldImages = [];
 var newImages = [];
+// var renderOldImages = ['https://images.pexels.com/photos/1805164/pexels-photo-1805164.jpeg', 'https://images.pexels.com/photos/731022/pexels-photo-731022.jpeg'];
 
 let numberOfImagesAllowed = 3;
 let size = 1048576;//equivale a 1MB
@@ -62,13 +63,10 @@ if (document.getElementById("multi-upload")) {
     // fron the waste buckets in the file preview cards
     gallery.onclick = ({ target }) => {
         if (target.classList.contains("delete")) {
-            // const group = target.dataset.group;
             const index = target.dataset.index;
             const id = target.dataset.id;//id del elemento li para eliminar
-            // console.log(group, index)
             newImages.splice(index, 1);
             document.getElementById(id).remove(id);
-            console.log(gallery.children.length);
             renderNewImage(newImages);
             console.log('Viejas imágenes', oldImages);
             console.log('Nuevas imágenes', newImages);
@@ -80,15 +78,15 @@ if (document.getElementById("multi-upload")) {
             const index = target.dataset.index;
             const id = target.dataset.id;//id del elemento li para eliminar
             oldImages.splice(index, 1);
+            renderOldImages.splice(index, 1);
             document.getElementById(id).remove(id);
-            renderOldImage(oldImages);
+            renderOldImage(renderOldImages);
             console.log('Viejas imágenes', oldImages);
             console.log('Nuevas imágenes', newImages);
         }
     };
 
 }
-
 
 function addImage(file) {
     newImages.push(file);
@@ -135,7 +133,7 @@ function renderOldImage(images) {
         // clone.querySelector(".delete").dataset.group = 'old';
         Object.assign(clone.querySelector("img"), {
             src: src,
-            alt: src
+            alt: index
         });
         galleryUpload.prepend(clone);
     });
@@ -149,5 +147,16 @@ function renderOldImage(images) {
     }
 }
 
-export { newImages, numberOfImagesAllowed }
+function resetOldImages(array = []) {
+    oldImages = oldImages.concat(array);
+    // console.log(oldImages);
+}
+
+function resetRenderOldImages(array = []) {
+    renderOldImages = renderOldImages.concat(array);
+    // console.log(oldImages);
+    renderOldImage(renderOldImages);
+}
+
+export { newImages, oldImages, numberOfImagesAllowed, resetOldImages, resetRenderOldImages }
 

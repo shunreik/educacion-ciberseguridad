@@ -7,3 +7,4 @@ require('./multi-image-upload');
 
 //Actions - Axios
 require('./create-reading');
+require('./update-reading');

@@ -12,7 +12,7 @@ class ReadingComponent extends Component
 
     public function render(Request $request)
     {
-        $user = $request->user();//se obtiene al usuario que está realizando la petición
+        $user = $request->user(); //se obtiene al usuario que está realizando la petición
         $readings = $user->readings()->latest()->paginate(10);
 
         // $readings = Reading::paginate(10);
@@ -21,11 +21,18 @@ class ReadingComponent extends Component
         ]);
     }
 
-    public function create(){
+    public function create()
+    {
         return redirect()->route('create.reading');
     }
 
-    public function show($id){
+    public function show($id)
+    {
         return redirect()->route('show.reading', $id);
+    }
+
+    public function edit($id)
+    {
+        return redirect()->route('edit.reading', $id);
     }
 }

@@ -66,4 +66,18 @@ class ReadingController extends Controller
             'images' => $images,
         ]);
     }
+
+    public function edit(Reading $reading)
+    {
+        $topics = Topic::all();
+        $levels = Level::all();
+        $oldImages = $reading->images;
+
+        return view('livewire.reading.edit', [
+            'reading' => $reading,
+            'topics' => $topics,
+            'levels' => $levels,
+            'oldImages' => $oldImages,
+        ]);
+    }
 }

@@ -34,7 +34,7 @@ Route::middleware(['auth:sanctum', 'verified'])->group(function(){
     Route::get('reading/create', [ReadingController::class, 'create'])->name('create.reading');
     Route::get('reading/show/{reading}', [ReadingController::class, 'show'])->name('show.reading');
     Route::post('reading/store', [ReadingController::class, 'store'])->name('store.reading');
-    
+    Route::get('reading/edit/{reading}', [ReadingController::class, 'edit'])->name('edit.reading');
     Route::get('test', UploadImage::class);
 });
 

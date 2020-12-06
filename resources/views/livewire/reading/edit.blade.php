@@ -3,7 +3,7 @@
         <div class="flex items-center mb-4" >
           <div class="flex-grow">
               <h2 class="font-semibold text-xl text-gray-800 leading-tight">
-                Registro de lectura
+                Editar Lectura
               </h2>
           </div>
           <a href="{{route('reading')}}" class="inline-flex ml-2 items-center px-4 py-2 bg-gray-800 border border-transparent rounded-md font-semibold text-xs text-white uppercase tracking-widest hover:bg-gray-700 active:bg-gray-900 focus:outline-none focus:border-gray-900 focus:shadow-outline-gray disabled:opacity-25 transition ease-in-out duration-150">Regresar</a>
@@ -15,12 +15,13 @@
         <div class='md:grid md:grid-cols-3 md:gap-6'>
             <x-jet-section-title>
                 <x-slot name="title">Formulario</x-slot>
-                <x-slot name="description">A continuación, puedes registrar una nueva lecturas</x-slot>
+                <x-slot name="description">A continuación, puedes actualizar a la lectura seleccionada</x-slot>
             </x-jet-section-title>
         
             <div class="mt-5 md:mt-0 md:col-span-2">
-                <form action="{{route('store.reading')}}" method="POST" id='form-create-reading' enctype="multipart/form-data">
+                <form  method="POST" id='form-update-reading' enctype="multipart/form-data">
                     @csrf
+                    @method('PUT')
                     <div class="shadow overflow-hidden sm:rounded-md">
                         <div class="px-4 py-5 bg-white sm:p-6">
                             <div class="grid grid-cols-6 gap-6">
@@ -28,15 +29,14 @@
                                 <!-- Tile -->
                                 <div class="col-span-6 sm:col-span-5">
                                     <x-jet-label for="title" value="Título" />
-                                    <x-jet-input type="text" id="title" name='title' class="mt-1 block w-full" autocomplete="name" value="{{ old('title') }}" />
-                                    {{-- <x-jet-input-error for="title" class="mt-2" /> --}}
+                                    <x-jet-input type="text" id="title" name='title' class="mt-1 block w-full" autocomplete="name" value="{{ $reading->title }}" />
                                     <p class="mt-2 text-sm text-red-600 hidden"></p>
                                 </div>
 
                                 <!-- Description -->
                                 <div class="col-span-6 sm:col-span-5">
                                     <x-jet-label for="description" value="Description" />
-                                    <textarea name="description" id="description" class="resize border rounded-md mt-1 block w-full" rows="10">{{ old('description') }}</textarea>
+                                    <textarea name="description" id="description" class="resize border rounded-md mt-1 block w-full" rows="10">{{ $reading->description }}</textarea>
                                     <p class="mt-2 text-sm text-red-600 hidden"></p>
                                 </div>
 
@@ -45,7 +45,11 @@
                                   <x-jet-label for="topic" value="Temática" />
                                   <select name="topic_id" id="topic" class="form-select rounded-md shadow-sm mt-1 w-full">
                                     @foreach ($topics as $topic)
-                                      <option value="{{ $topic->id}}" >{{ $topic->title}}</option> 
+                                        @if ($topic->id === $reading->topic->id)
+                                            <option value="{{ $topic->id}}" selected>{{ $topic->title}}</option> 
+                                        @else
+                                            <option value="{{ $topic->id}}">{{ $topic->title}}</option> 
+                                        @endif
                                     @endforeach
                                   </select>
                                   <p class="mt-2 text-sm text-red-600 hidden"></p>
@@ -56,7 +60,11 @@
                                   <x-jet-label for="level" value="Nivel" />
                                   <select name="level_id" id="level" class="form-select w-full rounded-md shadow-sm mt-1">
                                     @foreach ($levels as $level)
-                                      <option value="{{ $level->id}}" >{{ $level->name}}</option> 
+                                        @if ($level->id === $reading->level->id)
+                                            <option value="{{ $level->id}}" selected>{{ $level->name}}</option> 
+                                        @else
+                                            <option value="{{ $level->id}}" >{{ $level->name}}</option> 
+                                        @endif
                                     @endforeach
                                   </select>
                                   <p class="mt-2 text-sm text-red-600 hidden"></p>
@@ -64,30 +72,43 @@
 
                                 <!-- Imágenes-->
                                 <div class="col-span-6 sm:col-span-5">
+                                    
+                                    @if (count($oldImages) > 0)
+                                    <span id="infOldImages" class="hidden">
+                                        @foreach ($oldImages as $image)
+                                            <span data-path="{{ $image->path }}"> {{ $image->getPathImage() }}</span>
+                                        @endforeach
+                                      </span>
+                                    @endif
+
                                     <x-jet-label for="images" value="Imágenes (Opcional)" />
                                     <!-- scroll area -->
-                                <section class="h-full overflow-auto p-8 w-full flex flex-col" id="multi-upload">
+                                    <section class="h-full overflow-auto p-8 w-full flex flex-col" id="multi-upload">
 
-                                  <input id="hidden-input" type="file" multiple class="hidden" />
-                                  <button id="upload" type="button" class="m-0 rounded-sm px-3 py-1 bg-gray-200 hover:bg-gray-300 focus:shadow-outline focus:outline-none  inline-flex items-center justify-center">
-                                    <svg class=" bg-gray-200" height="18" viewBox="0 0 24 24" width="18" xmlns="http://www.w3.org/2000/svg">
-                                      <path d="M0 0h24v24H0z" fill="none"/>
-                                        <path d="M9 16h6v-6h4l-7-7-7 7h4zm-4 2h14v2H5z"/>
-                                    </svg>
-                                    
-                                    <span class="ml-2">Subir imágenes</span>
-                                  </button>
-                                  <p class="mt-2 text-sm text-red-600 hidden"></p>
-                                    
-                                    <ul id="gallery" class="flex flex-1 flex-wrap mt-2">
-                                          {{-- Agregar imágenes --}}
-                                    </ul>
+                                        <ul id="gallery-upload" class="flex flex-1 flex-wrap">
+                                            {{-- Agregar imágenes actuguas del reading--}}
+                                        </ul>
 
-                                    <div id="empty" class="h-full w-full text-center flex flex-col items-center justify-center">
-                                      <img class="mx-auto w-32" src="https://user-images.githubusercontent.com/507615/54591670-ac0a0180-4a65-11e9-846c-e55ffce0fe7b.png" alt="no data" />
-                                      <span class="text-small text-gray-500">Sin imágenes</span>
-                                    </div>
-                                </section>
+                                        <input id="hidden-input" type="file" multiple class="hidden" />
+                                        <button id="upload" type="button" class="m-0 rounded-sm px-3 py-1 bg-gray-200 hover:bg-gray-300 focus:shadow-outline focus:outline-none  inline-flex items-center justify-center">
+                                            <svg class=" bg-gray-200" height="18" viewBox="0 0 24 24" width="18" xmlns="http://www.w3.org/2000/svg">
+                                            <path d="M0 0h24v24H0z" fill="none"/>
+                                                <path d="M9 16h6v-6h4l-7-7-7 7h4zm-4 2h14v2H5z"/>
+                                            </svg>
+                                            
+                                            <span class="ml-2">Subir imágenes</span>
+                                        </button>
+                                        <p class="mt-2 text-sm text-red-600 hidden"></p>
+                                            
+                                        <ul id="gallery" class="flex flex-1 flex-wrap mt-2">
+                                            {{-- Agregar nuevas imágenes --}}
+                                        </ul>
+
+                                        <div id="empty" class="h-full w-full text-center flex flex-col items-center justify-center">
+                                            <img class="mx-auto w-32" src="https://user-images.githubusercontent.com/507615/54591670-ac0a0180-4a65-11e9-846c-e55ffce0fe7b.png" alt="no data" />
+                                            <span class="text-small text-gray-500">Sin imágenes</span>
+                                        </div>
+                                    </section>
                                 </div>
                             </div>
                         </div>
