@@ -39,17 +39,31 @@ class ReadingController extends Controller
         $reading->level_id = $validate['level_id'];
         $reading->save();
         //Se guardan la imagenes del reading
-        if($request->file('newImages')){
+        if ($request->file('newImages')) {
             foreach ($request->file('newImages') as $image) {
                 $image = new Image([
                     // 'url' => $image->store('report_images', 's3'),
-                    'url' => $image->store('reading_images'),
-                    ]);
+                    'path' => $image->store('reading_images', 'public'),
+                ]);
                 $reading->images()->save($image);
             }
         }
 
         session()->flash('success', 'Lectura registrada correctamente');
-        return response()->json(['success' => 'Registro almacenado', 'reading' => $validate, 'redirect'=> route('reading')]);
+        return response()->json(['success' => 'Registro almacenado', 'reading' => $validate, 'redirect' => route('reading')]);
+    }
+
+    public function show(Reading $reading)
+    {
+        $topic = $reading->topic;
+        $level = $reading->level;
+        $images = $reading->images;
+
+        return view('livewire.reading.show', [
+            'reading' => $reading,
+            'topic' => $topic,
+            'level' => $level,
+            'images' => $images,
+        ]);
     }
 }

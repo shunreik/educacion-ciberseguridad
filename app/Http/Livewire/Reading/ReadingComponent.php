@@ -8,6 +8,8 @@ use Illuminate\Http\Request;
 
 class ReadingComponent extends Component
 {
+    public $title, $description, $topic, $level, $images;
+
     public function render(Request $request)
     {
         $user = $request->user();//se obtiene al usuario que está realizando la petición
@@ -21,5 +23,9 @@ class ReadingComponent extends Component
 
     public function create(){
         return redirect()->route('create.reading');
+    }
+
+    public function show($id){
+        return redirect()->route('show.reading', $id);
     }
 }

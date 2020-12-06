@@ -37,7 +37,7 @@
                 <td class="px-6 py-4 whitespace-nowrap text-sm font-medium">
                   <div class="flex justify-center">
 
-                      <button class="text-gray-600 hover:text-gray-900 mx-3">Ver</button>
+                      <button class="text-gray-600 hover:text-gray-900 mx-3" wire:click="show({{ $reading->id}})">Ver</button>
                       <button class="text-blue-600 hover:text-blue-900 mx-3">Editar</button>
                       {{-- <button class="text-pink-600 hover:text-pink-900 mx-3">Desactivar</button> --}}
                       {{-- <button wire:click="confirmActive({{ $user->id }})" class="text-green-600 hover:text-green-900 mx-3">Activar</button> --}}

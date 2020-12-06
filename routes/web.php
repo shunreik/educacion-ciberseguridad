@@ -32,7 +32,9 @@ Route::middleware(['auth:sanctum', 'verified'])->group(function(){
     Route::get('teachers', TeacherComponent::class)->name('teacher')->middleware('can:manage.teachers');
     Route::get('readings', ReadingComponent::class)->name('reading');
     Route::get('reading/create', [ReadingController::class, 'create'])->name('create.reading');
+    Route::get('reading/show/{reading}', [ReadingController::class, 'show'])->name('show.reading');
     Route::post('reading/store', [ReadingController::class, 'store'])->name('store.reading');
+    
     Route::get('test', UploadImage::class);
 });
 

@@ -4,10 +4,18 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Support\Facades\Storage;
 
 class Image extends Model
 {
     use HasFactory;
+
+    /**
+     * The table associated with the model.
+     *
+     * @var string
+     */
+    protected $table = 'images';
 
     /**
      * The attributes that are mass assignable.
@@ -15,15 +23,26 @@ class Image extends Model
      * @var array
      */
     protected $fillable = [
-        'url',
+        'path',
     ];
-    
+
     /**
      * Relaciones polimórficas
     /**
      * Get the owning imageable model.
      */
-    public function imageable(){
+    public function imageable()
+    {
         return $this->morphTo();
+    }
+    
+    /**
+     * Se obtiene la direción de la imagen
+     */
+    public function getPathImage()
+    {
+        $path = $this->path;
+        $pathImage = Storage::disk('public')->url($path);
+        return $pathImage;
     }
 }
