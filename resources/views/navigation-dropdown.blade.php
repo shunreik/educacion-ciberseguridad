@@ -29,9 +29,11 @@
                     </x-jet-nav-link>
                     @endcan
                     
+                    @can('manage.readings')
                     <x-jet-nav-link href="{{ route('reading') }}" :active="request()->routeIs('reading')">
                         Lecturas
                     </x-jet-nav-link>
+                    @endcan
                     
                 </div>
             </div>
@@ -154,9 +156,11 @@
             </x-jet-responsive-nav-link>
             @endcan
 
+            @can('manage.readings')
             <x-jet-responsive-nav-link href="{{ route('reading') }}" :active="request()->routeIs('reading')">
                 Lecturas
             </x-jet-responsive-nav-link>
+            @endcan
 
 
         </div>

@@ -47,19 +47,20 @@
     </x-cards.module>
     @endcan
 
-
+    @can('manage.readings')
     <x-cards.module class="border-t border-gray-200">
         <x-slot name='icon'>
             <img src="https://img.icons8.com/material/50/000000/view-module.png" class="w-8 h-8"/>
         </x-slot>
-        <x-slot name='title'><a href="#">Módulo Prueba1</a></x-slot>
+        <x-slot name='title'><a href="{{ route('reading') }}">Módulo Lectura</a></x-slot>
         <x-slot name="description">
-            Descripción
+            Puedes listar a todas las lecturas registradas, visualizar, registrar, actualizar a un determinado registro. Además, puede privar o publicar a las lecturas para permitir o impedir su visibilidad a los estudiantes.
         </x-slot>
-        <x-link-module href="#">
+        <x-link-module href="{{ route('reading') }}">
             Visitar módulo
         </x-link-module>
     </x-cards.module>
+    @endcan
 
     <x-cards.module class="border-t border-gray-200 md:border-l">
         <x-slot name='icon'>

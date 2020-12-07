@@ -38,14 +38,15 @@ class PermissionRoleSeeder extends Seeder
         $manageTeachers = Permission::create([
             'name' => 'manage.teachers',
         ]);
+        //  Módulo: estudiante
         $manageStudents = Permission::create([
             'name' => 'manage.students',
         ]);
-
-        // Módulo: Contenido
-        $listContent = Permission::create([
-            'name' => 'list.content',
+        // Módulo: lectura
+        $manageReading = Permission::create([
+            'name' => 'manage.readings'
         ]);
+
         $createContent = Permission::create([
             'name' => 'create.content'
         ]);
@@ -59,10 +60,10 @@ class PermissionRoleSeeder extends Seeder
             $manageStudents,
         ]);
         $teacherRole->syncPermissions([
-            $createContent,
+            $manageReading,
         ]);
         $studentRole->syncPermissions([
-            $listContent,
+            $createContent,
         ]);
     }
 }
