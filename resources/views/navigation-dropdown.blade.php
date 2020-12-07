@@ -34,6 +34,12 @@
                         Lecturas
                     </x-jet-nav-link>
                     @endcan
+
+                    {{-- @can('manage.readings') --}}
+                    <x-jet-nav-link href="{{ route('questionnarie') }}" :active="request()->routeIs('questionnarie')">
+                        Cuestionarios
+                    </x-jet-nav-link>
+                    {{-- @endcan --}}
                     
                 </div>
             </div>
@@ -161,6 +167,12 @@
                 Lecturas
             </x-jet-responsive-nav-link>
             @endcan
+
+            {{-- @can('manage.readings') --}}
+            <x-jet-responsive-nav-link href="{{ route('questionnarie') }}" :active="request()->routeIs('questionnarie')">
+                Cuestionarios
+            </x-jet-responsive-nav-link>
+            {{-- @endcan --}}
 
 
         </div>
