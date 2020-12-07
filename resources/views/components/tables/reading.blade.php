@@ -36,11 +36,13 @@
                 </td>
                 <td class="px-6 py-4 whitespace-nowrap text-sm font-medium">
                   <div class="flex justify-center">
-
                       <button class="text-gray-600 hover:text-gray-900 mx-3" wire:click="show({{ $reading->id}})">Ver</button>
                       <button class="text-blue-600 hover:text-blue-900 mx-3" wire:click="edit({{ $reading->id }})">Editar</button>
-                      {{-- <button class="text-pink-600 hover:text-pink-900 mx-3">Desactivar</button> --}}
-                      {{-- <button wire:click="confirmActive({{ $user->id }})" class="text-green-600 hover:text-green-900 mx-3">Activar</button> --}}
+                      @if ($reading->status)
+                        <button class="text-pink-600 hover:text-pink-900 mx-3" wire:click="confirmPrivate({{ $reading->id }})">Privar</button>
+                      @else
+                        <button class="text-green-600 hover:text-green-900 mx-3" wire:click="comfirmPublic({{ $reading->id }})">Publicar</button>
+                      @endif
 
                   </div>
                 </td>

@@ -56,8 +56,7 @@
                     <x-tables.reading :data="$readings"/>
 
                     {{-- Se presentan los modaldes acorde a la opción seleccionada por el usuario en el componente table-user --}}
-                    {{-- @include("livewire.reading.$view") --}}
-
+                    @include("livewire.reading.$view")
                 </div>
             </div>
         </div>
