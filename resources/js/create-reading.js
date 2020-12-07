@@ -43,7 +43,7 @@ if (document.getElementById("form-create-reading")) {
             uploadElem.nextElementSibling.classList.add('hidden');
             console.log('Registro guardado');
             // funciona como una redirección HTTP
-            if(response.data.redirect){
+            if (response.data.redirect) {
                 window.location.replace(response.data.redirect);
             }
 

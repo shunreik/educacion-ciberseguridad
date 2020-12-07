@@ -68,6 +68,10 @@
                                     <!-- scroll area -->
                                 <section class="h-full overflow-auto p-8 w-full flex flex-col" id="multi-upload">
 
+                                  <ul id="gallery-upload" class="flex flex-1 flex-wrap">
+                                      {{-- Agregar imágenes actuguas del reading--}}
+                                  </ul>
+
                                   <input id="hidden-input" type="file" multiple class="hidden" />
                                   <button id="upload" type="button" class="m-0 rounded-sm px-3 py-1 bg-gray-200 hover:bg-gray-300 focus:shadow-outline focus:outline-none  inline-flex items-center justify-center">
                                     <svg class=" bg-gray-200" height="18" viewBox="0 0 24 24" width="18" xmlns="http://www.w3.org/2000/svg">
