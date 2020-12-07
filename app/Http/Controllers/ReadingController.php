@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Middleware\ReadingOwner;
 use App\Http\Requests\ReadingRequest;
 use App\Models\Image;
 use App\Models\Level;
@@ -14,7 +15,7 @@ class ReadingController extends Controller
 {
     public function __construct()
     {
-        //
+        $this->middleware(ReadingOwner::class)->only('show', 'edit', 'update');
     }
 
     public function create()
