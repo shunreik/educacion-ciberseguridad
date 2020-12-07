@@ -5,7 +5,7 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class Questionnarie extends Model
+class Question extends Model
 {
     use HasFactory;
 
@@ -14,7 +14,7 @@ class Questionnarie extends Model
      *
      * @var string
      */
-    protected $table = 'questionnaries';
+    protected $table = 'questions';
 
     /**
      * The attributes that are mass assignable.
@@ -25,18 +25,13 @@ class Questionnarie extends Model
         //
     ];
 
+
     /**
      * Relaciones entre modelos
      */
-    //Un questionario le pertenece a una lectura
-    public function reading()
+    //Una pregunta le pertenece a un solo questionario
+    public function questionnarie()
     {
-        return $this->belongsTo(Reading::class);
-    }
-    
-    //Un cuestionario puede tener más de una pregunta
-    public function questions()
-    {
-        return $this->hasMany(Question::class);
+        return $this->belongsTo(Questionnarie::class);
     }
 }
