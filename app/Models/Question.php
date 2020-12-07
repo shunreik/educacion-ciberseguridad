@@ -39,4 +39,9 @@ class Question extends Model
     {
         return $this->hasOne(Answer::class);
     }
+    //Una pregunta puede tener varias opciones
+    public function options()
+    {
+        return $this->hasMany(Option::class);
+    }
 }
