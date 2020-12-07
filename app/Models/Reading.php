@@ -44,6 +44,12 @@ class Reading extends Model
         return $this->belongsTo(Level::class);
     }
 
+    //Una lectura tiene solo un cuestionario
+    public function questionnarie()
+    {
+        return $this->hasOne(Questionnarie::class);
+    }
+
     /***
      * Relaciones polimórficas
      * Get all of the post's images.
