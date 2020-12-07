@@ -5,7 +5,7 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class Question extends Model
+class Answer extends Model
 {
     use HasFactory;
 
@@ -14,7 +14,7 @@ class Question extends Model
      *
      * @var string
      */
-    protected $table = 'questions';
+    protected $table = 'answers';
 
     /**
      * The attributes that are mass assignable.
@@ -25,18 +25,12 @@ class Question extends Model
         'content'
     ];
 
-
     /**
      * Relaciones entre modelos
      */
-    //Una pregunta le pertenece a un solo questionario
-    public function questionnarie()
+    //una respuesta le pertenece a una sola pregunta
+    public function question()
     {
-        return $this->belongsTo(Questionnarie::class);
-    }
-    //Una pregunta solo tiene una respuesta
-    public function answer()
-    {
-        return $this->hasOne(Answer::class);
+        return $this->belongsTo(Question::class);
     }
 }
