@@ -16,4 +16,9 @@ class QuestionnarieComponent extends Component
             'readings' => $readings,
         ]);
     }
+
+    public function questionnarie($id)
+    {
+        return redirect()->route('questions', $id);
+    }
 }

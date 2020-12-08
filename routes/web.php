@@ -1,11 +1,13 @@
 <?php
 
 use App\Http\Controllers\ReadingController;
+use App\Http\Livewire\Question\QuestionComponent;
 use App\Http\Livewire\Questionnarie\QuestionnarieComponent;
 use App\Http\Livewire\Reading\ReadingComponent;
 use App\Http\Livewire\StudentComponent;
 use App\Http\Livewire\TeacherComponent;
 use App\Http\Livewire\Test\UploadImage;
+use App\Http\Middleware\ReadingOwner;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -32,8 +34,9 @@ Route::middleware(['auth:sanctum', 'verified'])->group(function(){
     Route::post('reading/store', [ReadingController::class, 'store'])->name('store.reading')->middleware('can:manage.readings');
     Route::get('reading/edit/{reading}', [ReadingController::class, 'edit'])->name('edit.reading')->middleware('can:manage.readings');
     Route::put('reading/{reading}', [ReadingController::class, 'update'])->name('update.reading')->middleware('can:manage.readings');
-    
+
     Route::get('questionnaries', QuestionnarieComponent::class)->name('questionnarie');
+    Route::get('questionnarie/{reading}', QuestionComponent::class)->name('questions')->middleware([ReadingOwner::class]);
     
     Route::get('test', UploadImage::class);
 });

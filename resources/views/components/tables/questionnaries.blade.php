@@ -28,7 +28,7 @@
                 </td>
                 <td class="px-6 py-4 whitespace-nowrap text-sm font-medium">
                   <div class="flex justify-center">
-                      <button class="text-green-600 hover:text-green-900 mx-3">Agregar cuestionario</button>
+                      <button class="text-green-600 hover:text-green-900 mx-3" wire:click="questionnarie({{ $reading->id }})">Agregar cuestionario</button>
                       {{-- <button class="text-blue-600 hover:text-blue-900 mx-3">Editar cuestionario</button> --}}
                   </div>
                 </td>
