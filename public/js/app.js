@@ -21700,6 +21700,8 @@ if (document.getElementById("form-update-reading")) {
           window.location.replace(response.data.redirect);
         }
       })["catch"](function (error) {
+        console.log(error.response);
+
         if (error.response) {
           if (error.response.data.errors) {
             //se obtienen los errores de validaciones de laravel (Request)

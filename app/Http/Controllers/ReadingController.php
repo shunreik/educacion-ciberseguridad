@@ -41,7 +41,7 @@ class ReadingController extends Controller
         $reading->level_id = $validate['level_id'];
         $reading->save();
         //Se guardan la imagenes del reading
-        if ($request->file('newImages')) {
+        if ($request->hasFile('newImages')) {
             foreach ($request->file('newImages') as $image) {
                 $image = new Image([
                     // 'url' => $image->store('report_images', 's3'),
@@ -99,7 +99,7 @@ class ReadingController extends Controller
         $oldImagesReading = $reading->images;
 
         //En caso de recibir un arreglo de imágenes antiguas de la lectura
-        if ($oldImagesReceived) {
+        if ($request->has('oldImages')) {
             //Se procede a recorrer las imágenes registrdas de la lectura
             foreach ($oldImagesReading as $oldImageReading) {
                 //Por cada imágen se verifica si ha sido borrada
@@ -128,7 +128,7 @@ class ReadingController extends Controller
         }
 
         //Se guardan la imagenes del reading
-        if ($request->file('newImages')) {
+        if ($request->hasFile('newImages')) {
             foreach ($request->file('newImages') as $image) {
                 $image = new Image([
                     'path' => $image->store('reading_images', 'public'),
@@ -138,7 +138,8 @@ class ReadingController extends Controller
         }
 
         session()->flash('success', 'Lectura actualizada correctamente');
-        return response()->json(['success' => 'Registro actualizado', 'reading' => $validate, 'redirect' => route('reading')]);
+        return response()
+            ->json(['success' => 'Registro actualizado', 'reading' => $validate, 'redirect' => route('reading')]);
     }
 
     /**

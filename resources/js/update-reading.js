@@ -44,8 +44,11 @@ if (document.getElementById("form-update-reading")) {
                 formData.append('oldImages[]', image)
             });
 
+
             let confing = {
-                headers: { 'Content-Type': 'multipart/form-data' }
+                headers: {
+                    'Content-Type': 'multipart/form-data',
+                }
             };
             axios.post(url, formData, confing).then(function (response) {
                 // handle success
@@ -63,6 +66,7 @@ if (document.getElementById("form-update-reading")) {
                 }
 
             }).catch(function (error) {
+                console.log(error.response);
                 if (error.response) {
                     if (error.response.data.errors) {//se obtienen los errores de validaciones de laravel (Request)
                         var errorsForm = error.response.data.errors;
