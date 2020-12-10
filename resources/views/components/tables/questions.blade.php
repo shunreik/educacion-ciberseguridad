@@ -56,11 +56,12 @@
                                                 <span class="ml-1">Respuesta</span>
                                             </button>
                                             @endif
-                                            <button class="flex justify-items-center items-center text-blue-600 hover:text-blue-900 mx-3">
-                                                
+                                            @if (count($question->options) < 4)
+                                            <button wire:click="createOption({{ $question->id }})" class="flex justify-items-center items-center text-blue-600 hover:text-blue-900 mx-3">
                                                 <x-icons.add class="w-5 h-5 fill-current"/>
-                                                <span>Opción</span>
+                                                <span class="ml-1">Opción</span>
                                             </button>
+                                            @endif
                                         </div>
                                     </td>
                                 </tr>

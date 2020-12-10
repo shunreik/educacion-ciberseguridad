@@ -3,6 +3,7 @@
 namespace App\Http\Livewire\Question;
 
 use App\Models\Answer;
+use App\Models\Option;
 use App\Models\Question;
 use App\Models\Questionnarie;
 use App\Models\Reading;
@@ -25,8 +26,9 @@ class QuestionComponent extends Component
     //Mode - Answer
     public $createAnswerMode = false, $editAnswerMode = false;
     //Options
-
-
+    public $optionId, $optionContent;
+    //Mode - Answer
+    public $createOptionMode = false, $editOptionMode = false;
     //Vista
     public $view = 'question.create';
 
@@ -101,6 +103,7 @@ class QuestionComponent extends Component
     public function createAnswer($id)
     {
         $this->resetErrorBag('answerContent');
+
         $question = Question::find($id);
         $this->questionId = $question->id;
         $this->questionContent = $question->content;
@@ -122,11 +125,13 @@ class QuestionComponent extends Component
         $question->answer()->save($answer);
 
         $this->createAnswerMode = false;
+        $this->answerContent = '';
     }
 
     public function editAnswer($id)
     {
         $this->resetErrorBag('answerContent');
+
         $question = Question::find($id);
         $this->questionId = $question->id;
         $this->questionContent = $question->content;
@@ -147,5 +152,34 @@ class QuestionComponent extends Component
         $answer->save();
 
         $this->editAnswerMode = false;
+        $this->answerContent = '';
+    }
+
+    public function createOption($id)
+    {
+        $this->resetErrorBag('optionContent');
+
+        $question = Question::find($id);
+        $this->questionId = $question->id;
+        $this->questionContent = $question->content;
+        $this->view = 'option.create';
+        $this->createOptionMode = true;
+        $this->optionContent = '';
+    }
+
+    public function storeOption()
+    {
+        $this->validate([
+            'optionContent' => ['required', 'string', 'max:255'],
+        ]);
+
+        $option = new Option();
+        $option->content = $this->optionContent;
+
+        $question = Question::find($this->questionId);
+        $question->options()->save($option);
+
+        $this->createOptionMode = false;
+        $this->optionContent = '';
     }
 }
