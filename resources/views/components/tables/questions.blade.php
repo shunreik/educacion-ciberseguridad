@@ -29,7 +29,7 @@
                                     <td class="px-6 py-4 whitespace-nowrap">
                                         @if ($question->answer)
                                             <div class="grid grid-flow-col grid-cols-3">
-                                                <button type="button" class="col-span-1 flex justify-self-center self-center mr-2" wire:click="editAnswer({{ $question->id }})">
+                                                <button type="button" class="col-span-1 flex justify-self-center self-center mr-2" wire:click="editAnswer({{ $question->answer->id }})">
                                                     <x-icons.edit class="w-5 h-5 fill-current "/>
                                                 </button>
                                                 <div class="col-span-2 text-sm text-gray-900">{{ $question->answer->content}}</div>
@@ -41,7 +41,12 @@
                                     <td class="px-6 py-4 whitespace-nowrap">
                                         @if (count($question->options) > 0)
                                             @foreach ($question->options as $option)
-                                                <div class="text-sm text-gray-900">{{ $option->content}}</div>
+                                                <div class="grid grid-flow-col grid-cols-3 my-3">
+                                                    <button type="button" class="col-span-1 flex justify-self-center self-center mr-2" wire:click="editOption({{  $option->id }})">
+                                                        <x-icons.edit class="w-5 h-5 fill-current "/>
+                                                    </button>
+                                                    <div class="col-span-2 text-sm text-gray-900">{{ $option->content}}</div>
+                                                </div>
                                             @endforeach
                                         @else
                                             <div class="text-sm text-red-900">Sin asignar</div>

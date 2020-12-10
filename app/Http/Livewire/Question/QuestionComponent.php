@@ -182,4 +182,31 @@ class QuestionComponent extends Component
         $this->createOptionMode = false;
         $this->optionContent = '';
     }
+
+    public function editOption($id)
+    {
+        $this->resetErrorBag('optionContent');
+
+        $option = Option::find($id);
+        $this->optionId = $option->id;
+        $this->optionContent = $option->content;
+        $this->questionContent = $option->question->content;
+
+        $this->view = 'option.edit';
+        $this->editOptionMode = true;
+    }
+
+    public function updateOption()
+    {
+        $this->validate([
+            'optionContent' => ['required', 'string', 'max:255'],
+        ]);
+
+        $option = Option::find($this->optionId);
+        $option->content = $this->optionContent;
+        $option->save();
+
+        $this->editOptionMode = false;
+        $this->optionContent = '';
+    }
 }
