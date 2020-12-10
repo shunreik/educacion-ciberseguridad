@@ -18,6 +18,14 @@
             </button>
         </x-alerts.toast>
     @endif
+    @if (session()->has('danger'))
+        <x-alerts.toast wire:model="alert" color='red'>
+            <x-slot name="message">{{ session('danger') }}</x-slot>
+            <button type="button" wire:click="$refresh" class="text-red-700">
+                <span class="">&times;</span>
+            </button>
+        </x-alerts.toast>
+    @endif
 
     <div class="pt-12">
         <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
@@ -54,10 +62,27 @@
                     <div class="flex items-center mb-4" >
                         <div class="flex-grow">
                             <div class="text-gray-500 mb-2">
-                                Estado: .....
+                                @if ($questions)
+                                    @if ($questionnarie->status)
+                                        <span class="text-green-600"> Estado: publicado</span>
+                                    @else
+                                        <span class="text-red-600"> Estado: privado</span>
+                                    @endif
+                                @endif
                             </div>
                         </div>
-                        <a href="#" class="inline-flex ml-2 items-center px-4 py-2 bg-gray-800 border border-transparent rounded-md font-semibold text-xs text-white uppercase tracking-widest hover:bg-gray-700 active:bg-gray-900 focus:outline-none focus:border-gray-900 focus:shadow-outline-gray disabled:opacity-25 transition ease-in-out duration-150">Publicar</a>
+                        @if ($questions)
+                            @if ($questionnarie->status)
+                                <a href="#" class="inline-flex ml-2 items-center px-4 py-2 bg-red-800 border border-transparent rounded-md font-semibold text-xs text-white uppercase tracking-widest hover:bg-red-700 active:bg-red-900 focus:outline-none focus:border-red-900 focus:shadow-outline-gray disabled:opacity-25 transition ease-in-out duration-150">
+                                    Privar
+                                </a>
+                                
+                            @else
+                                <button type="button" wire:click="confirmPublication" class="inline-flex ml-2 items-center px-4 py-2 bg-green-800 border border-transparent rounded-md font-semibold text-xs text-white uppercase tracking-widest hover:bg-green-700 active:bg-green-900 focus:outline-none focus:border-green-900 focus:shadow-outline-gray disabled:opacity-25 transition ease-in-out duration-150">
+                                    Publicar
+                                </button>
+                            @endif
+                        @endif
                     </div>
                    
                     <x-tables.questions :questions="$questions"/>

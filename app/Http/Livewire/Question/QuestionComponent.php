@@ -31,6 +31,8 @@ class QuestionComponent extends Component
     public $createOptionMode = false, $editOptionMode = false;
     //Vista
     public $view = 'question.create';
+    //Publicar o privar al cuestionario
+    public $publishMode = false;
 
     //Route Model Binding
     // En los componentes de Livewire, usa en mount()lugar de un constructor de clase __construct()como puede estar acostumbrado.
@@ -59,6 +61,7 @@ class QuestionComponent extends Component
     {
         if (is_null($this->questionnarie)) {
             $newQuestionnarie = new Questionnarie();
+            $newQuestionnarie->status = false;
             $this->questionnarie = $this->reading->questionnarie()->save($newQuestionnarie);
         }
 
@@ -208,5 +211,42 @@ class QuestionComponent extends Component
 
         $this->editOptionMode = false;
         $this->optionContent = '';
+    }
+
+    public function confirmPublication()
+    {
+        $this->view = 'questionnarie.active';
+        $this->publishMode = true;
+    }
+    public function publishQuestionnarie()
+    {
+        $questions = $this->reading->questionnarie->questions;
+
+        if ($this->verifyQuestionnarie($questions)) {
+            $this->questionnarie->status = true;
+            $this->questionnarie->save();
+
+            session()->flash('success', 'Cuestionario publicado correctamente');
+            return redirect()->route('questionnarie');
+        } else {
+            session()->flash('danger', 'Cuestionario incompleto');
+            $this->publishMode = false;
+        }
+    }
+
+    //Se verifica que el cuestionaro esté completo
+    public function verifyQuestionnarie($array)
+    {
+        $isCompleted = false;
+        if (count($array) >= 3) {
+            foreach ($array as $question) {
+                if ($question->answer && count($question->options) > 0) {
+                    $isCompleted = true;
+                } else {
+                    break; //termino el bucle de for
+                }
+            }
+        }
+        return $isCompleted;
     }
 }

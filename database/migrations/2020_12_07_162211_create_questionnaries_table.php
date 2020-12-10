@@ -15,6 +15,7 @@ class CreateQuestionnariesTable extends Migration
     {
         Schema::create('questionnaries', function (Blueprint $table) {
             $table->id();
+            $table->boolean('status');
             //Claves foráneas
             $table->foreignId('reading_id')->constrained('readings')->onDelete('cascade');
             $table->timestamps();
