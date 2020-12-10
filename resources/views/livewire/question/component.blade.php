@@ -30,7 +30,7 @@
                         <div class="flex-grow mt-4 text-gray-500 mb-2">
                             Puedes agregar una nueva pregunta seleccionando la siguiente opción.
                         </div>
-                        <x-jet-button type='button'>Agregar pregunta</x-jet-button>
+                        <x-jet-button type='button' wire:click="createQuestion">Agregar pregunta</x-jet-button>
                     </div>
                 </div>
             </div>
@@ -45,16 +45,25 @@
                         Listado de tus preguntas registradas
                     </div>
                     <div class="mt-4 text-gray-500">
-                        Lectura: <span class="font-bold">{{ $title }}</span>
+                        Lectura: <span class="font-bold">{{ $reading->title }}</span>
                     </div>
                     <div class="text-gray-500 mb-2">
                         A continuación puedes obsevar el listado de preguntas que registrastes para el cuestionario.
                     </div>
+
+                    <div class="flex items-center mb-4" >
+                        <div class="flex-grow">
+                            <div class="text-gray-500 mb-2">
+                                Estado: .....
+                            </div>
+                        </div>
+                        <a href="#" class="inline-flex ml-2 items-center px-4 py-2 bg-gray-800 border border-transparent rounded-md font-semibold text-xs text-white uppercase tracking-widest hover:bg-gray-700 active:bg-gray-900 focus:outline-none focus:border-gray-900 focus:shadow-outline-gray disabled:opacity-25 transition ease-in-out duration-150">Publicar</a>
+                    </div>
                    
-                    <x-tables.questions :questionnarie="$questionnarie"/>
+                    <x-tables.questions :questions="$questions"/>
 
                     {{-- Se presentan los modaldes acorde a la opción seleccionada por el usuario en el componente table-user --}}
-                    {{-- @include("livewire.reading.$view") --}}
+                    @include("livewire.$view")
                 </div>
             </div>
         </div>
