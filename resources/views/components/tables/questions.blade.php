@@ -28,7 +28,12 @@
                                     </td>
                                     <td class="px-6 py-4 whitespace-nowrap">
                                         @if ($question->answer)
-                                            <div class="text-sm text-gray-900">{{ $question->answer->content}}</div>
+                                            <div class="grid grid-flow-col grid-cols-3">
+                                                <button type="button" class="col-span-1 flex justify-self-center self-center mr-2" wire:click="editAnswer({{ $question->id }})">
+                                                    <x-icons.edit class="w-5 h-5 fill-current "/>
+                                                </button>
+                                                <div class="col-span-2 text-sm text-gray-900">{{ $question->answer->content}}</div>
+                                            </div>
                                         @else
                                             <div class="text-sm text-red-900">Sin asignar</div>
                                         @endif

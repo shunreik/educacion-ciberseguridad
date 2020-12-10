@@ -123,4 +123,29 @@ class QuestionComponent extends Component
 
         $this->createAnswerMode = false;
     }
+
+    public function editAnswer($id)
+    {
+        $this->resetErrorBag('answerContent');
+        $question = Question::find($id);
+        $this->questionId = $question->id;
+        $this->questionContent = $question->content;
+        $this->answerContent = $question->answer->content;
+        $this->answerId = $question->answer->id;
+        $this->view = 'answer.edit';
+        $this->editAnswerMode = true;
+    }
+
+    public function updateAnswer()
+    {
+        $this->validate([
+            'answerContent' => ['required', 'string', 'max:255'],
+        ]);
+
+        $answer = Answer::find($this->answerId);
+        $answer->content = $this->answerContent;
+        $answer->save();
+
+        $this->editAnswerMode = false;
+    }
 }
