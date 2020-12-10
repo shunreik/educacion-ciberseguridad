@@ -2,6 +2,7 @@
 
 namespace App\Http\Livewire\Question;
 
+use App\Models\Answer;
 use App\Models\Question;
 use App\Models\Questionnarie;
 use App\Models\Reading;
@@ -17,12 +18,15 @@ class QuestionComponent extends Component
     public $questionnarie; //Se obtiene el cuestionario de la lectura
     //Question
     public $questionId, $questionContent;
+    //Mode - Question
+    public $createQuestionMode = false, $editQuestionMode = false;
+    //Answer
+    public $answerId, $answerContent;
+    //Mode - Answer
+    public $createAnswerMode = false, $editAnswerMode = false;
     //Options
 
-    //Answer
 
-    //Modes
-    public $createQuestionMode = false, $editQuestionMode = false;
     //Vista
     public $view = 'question.create';
 
@@ -92,5 +96,31 @@ class QuestionComponent extends Component
         $this->questionnarie->questions()->save($question);
         $this->editQuestionMode = false;
         $this->questionContent = '';
+    }
+
+    public function createAnswer($id)
+    {
+        $this->resetErrorBag('answerContent');
+        $question = Question::find($id);
+        $this->questionId = $question->id;
+        $this->questionContent = $question->content;
+        $this->view = 'answer.create';
+        $this->createAnswerMode = true;
+        $this->answerContent = '';
+    }
+
+    public function storeAnswer()
+    {
+        $this->validate([
+            'answerContent' => ['required', 'string', 'max:255'],
+        ]);
+
+        $answer = new Answer();
+        $answer->content = $this->answerContent;
+
+        $question = Question::find($this->questionId);
+        $question->answer()->save($answer);
+
+        $this->createAnswerMode = false;
     }
 }

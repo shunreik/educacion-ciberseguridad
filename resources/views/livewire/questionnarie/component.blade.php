@@ -18,7 +18,7 @@
             <div class="bg-white overflow-hidden shadow-xl sm:rounded-lg">
                 <div class="p-6 sm:px-20 bg-white border-b border-gray-200">
                     <div class="mt-2 text-2xl">
-                        Lecturas registradas
+                        Cuestionarios registrados
                     </div>
                     <div class="mt-4 text-gray-500 mb-2">
                         A continuación puedes agregar o editar el cuestionario en cada una de tus lecturas.
