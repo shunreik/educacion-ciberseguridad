@@ -40,6 +40,12 @@
                         Cuestionarios
                     </x-jet-nav-link>
                     @endcan
+
+                    {{-- @can('manage.questionnaries') --}}
+                    <x-jet-nav-link href="{{ route('content') }}" :active="request()->routeIs('content')">
+                        Contenido
+                    </x-jet-nav-link>
+                    {{-- @endcan --}}
                     
                 </div>
             </div>
@@ -173,6 +179,12 @@
                 Cuestionarios
             </x-jet-responsive-nav-link>
             @endcan
+
+            {{-- @can('manage.questionnaries') --}}
+            <x-jet-responsive-nav-link href="{{ route('content') }}" :active="request()->routeIs('content')">
+                Contenido
+            </x-jet-responsive-nav-link>
+            {{-- @endcan --}}
 
 
         </div>
