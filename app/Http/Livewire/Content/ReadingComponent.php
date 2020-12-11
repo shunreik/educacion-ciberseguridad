@@ -9,12 +9,12 @@ use Livewire\Component;
 class ReadingComponent extends Component
 {
     public $readingId, $readingTitle, $readingDescription, $readingLevel,
-        $readingImages, $readingAutorName, $readingAutorPhoto, $readingDate;
-    public $topicId, $topicName;
+        $readingImages, $readingAutorName, $readingAutorPhoto, $readingDate,
+        $readingQuestionnarie, $readingTopicId, $readingTopicName;
 
-    public function mount($topic, $reading)
+
+    public function mount($reading)
     {
-        $this->topicId = $topic;
         $this->readingId = $reading;
     }
     public function render()
@@ -27,10 +27,17 @@ class ReadingComponent extends Component
         $this->readingAutorPhoto = $reading->user->profile_photo_url;
         $this->readingAutorName = $reading->user->nickname;
         $this->readingDate = $reading->created_at->format('d M Y');
-
-        $topic = Topic::findOrFail($this->topicId);
-        $this->topicName = $topic->title;
+        $this->readingQuestionnarie = $reading->questionnarie;
+        $this->readingTopicId = $reading->topic->id;
+        $this->readingTopicName = $reading->topic->title;
 
         return view('livewire.content.reading');
+    }
+
+    public function goToQuestionnarie($questionnarieId)
+    {
+        return redirect()->route('content.questionnarie', [
+            'questionnarie' => $questionnarieId,
+        ]);
     }
 }

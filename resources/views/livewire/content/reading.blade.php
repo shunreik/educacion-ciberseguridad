@@ -7,7 +7,7 @@
                     Lectura
                 </h2>
             </div>
-            <a href="{{ route('content.topic', $topicId) }}" class="inline-flex ml-2 items-center px-4 py-2 bg-gray-800 border border-transparent rounded-md font-semibold text-xs text-white uppercase tracking-widest hover:bg-gray-700 active:bg-gray-900 focus:outline-none focus:border-gray-900 focus:shadow-outline-gray disabled:opacity-25 transition ease-in-out duration-150">Regresar</a>
+            <a href="{{ route('content.topic', $readingTopicId) }}" class="inline-flex ml-2 items-center px-4 py-2 bg-gray-800 border border-transparent rounded-md font-semibold text-xs text-white uppercase tracking-widest hover:bg-gray-700 active:bg-gray-900 focus:outline-none focus:border-gray-900 focus:shadow-outline-gray disabled:opacity-25 transition ease-in-out duration-150">Regresar</a>
         </div>
 
     </x-slot>
@@ -59,7 +59,7 @@
                         <div class="col-span-6 sm:col-span-3">
                             <x-jet-section-title>
                                 <x-slot name='title'>Temática</x-slot>
-                                <x-slot name='description'>{{ $topicName }}</x-slot>
+                                <x-slot name='description'>{{ $readingTopicName }}</x-slot>
                             </x-jet-section-title>
                         </div>
                         <div class="col-span-6 sm:col-span-3">
@@ -112,7 +112,22 @@
                         </div>
                         @endif
                     </div>
-    
+
+                    {{-- <p>{{ var_dump($readingQuestionnarie) }}</p> --}}
+                    @if (!is_null($readingQuestionnarie))
+                        @if ($readingQuestionnarie->status)
+                            <div class="md:col-span-1 mb-4">
+                                <div class="flex items-center mb-4" >
+                                    <div class="flex-grow">
+                                        <div class="mt-2 text-md">
+                                            Ahora puede reforzar tus conociemintos de esta lectura llenado el siguiente cuestionario. Para ello, selecciona la siguiente opción.
+                                        </div>
+                                    </div>
+                                    <button wire:click="goToQuestionnarie({{$readingQuestionnarie->id}})" class="bg-green-300 hover:bg-green-400 rounded-md capitalize px-3 py-2 mr-2">Llenar cuestionario</button>
+                                </div>
+                            </div>
+                        @endif
+                    @endif
                 </div>
             </div>
         </div>

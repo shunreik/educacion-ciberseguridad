@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\ReadingController;
 use App\Http\Livewire\Content\ContentComponent;
+use App\Http\Livewire\Content\QuestionnarieComponent as ContentQuestionnarieComponent;
 use App\Http\Livewire\Content\ReadingComponent as ContentReadingComponent;
 use App\Http\Livewire\Content\TopicComponent;
 use App\Http\Livewire\Question\QuestionComponent;
@@ -43,12 +44,13 @@ Route::middleware(['auth:sanctum', 'verified'])->group(function(){
 
     Route::get('questionnaries', QuestionnarieComponent::class)->name('questionnarie')->middleware('can:manage.questionnaries');
     Route::get('questionnarie/{reading}', QuestionComponent::class)->name('questions')->middleware(["can:manage.questionnaries", ReadingOwner::class]);
+    
     Route::get('content', ContentComponent::class)->name('content');
     Route::get('content/topic/{topic}', TopicComponent::class)->name('content.topic');
-    Route::get('content/topic/{topic}/reading/{reading}', ContentReadingComponent::class)->name('content.reading');
-
+    Route::get('content/reading/{reading}', ContentReadingComponent::class)->name('content.reading');
+    Route::get('content/questionnarie/{questionnarie}', ContentQuestionnarieComponent::class)->name('content.questionnarie');
+    
     Route::get('test', UploadImage::class);
-
 });
 
 Route::get('logout', function () {
