@@ -47,6 +47,11 @@ class PermissionRoleSeeder extends Seeder
             'name' => 'manage.readings'
         ]);
 
+        // Módulo: Cuestionario
+        $manageQuestionnarie = Permission::create([
+            'name' => 'manage.questionnaries'
+        ]);
+
         $createContent = Permission::create([
             'name' => 'create.content'
         ]);
@@ -61,6 +66,7 @@ class PermissionRoleSeeder extends Seeder
         ]);
         $teacherRole->syncPermissions([
             $manageReading,
+            $manageQuestionnarie,
         ]);
         $studentRole->syncPermissions([
             $createContent,

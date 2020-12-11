@@ -54,7 +54,7 @@
         </x-slot>
         <x-slot name='title'><a href="{{ route('reading') }}">Módulo Lectura</a></x-slot>
         <x-slot name="description">
-            Puedes listar a todas las lecturas registradas, visualizar, registrar, actualizar a un determinado registro. Además, puede privar o publicar a las lecturas para permitir o impedir su visibilidad a los estudiantes.
+            Puedes listar a todas las lecturas registradas, visualizar, registrar, actualizar a un determinado registro. También, puede privar o publicar a las lecturas para permitir o impedir su visibilidad a los estudiantes.
         </x-slot>
         <x-link-module href="{{ route('reading') }}">
             Visitar módulo
@@ -62,17 +62,20 @@
     </x-cards.module>
     @endcan
 
+    @can('manage.questionnaries')
     <x-cards.module class="border-t border-gray-200 md:border-l">
         <x-slot name='icon'>
             <img src="https://img.icons8.com/material/50/000000/view-module.png" class="w-8 h-8"/>
         </x-slot>
-        <x-slot name='title'><a href="#">Módulo Prueba2</a></x-slot>
+        <x-slot name='title'><a href="{{ route('questionnarie') }}">Módulo Cuestionario</a></x-slot>
         <x-slot name="description">
-            Descripción
+            Puedes listar a todas los cuestionarios registradas, agregar o editar un cuestionario asignado a una determinada lectura. También, puedes publicar tu cuestionario o privarlo para que sea accedido por los estudiantes.
         </x-slot>
-        <x-link-module href="#">
+        <x-link-module href="{{ route('questionnarie') }}">
             Visitar módulo
         </x-link-module>
     </x-cards.module>
+    @endcan
+    
 
 </div>

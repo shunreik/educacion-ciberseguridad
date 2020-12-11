@@ -35,11 +35,11 @@
                     </x-jet-nav-link>
                     @endcan
 
-                    {{-- @can('manage.readings') --}}
+                    @can('manage.questionnaries')
                     <x-jet-nav-link href="{{ route('questionnarie') }}" :active="request()->routeIs('questionnarie')">
                         Cuestionarios
                     </x-jet-nav-link>
-                    {{-- @endcan --}}
+                    @endcan
                     
                 </div>
             </div>
@@ -168,11 +168,11 @@
             </x-jet-responsive-nav-link>
             @endcan
 
-            {{-- @can('manage.readings') --}}
+            @can('manage.questionnaries')
             <x-jet-responsive-nav-link href="{{ route('questionnarie') }}" :active="request()->routeIs('questionnarie')">
                 Cuestionarios
             </x-jet-responsive-nav-link>
-            {{-- @endcan --}}
+            @endcan
 
 
         </div>

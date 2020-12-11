@@ -38,8 +38,8 @@ Route::middleware(['auth:sanctum', 'verified'])->group(function(){
     Route::get('reading/edit/{reading}', [ReadingController::class, 'edit'])->name('edit.reading')->middleware('can:manage.readings');
     Route::put('reading/{reading}', [ReadingController::class, 'update'])->name('update.reading')->middleware('can:manage.readings');
 
-    Route::get('questionnaries', QuestionnarieComponent::class)->name('questionnarie');
-    Route::get('questionnarie/{reading}', QuestionComponent::class)->name('questions')->middleware([ReadingOwner::class]);
+    Route::get('questionnaries', QuestionnarieComponent::class)->name('questionnarie')->middleware('can:manage.questionnaries');
+    Route::get('questionnarie/{reading}', QuestionComponent::class)->name('questions')->middleware(["can:manage.questionnaries", ReadingOwner::class]);
     
     Route::get('test', UploadImage::class);
 });
