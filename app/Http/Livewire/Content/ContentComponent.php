@@ -4,20 +4,20 @@ namespace App\Http\Livewire\Content;
 
 use App\Models\Topic;
 use Livewire\Component;
+use Illuminate\Database\Eloquent\Builder;
 
 class ContentComponent extends Component
 {
-    public $view = "topics";
 
     public function render()
     {
-        $topics = Topic::has('readings')->get();
+        //Solo de obtienen los topics que tengan lecturas asignadas y además
+        //estas lecturas estén activas (publicadas)
+        $topics = Topic::whereHas('readings', function (Builder $query) {
+            $query->where('status', true);
+        })->get();
         return view('livewire.content.component', [
             'topics' => $topics,
         ]);
-    }
-
-    public function listReadings(){
-        $this->view = "readings";
     }
 }
