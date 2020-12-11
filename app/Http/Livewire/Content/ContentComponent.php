@@ -16,6 +16,7 @@ class ContentComponent extends Component
         $topics = Topic::whereHas('readings', function (Builder $query) {
             $query->where('status', true);
         })->get();
+
         return view('livewire.content.component', [
             'topics' => $topics,
         ]);

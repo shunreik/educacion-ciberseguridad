@@ -28,7 +28,7 @@
                                 <div class="rounded-lg bg-white shadow-lg md:shadow-xl relative overflow-hidden">
                                     <div class="px-3 pt-8 pb-10 text-center relative z-10">
                                         <h4 class="text-sm uppercase text-gray-500 leading-tight">{{ $topic->title }}</h4>
-                                        <h3 class="text-3xl text-gray-700 font-semibold leading-tight my-3">{{ count($topic->readings )}}</h3>
+                                        <h3 class="text-3xl text-gray-700 font-semibold leading-tight my-3">{{ count($topic->readings()->where('status', true)->get() )}}</h3>
                                         <p class="text-xs text-green-500 leading-tight">Lecturas</p>
                                         <a href="{{route('content.topic', $topic->id)}}" class="mt-3 w-1/2 inline-flex ml-2 items-center px-4 py-2 bg-gray-800 border border-transparent rounded-md font-semibold text-xs text-white uppercase tracking-widest hover:bg-gray-700 active:bg-gray-900 focus:outline-none focus:border-gray-900 focus:shadow-outline-gray disabled:opacity-25 transition ease-in-out duration-150">
                                             <span class="mx-auto">Listar</span>
