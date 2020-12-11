@@ -40,7 +40,7 @@
                             <x-slot name="photo">{{ $reading->user->profile_photo_url }}</x-slot>
                             <x-slot name="date">{{ $reading->created_at->format('d M Y') }}</x-slot>
                             <div class="flex items-center mt-2 text-gray-700">
-                                <a href="#" class="text-blue-600 cursor-pointer mx-2 hover:underline">Ver más</a>
+                                <a href="{{ route('content.reading', ['topic'=> $topicId, 'reading' => $reading->id]) }}" class="text-blue-600 cursor-pointer mx-2 hover:underline">Ver más</a>
                             </div>
 
                             @if ($reading->level->weighing >= 0 && $reading->level->weighing < 50)
