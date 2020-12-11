@@ -19,7 +19,7 @@ class ReadingOwner
     {
         $userId = $request->user()->id; //se obtiene el id del usuario que está realizando la petición
         $readingId = is_numeric($request->route('reading')) ?
-            Reading::find($request->route('reading'))->user_id  :
+            Reading::findOrFail($request->route('reading'))->user_id  :
             $request->route('reading')->user_id; //se obtiene el id del propietario de la lectura de la ruta
 
         if ($userId !== $readingId) {

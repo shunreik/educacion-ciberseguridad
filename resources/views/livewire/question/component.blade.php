@@ -72,12 +72,7 @@
                             </div>
                         </div>
                         @if ($questions)
-                            @if ($questionnarie->status)
-                                <a href="#" class="inline-flex ml-2 items-center px-4 py-2 bg-red-800 border border-transparent rounded-md font-semibold text-xs text-white uppercase tracking-widest hover:bg-red-700 active:bg-red-900 focus:outline-none focus:border-red-900 focus:shadow-outline-gray disabled:opacity-25 transition ease-in-out duration-150">
-                                    Privar
-                                </a>
-                                
-                            @else
+                            @if (!$questionnarie->status)
                                 <button type="button" wire:click="confirmPublication" class="inline-flex ml-2 items-center px-4 py-2 bg-green-800 border border-transparent rounded-md font-semibold text-xs text-white uppercase tracking-widest hover:bg-green-700 active:bg-green-900 focus:outline-none focus:border-green-900 focus:shadow-outline-gray disabled:opacity-25 transition ease-in-out duration-150">
                                     Publicar
                                 </button>
