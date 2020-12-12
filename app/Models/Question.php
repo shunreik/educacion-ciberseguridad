@@ -25,7 +25,6 @@ class Question extends Model
         'content'
     ];
 
-
     /**
      * Relaciones entre modelos
      */
