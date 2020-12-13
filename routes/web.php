@@ -11,8 +11,8 @@ use App\Http\Livewire\Reading\ReadingComponent;
 use App\Http\Livewire\StudentComponent;
 use App\Http\Livewire\TeacherComponent;
 use App\Http\Livewire\Test\UploadImage;
+use App\Http\Middleware\PublishedReading;
 use App\Http\Middleware\ReadingOwner;
-use App\Models\Questionnarie;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -48,7 +48,7 @@ Route::middleware(['auth:sanctum', 'verified'])->group(function(){
     
     Route::get('content', ContentComponent::class)->name('content');
     Route::get('content/topic/{topic}', TopicComponent::class)->name('content.topic');
-    Route::get('content/reading/{reading}', ContentReadingComponent::class)->name('content.reading');
+    Route::get('content/reading/{reading}', ContentReadingComponent::class)->name('content.reading')->middleware(PublishedReading::class);
     
     // Route::get('content/questionnarie/{questionnarie}', ContentQuestionnarieComponent::class)->name('content.questionnarie');
     Route::get('content/questionnarie/{questionnarie}', [QuestionnarieController::class, 'show'])->name('content.questionnarie')->middleware('can:fill.questionnarie');
