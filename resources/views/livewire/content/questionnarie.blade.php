@@ -1,8 +1,14 @@
 <x-app-layout>
     <x-slot name="header">
-        <h2 class="font-semibold text-xl text-gray-800 leading-tight">
-            Cuestionario
-        </h2>
+        <div class="flex items-center mb-4" >
+            <div class="flex-grow">
+                <h2 class="font-semibold text-xl text-gray-800 leading-tight">
+                    Cuestionario
+                </h2>
+            </div>
+            <a href="{{ route('content.reading', $questionnarie->reading->id ) }}" class="inline-flex ml-2 items-center px-4 py-2 bg-gray-800 border border-transparent rounded-md font-semibold text-xs text-white uppercase tracking-widest hover:bg-gray-700 active:bg-gray-900 focus:outline-none focus:border-gray-900 focus:shadow-outline-gray disabled:opacity-25 transition ease-in-out duration-150">Regresar</a>
+        </div>
+
     </x-slot>
 
     <div class="py-12">
@@ -10,7 +16,7 @@
             <div class="bg-white overflow-hidden shadow-xl sm:rounded-lg">
                 <div class="p-6 sm:px-20 bg-white border-b border-gray-200">
                     <div class="mt-2 text-2xl">
-                        Lectura: Poner el título de la lectura
+                        Lectura: <span class="text-gray-700">{{ $questionnarie->reading->title }}</span>
                     </div>
 
                     <div class="mt-4 text-gray-500 mb-3">

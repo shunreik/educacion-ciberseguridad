@@ -3,7 +3,6 @@
 use App\Http\Controllers\QuestionnarieController;
 use App\Http\Controllers\ReadingController;
 use App\Http\Livewire\Content\ContentComponent;
-use App\Http\Livewire\Content\QuestionnarieComponent as ContentQuestionnarieComponent;
 use App\Http\Livewire\Content\ReadingComponent as ContentReadingComponent;
 use App\Http\Livewire\Content\TopicComponent;
 use App\Http\Livewire\Question\QuestionComponent;
