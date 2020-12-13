@@ -39,4 +39,9 @@ class Questionnarie extends Model
     {
         return $this->hasMany(Question::class);
     }
+    //Un cuestionario puede tener más de una calificaión por parte del estudiante
+    public function scores()
+    {
+        return $this->hasMany(Score::class);
+    }
 }

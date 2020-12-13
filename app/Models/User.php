@@ -238,4 +238,9 @@ class User extends Authenticatable implements MustVerifyEmail, CanResetPassword
     {
         return $this->hasMany(Reading::class);
     }
+    //Un usuario pude tener registradas varias calificaciones a su nombre
+    public function scores()
+    {
+        return $this->hasMany(Score::class);
+    }
 }
