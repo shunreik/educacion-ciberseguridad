@@ -35,4 +35,9 @@ class Score extends Model
     {
         return $this->belongsTo(Questionnarie::class);
     }
+    //Un puntaje o calificación puede tener adjuntada varias respuestas del estudiante
+    public function studentResponses()
+    {
+        return $this->hasMany(StudentResponse::class);
+    }
 }
