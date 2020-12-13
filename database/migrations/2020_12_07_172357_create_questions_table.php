@@ -14,8 +14,8 @@ class CreateQuestionsTable extends Migration
     public function up()
     {
         Schema::create('questions', function (Blueprint $table) {
-            $table->id();
-            $table->string('content');//se almacena la pregunta en sí
+            $table->uuid('id')->primary();
+            $table->string('content'); //se almacena la pregunta en sí
 
             //Claves foráneas
             $table->foreignId('questionnarie_id')->constrained('questionnaries')->onDelete('cascade');

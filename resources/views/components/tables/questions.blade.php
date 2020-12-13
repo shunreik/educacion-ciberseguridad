@@ -20,7 +20,7 @@
                                 <tr>
                                     <td class="px-6 py-4  whitespace-nowrap">
                                         <div class="grid grid-flow-col grid-cols-12">
-                                            <button type="button" class="col-span-1 flex justify-self-center self-center mr-2" wire:click="editQuestion({{ $question->id }})">
+                                            <button type="button" class="col-span-1 flex justify-self-center self-center mr-2" wire:click="editQuestion('{{ $question->id }}')">
                                                 <x-icons.edit class="w-5 h-5 fill-current "/>
                                             </button>
                                             <div class="text-sm text-gray-900 col-span-11">{{ $question->content }}</div>
@@ -29,7 +29,7 @@
                                     <td class="px-6 py-4 whitespace-nowrap">
                                         @if ($question->answer)
                                             <div class="grid grid-flow-col grid-cols-3">
-                                                <button type="button" class="col-span-1 flex justify-self-center self-center mr-2" wire:click="editAnswer({{ $question->answer->id }})">
+                                                <button type="button" class="col-span-1 flex justify-self-center self-center mr-2" wire:click="editAnswer('{{ $question->answer->id }}')">
                                                     <x-icons.edit class="w-5 h-5 fill-current "/>
                                                 </button>
                                                 <div class="col-span-2 text-sm text-gray-900">{{ $question->answer->content}}</div>
@@ -42,7 +42,7 @@
                                         @if (count($question->options) > 0)
                                             @foreach ($question->options as $option)
                                                 <div class="grid grid-flow-col grid-cols-3 my-3">
-                                                    <button type="button" class="col-span-1 flex justify-self-center self-center mr-2" wire:click="editOption({{  $option->id }})">
+                                                    <button type="button" class="col-span-1 flex justify-self-center self-center mr-2" wire:click="editOption('{{ $option->id }}')">
                                                         <x-icons.edit class="w-5 h-5 fill-current "/>
                                                     </button>
                                                     <div class="col-span-2 text-sm text-gray-900">{{ $option->content}}</div>
@@ -56,13 +56,13 @@
                                     <td class="px-1 py-4 whitespace-nowrap text-sm font-medium">
                                         <div class="flex flex-row justify-center">
                                             @if (is_null($question->answer))
-                                            <button wire:click="createAnswer({{ $question->id }})" class="flex justify-items-center items-center text-green-600 hover:text-green-900 mx-3">
+                                            <button wire:click="createAnswer('{{ $question->id }}')" class="flex justify-items-center items-center text-green-600 hover:text-green-900 mx-3">
                                                 <x-icons.add class="w-5 h-5 fill-current"/>
                                                 <span class="ml-1">Respuesta</span>
                                             </button>
                                             @endif
                                             @if (count($question->options) < 4)
-                                            <button wire:click="createOption({{ $question->id }})" class="flex justify-items-center items-center text-blue-600 hover:text-blue-900 mx-3">
+                                            <button wire:click="createOption('{{ $question->id }}')" class="flex justify-items-center items-center text-blue-600 hover:text-blue-900 mx-3">
                                                 <x-icons.add class="w-5 h-5 fill-current"/>
                                                 <span class="ml-1">Opción</span>
                                             </button>
