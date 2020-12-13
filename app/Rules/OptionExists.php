@@ -9,8 +9,8 @@ class OptionExists implements Rule
 {
     public $questions; //array
 
-    public $answer;//model instance Answer
-    public $options;//arrau
+    public $answer; //model instance Answer
+    public $options; //array
     /**
      * Create a new rule instance.
      *
@@ -47,7 +47,7 @@ class OptionExists implements Rule
         }
 
         // foreach ($this->questions as $question) {
-            
+
         // }
 
         // $findAnswer = Answer::find($value);

@@ -49,7 +49,7 @@ class QuestionnarieController extends Controller
         $messages = [];
         $index = 1;
 
-        foreach($questions as $question){
+        foreach ($questions as $question) {
             $rules += [
                 "$question->id" => ['required', new OptionExists($question->answer, $question->options)],
             ];
@@ -69,15 +69,15 @@ class QuestionnarieController extends Controller
         $numberOfQuestions = count($questions);
         $correctAnswers = 0;
 
-        foreach($validated as $questionId => $answerId){
+        foreach ($validated as $questionId => $answerId) {
             $question = Question::find($questionId);
-            if($question->answer->id === $answerId){
+            if ($question->answer->id === $answerId) {
                 $correctAnswers++;
             }
             // var_dump("Pregunta: $question", "Respuesta: $answer");
         }
 
-        $score = round($correctAnswers * (10/$numberOfQuestions), 1);//Se redondea a dos décimales
+        $score = round($correctAnswers * (10 / $numberOfQuestions), 1); //Se redondea a dos décimales
         dd("Tu calificación es: $score");
     }
 }
