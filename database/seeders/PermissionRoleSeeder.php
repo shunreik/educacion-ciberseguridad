@@ -51,9 +51,10 @@ class PermissionRoleSeeder extends Seeder
         $manageQuestionnarie = Permission::create([
             'name' => 'manage.questionnaries'
         ]);
-
-        $createContent = Permission::create([
-            'name' => 'create.content'
+        
+        //Permiso para que los usuarios (estudiantes) puedan llenar/completar el cuestionario
+        $fillOutQuestionnarie = Permission::create([
+            'name' => 'fill.questionnarie'
         ]);
 
         /**
@@ -69,7 +70,7 @@ class PermissionRoleSeeder extends Seeder
             $manageQuestionnarie,
         ]);
         $studentRole->syncPermissions([
-            $createContent,
+            $fillOutQuestionnarie,
         ]);
     }
 }

@@ -113,24 +113,26 @@
                         @endif
                     </div>
 
-                    {{-- <p>{{ var_dump($readingQuestionnarie) }}</p> --}}
-                    @if (!is_null($readingQuestionnarie))
-                        @if ($readingQuestionnarie->status)
-                            <div class="md:col-span-1 mb-4">
-                                <div class="flex items-center mb-4" >
-                                    <div class="flex-grow">
-                                        <div class="mt-2 text-md">
-                                            Ahora puede reforzar tus conociemintos de esta lectura llenado el siguiente cuestionario. Para ello, selecciona la siguiente opción.
+                    @can('fill.questionnarie')
+                        @if (!is_null($readingQuestionnarie))
+                            @if ($readingQuestionnarie->status)
+                                <div class="md:col-span-1 mb-4">
+                                    <div class="flex items-center mb-4" >
+                                        <div class="flex-grow">
+                                            <div class="mt-2 text-md">
+                                                Ahora puede reforzar tus conociemintos de esta lectura llenado el siguiente cuestionario. Para ello, selecciona la siguiente opción.
+                                            </div>
                                         </div>
+                                        <a href="{{ route('content.questionnarie', $readingQuestionnarie->id) }}" class="bg-green-300 hover:bg-green-400 rounded-md capitalize px-3 py-2 mr-2">
+                                            Llenar cuestionario
+                                        </a>
+                                        {{-- <button wire:click="goToQuestionnarie({{$readingQuestionnarie->id}})" class=""></button> --}}
                                     </div>
-                                    <a href="{{ route('content.questionnarie', $readingQuestionnarie->id) }}" class="bg-green-300 hover:bg-green-400 rounded-md capitalize px-3 py-2 mr-2">
-                                        Llenar cuestionario
-                                    </a>
-                                    {{-- <button wire:click="goToQuestionnarie({{$readingQuestionnarie->id}})" class=""></button> --}}
                                 </div>
-                            </div>
+                            @endif
                         @endif
-                    @endif
+                    @endcan
+
                 </div>
             </div>
         </div>
