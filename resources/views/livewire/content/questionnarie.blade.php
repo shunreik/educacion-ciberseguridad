@@ -1,4 +1,4 @@
-<div>
+<x-app-layout>
     <x-slot name="header">
         <h2 class="font-semibold text-xl text-gray-800 leading-tight">
             Cuestionario
@@ -10,74 +10,44 @@
             <div class="bg-white overflow-hidden shadow-xl sm:rounded-lg">
                 <div class="p-6 sm:px-20 bg-white border-b border-gray-200">
                     <div class="mt-2 text-2xl">
-                        Listado de preguntas
+                        Lectura: Poner el título de la lectura
                     </div>
 
-                    <div class="mt-4 text-gray-500 mb-2">
+                    <div class="mt-4 text-gray-500 mb-3">
                         A continuación puedes obsevar las preguntas que componen al cuestionario
                     </div>
 
-
                     {{-- Formulario --}}
 
-                    <form wire:submit.prevent="submit">
-        
+                    <form action="{{ route('store.questionnarie', $questionnarie->id) }}" method="POST">
+                        @csrf
                          
-                        {{-- <select id="pregunta.0" name="pregunta.0" wire:model="pregunta.0" class="form-select rounded-md shadow-sm mt-1 w-full">
-                            <option value="" >Seleccione una opción</option> 
-                            <option value="option1">Opción 1</option>
-                            <option value="option2">Opción 2</option>
-                        </select>
-                        <x-jet-input-error for="pregunta.0" class="mt-2" />
-
-                        <select id="pregunta.1" name="pregunta.1" wire:model="pregunta.1" class="form-select rounded-md shadow-sm mt-1 w-full">
-                            <option value="" >Seleccione una opción</option> 
-                            <option value="option1">Opción 1</option>
-                            <option value="option2">Opción 2</option>
-                        </select>
-                        <x-jet-input-error for="pregunta.1" class="mt-2" /> --}}
-
-                        
-
-
-                        @php
-                            $count = 0;
-                        @endphp
-
-                        @foreach ($questionForm as $name => $input)
-
-                            <div class="col-span-6 sm:col-span-5 mb-5">
-                                <x-jet-label for="{{ $name }}" value="{{ $input['question']->content }}" />
-                                
-                                @foreach ($input['options'] as $option)
-                                    <div>
-                                        <input type="radio" id="{{$count}}" name="{{ $name }}" value="{{$option->id}}">
-                                        <label for="{{$count}}">{{$option->content}}</label>
+                         @foreach ($questionnarieForm as $item => $value)
+                             {{-- {{ var_dump($value) }} --}}
+                             <div class="col-span-6 sm:col-span-5 mb-4">
+                                <x-jet-label value="Pregunta {{ $item + 1 }}: {{ $value['question']->content }}" />
+                                    @foreach ($value['options'] as $option)
+                                    {{-- @php
+                                        $inputName = "answer_$item";
+                                    @endphp --}}
+                                    <div class="my-2 ml-5">
+                                        <input type="radio" id="{{ $option->id }}" name="{{$value['question']->id }}" value="{{$option->id}}" {{ old($value['question']->id) === "$option->id" ? "checked" : "" }}>
+                                        <label for="{{ $option->id }}">{{ $option->content }}</label>
                                     </div>
-                                    @php
-                                        $count++;
-                                    @endphp
-                                @endforeach
-
-                                {{-- <select id="{{ $name }}" name="{{ $name }}" wire:model="test." class="form-select rounded-md shadow-sm mt-1 w-full">
-                                    
-                                    <option value="" >Seleccione una opción</option> 
-                                    @foreach ($input['options'] as $option)
-                                    <option value="{{ $option->id }}">{{$option->content}}</option> 
                                     @endforeach
-
-                                </select> --}}
-                                {{-- <x-jet-input-error for="question[]" class="mt-2" /> --}}
+                                <x-jet-input-error for="{{$value['question']->id }}" class="mt-2"/>
                             </div>
-                        @endforeach
+                         @endforeach
 
-                        <x-jet-button type="submit">Enviar</x-jet-button>
-
+                        <div class="flex items-center justify-end px-4 py-3 bg-gray-50 text-right sm:px-6">
+                            <x-jet-button type='submit'>
+                                Guardar
+                            </x-jet-button>
+                        </div>
                     </form>
-                   
 
                 </div>
             </div>
         </div>
     </div>
-</div>
+</x-app-layout>

@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\QuestionnarieController;
 use App\Http\Controllers\ReadingController;
 use App\Http\Livewire\Content\ContentComponent;
 use App\Http\Livewire\Content\QuestionnarieComponent as ContentQuestionnarieComponent;
@@ -12,6 +13,7 @@ use App\Http\Livewire\StudentComponent;
 use App\Http\Livewire\TeacherComponent;
 use App\Http\Livewire\Test\UploadImage;
 use App\Http\Middleware\ReadingOwner;
+use App\Models\Questionnarie;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -49,8 +51,10 @@ Route::middleware(['auth:sanctum', 'verified'])->group(function(){
     Route::get('content/topic/{topic}', TopicComponent::class)->name('content.topic');
     Route::get('content/reading/{reading}', ContentReadingComponent::class)->name('content.reading');
     
-    Route::get('content/questionnarie/{questionnarie}', ContentQuestionnarieComponent::class)->name('content.questionnarie');
-    
+    // Route::get('content/questionnarie/{questionnarie}', ContentQuestionnarieComponent::class)->name('content.questionnarie');
+    Route::get('content/questionnarie/{questionnarie}', [QuestionnarieController::class, 'show'])->name('content.questionnarie');
+    Route::post('content/questionnarie/{questionnarie}', [QuestionnarieController::class, 'store'])->name('store.questionnarie');//se guarda el cuestionario llenado por el estudiante
+
     Route::get('test', UploadImage::class);
 });
 
