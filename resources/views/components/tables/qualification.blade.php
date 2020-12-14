@@ -24,7 +24,7 @@
                   <div class="text-sm text-gray-900">{{ $score->created_at->format('d M Y') }}</div>
                 </td>
                 <td class="px-6 py-4 whitespace-nowrap">
-                  <div class="text-sm text-gray-900 text-center">{{ $score->qualification }}</div>
+                  <div class="text-sm text-gray-900 text-center">{{ $score->qualification }}/10</div>
                 </td>
                 
                 <td class="px-6 py-4 whitespace-nowrap text-sm font-medium">

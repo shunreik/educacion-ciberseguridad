@@ -16,9 +16,8 @@ use App\Http\Middleware\CompletedQuestionnarie;
 use App\Http\Middleware\PublishedQuestionnarie;
 use App\Http\Middleware\PublishedReading;
 use App\Http\Middleware\ReadingOwner;
-use App\Models\Questionnarie;
+use App\Http\Middleware\ScoreOwner;
 use Illuminate\Support\Facades\Route;
-use Laravel\Fortify\Actions\CompletePasswordReset;
 
 /*
 |--------------------------------------------------------------------------
@@ -60,7 +59,7 @@ Route::middleware(['auth:sanctum', 'verified'])->group(function () {
     Route::post('content/questionnarie/{questionnarie}', [QuestionnarieController::class, 'store'])->name('store.questionnarie')->middleware(['can:fill.questionnarie', PublishedQuestionnarie::class, CompletedQuestionnarie::class]); //se guarda el cuestionario llenado por el estudiante
 
     Route::get('qualifications', [QualificationController::class, 'index'])->name('qualifications')->middleware('can:show.qualification');
-    Route::get('qualification/{score}', [QualificationController::class, 'show'])->name('qualification.show')->middleware(['can:show.qualification']);
+    Route::get('qualification/{score}', [QualificationController::class, 'show'])->name('qualification.show')->middleware(['can:show.qualification', ScoreOwner::class]);
     Route::get('test', UploadImage::class);
 });
 
