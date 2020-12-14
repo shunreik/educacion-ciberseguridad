@@ -33,7 +33,7 @@
     @endcan
     
     @can('manage.teachers')
-    <x-cards.module class="border-gray-200 md:border-t-0 md:border-l">
+    <x-cards.module class="border-gray-200 md:border-t-0 md:border-l border-b">
         <x-slot name='icon'>
             <img src="https://img.icons8.com/material/50/000000/view-module.png" class="w-8 h-8"/>
         </x-slot>
@@ -48,7 +48,7 @@
     @endcan
 
     @can('manage.readings')
-    <x-cards.module class="border-t border-gray-200">
+    <x-cards.module class="border-gray-200">
         <x-slot name='icon'>
             <img src="https://img.icons8.com/material/50/000000/view-module.png" class="w-8 h-8"/>
         </x-slot>
@@ -63,7 +63,7 @@
     @endcan
 
     @can('manage.questionnaries')
-    <x-cards.module class="border-t border-gray-200 md:border-l">
+    <x-cards.module class="border-gray-200 md:border-l border-b">
         <x-slot name='icon'>
             <img src="https://img.icons8.com/material/50/000000/view-module.png" class="w-8 h-8"/>
         </x-slot>
@@ -72,6 +72,36 @@
             Puedes listar a todas los cuestionarios registradas, agregar o editar un cuestionario asignado a una determinada lectura. También, puedes publicar tu cuestionario o privarlo para que sea accedido por los estudiantes.
         </x-slot>
         <x-link-module href="{{ route('questionnarie') }}">
+            Visitar módulo
+        </x-link-module>
+    </x-cards.module>
+    @endcan
+
+    {{-- @can('manage.readings') --}}
+    <x-cards.module class="border-gray-200">
+        <x-slot name='icon'>
+            <img src="https://img.icons8.com/material/50/000000/view-module.png" class="w-8 h-8"/>
+        </x-slot>
+        <x-slot name='title'><a href="{{ route('content') }}">Módulo Contenido</a></x-slot>
+        <x-slot name="description">
+            Visualiza, según la temática, las lecturas registradas por parte de los profesores de la aplicación web.
+        </x-slot>
+        <x-link-module href="{{ route('content') }}">
+            Visitar módulo
+        </x-link-module>
+    </x-cards.module>
+    {{-- @endcan --}}
+
+    @can('show.qualification')
+    <x-cards.module class="border-gray-200 md:border-l">
+        <x-slot name='icon'>
+            <img src="https://img.icons8.com/material/50/000000/view-module.png" class="w-8 h-8"/>
+        </x-slot>
+        <x-slot name='title'><a href="{{ route('questionnarie') }}">Módulo Calificaciones</a></x-slot>
+        <x-slot name="description">
+            Puedes listar tus calificaiones de los cuestionarios completados.
+        </x-slot>
+        <x-link-module href="{{ route('qualifications') }}">
             Visitar módulo
         </x-link-module>
     </x-cards.module>
