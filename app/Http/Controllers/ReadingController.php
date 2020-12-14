@@ -45,7 +45,7 @@ class ReadingController extends Controller
             foreach ($request->file('newImages') as $image) {
                 $image = new Image([
                     // 'url' => $image->store('report_images', 's3'),
-                    'path' => $image->store('reading_images', 'public'),
+                    'path' => $image->store('reading_images', 's3'),
                 ]);
                 $reading->images()->save($image);
             }
@@ -107,8 +107,8 @@ class ReadingController extends Controller
                 if ($this->searchDeletedImages($pathOldImage, $oldImagesReceived)) {
                     //En caso de que si se haya eliminado se procede a borrar la imágen del servidor y BDD
                     $reading->images()->where('path', $pathOldImage)->delete();
-                    if (Storage::disk('public')->exists($pathOldImage)) {
-                        Storage::disk('public')->delete($pathOldImage);
+                    if (Storage::disk('s3')->exists($pathOldImage)) {
+                        Storage::disk('s3')->delete($pathOldImage);
                     }
                 }
             }
@@ -120,8 +120,8 @@ class ReadingController extends Controller
                 $reading->images()->delete();
                 foreach ($oldImagesReading as $oldImageReading) {
                     $pathOldImage = $oldImageReading->path;
-                    if (Storage::disk('public')->exists($pathOldImage)) {
-                        Storage::disk('public')->delete($pathOldImage);
+                    if (Storage::disk('s3')->exists($pathOldImage)) {
+                        Storage::disk('s3')->delete($pathOldImage);
                     }
                 }
             }
@@ -131,7 +131,7 @@ class ReadingController extends Controller
         if ($request->hasFile('newImages')) {
             foreach ($request->file('newImages') as $image) {
                 $image = new Image([
-                    'path' => $image->store('reading_images', 'public'),
+                    'path' => $image->store('reading_images', 's3'),
                 ]);
                 $reading->images()->save($image);
             }

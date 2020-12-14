@@ -231,6 +231,17 @@ class User extends Authenticatable implements MustVerifyEmail, CanResetPassword
     }
 
     /**
+     * Get the disk that profile photos should be stored on.
+     *
+     * @return string
+     */
+    protected function profilePhotoDisk()
+    {
+        // return 's3' : 'public';
+        return 's3';
+    }
+
+    /**
      * Relaciones entre modelos
      */
     //Un usuario pude tener registradas varias lecturas a su nombre
