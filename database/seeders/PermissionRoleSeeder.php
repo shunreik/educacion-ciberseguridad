@@ -57,6 +57,10 @@ class PermissionRoleSeeder extends Seeder
             'name' => 'fill.questionnarie'
         ]);
 
+        $showQualification = Permission::create([
+            'name' => 'show.qualification'
+        ]);
+
         /**
          * ASIGNACIÓN
          * Se asignan los permisos registrados a los roles por defecto
@@ -71,6 +75,7 @@ class PermissionRoleSeeder extends Seeder
         ]);
         $studentRole->syncPermissions([
             $fillOutQuestionnarie,
+            $showQualification
         ]);
     }
 }

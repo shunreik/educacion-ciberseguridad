@@ -47,11 +47,11 @@
                     </x-jet-nav-link>
                     {{-- @endcan --}}
 
-                    {{-- @can('manage.questionnaries') --}}
+                    @can('show.qualification')
                     <x-jet-nav-link href="{{ route('qualifications') }}" :active="request()->routeIs('qualifications')">
                         Calificaciones
                     </x-jet-nav-link>
-                    {{-- @endcan --}}
+                    @endcan
                     
                 </div>
             </div>
@@ -192,11 +192,11 @@
             </x-jet-responsive-nav-link>
             {{-- @endcan --}}
 
-            {{-- @can('manage.questionnaries') --}}
+            @can('show.qualification')
             <x-jet-responsive-nav-link href="{{ route('qualifications') }}" :active="request()->routeIs('qualifications')">
                 Calificaciones
             </x-jet-responsive-nav-link>
-            {{-- @endcan --}}
+            @endcan
 
 
         </div>

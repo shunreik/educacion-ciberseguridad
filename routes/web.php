@@ -57,8 +57,8 @@ Route::middleware(['auth:sanctum', 'verified'])->group(function () {
     Route::get('content/questionnarie/{questionnarie}', [QuestionnarieController::class, 'show'])->name('content.questionnarie')->middleware(['can:fill.questionnarie', PublishedQuestionnarie::class]);
     Route::post('content/questionnarie/{questionnarie}', [QuestionnarieController::class, 'store'])->name('store.questionnarie')->middleware(['can:fill.questionnarie', PublishedQuestionnarie::class]); //se guarda el cuestionario llenado por el estudiante
 
-    Route::get('qualifications', [QualificationController::class, 'index'])->name('qualifications');
-    Route::get('qualification/{score}', [QualificationController::class, 'show'])->name('qualification.show');
+    Route::get('qualifications', [QualificationController::class, 'index'])->name('qualifications')->middleware('can:show.qualification');
+    Route::get('qualification/{score}', [QualificationController::class, 'show'])->name('qualification.show')->middleware(['can:show.qualification']);
     Route::get('test', UploadImage::class);
 });
 
