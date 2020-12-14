@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 
 use App\Models\Question;
 use App\Models\Questionnarie;
+use App\Models\Score;
+use App\Models\StudentResponse;
 use App\Rules\OptionExists;
 use Illuminate\Http\Request;
 
@@ -69,15 +71,31 @@ class QuestionnarieController extends Controller
         $numberOfQuestions = count($questions);
         $correctAnswers = 0;
 
+        //Se crear una instancia de la clase de score
+        $score = new Score();
+        $score->user_id = $request->user()->id;
+        $score->questionnarie_id = $questionnarie->id;
+        $score->qualification = $correctAnswers;
+        $score->save();
+
         foreach ($validated as $questionId => $answerId) {
             $question = Question::find($questionId);
+
             if ($question->answer->id === $answerId) {
                 $correctAnswers++;
             }
+
+            $studentResponse = new StudentResponse();
+            $studentResponse->uuid_question = $question->id;
+            $studentResponse->uuid_response = $answerId;
+            $score->studentResponses()->save($studentResponse);
             // var_dump("Pregunta: $question", "Respuesta: $answer");
         }
 
-        $score = round($correctAnswers * (10 / $numberOfQuestions), 1); //Se redondea a dos décimales
-        dd("Tu calificación es: $score");
+        $qualification = round($correctAnswers * (10 / $numberOfQuestions), 1); //Se redondea a dos décimales
+        $score->qualification = $qualification;//Se actualiza la nota del registro
+        $score->save();
+        dd("Tu calificación es: $qualification", $validated);
+        //Se debe redirigir a la vista de calificaciones
     }
 }
