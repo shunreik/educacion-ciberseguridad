@@ -78,7 +78,7 @@
     @endcan
 
     {{-- @can('manage.readings') --}}
-    <x-cards.module class="border-gray-200">
+    <x-cards.module class="border-gray-200 border-t border-r">
         <x-slot name='icon'>
             <img src="https://img.icons8.com/material/50/000000/view-module.png" class="w-8 h-8"/>
         </x-slot>

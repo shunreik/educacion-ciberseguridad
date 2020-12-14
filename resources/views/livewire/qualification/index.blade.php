@@ -6,9 +6,9 @@
     </x-slot>
 
     @if (session()->has('success'))
-        <x-alerts.toast wire:model="alert">
+        <x-alerts.toast id="alert">
             <x-slot name="message">{{ session('success') }}</x-slot>
-            <button type="button" wire:click="$refresh" class="text-green-700">
+            <button type="button" class="text-green-700" onclick="closeAlert()">
                 <span class="">&times;</span>
             </button>
         </x-alerts.toast>
@@ -32,4 +32,10 @@
             </div>
         </div>
     </div>
+
+    <script>
+        function closeAlert() {
+          document.getElementById("alert").classList.add('hidden');
+        }
+    </script>
 </x-app-layout>

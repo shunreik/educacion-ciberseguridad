@@ -115,7 +115,8 @@
 
                     @can('fill.questionnarie')
                         @if (!is_null($readingQuestionnarie))
-                            @if ($readingQuestionnarie->status)
+                            @if (is_null(Auth::user()->scores()->where('questionnarie_id', $readingQuestionnarie->id)->first()))
+                                @if ($readingQuestionnarie->status)
                                 <div class="md:col-span-1 mb-4">
                                     <div class="flex items-center mb-4" >
                                         <div class="flex-grow">
@@ -129,6 +130,7 @@
                                         {{-- <button wire:click="goToQuestionnarie({{$readingQuestionnarie->id}})" class=""></button> --}}
                                     </div>
                                 </div>
+                                @endif
                             @endif
                         @endif
                     @endcan
