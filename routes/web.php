@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\QualificationController;
 use App\Http\Controllers\QuestionnarieController;
 use App\Http\Controllers\ReadingController;
 use App\Http\Livewire\Content\ContentComponent;
@@ -14,6 +15,7 @@ use App\Http\Livewire\Test\UploadImage;
 use App\Http\Middleware\PublishedQuestionnarie;
 use App\Http\Middleware\PublishedReading;
 use App\Http\Middleware\ReadingOwner;
+use App\Models\Questionnarie;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -27,14 +29,14 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', function(){
+Route::get('/', function () {
     return redirect()->route('dashboard');
 });
 Route::middleware(['auth:sanctum', 'verified'])->get('/dashboard', function () {
     return view('dashboard');
 })->name('dashboard');
 
-Route::middleware(['auth:sanctum', 'verified'])->group(function(){
+Route::middleware(['auth:sanctum', 'verified'])->group(function () {
     Route::get('students', StudentComponent::class)->name('student')->middleware('can:manage.students');
     Route::get('teachers', TeacherComponent::class)->name('teacher')->middleware('can:manage.teachers');
     Route::get('readings', ReadingComponent::class)->name('reading')->middleware('can:manage.readings');
@@ -46,15 +48,17 @@ Route::middleware(['auth:sanctum', 'verified'])->group(function(){
 
     Route::get('questionnaries', QuestionnarieComponent::class)->name('questionnarie')->middleware('can:manage.questionnaries');
     Route::get('questionnarie/{reading}', QuestionComponent::class)->name('questions')->middleware(["can:manage.questionnaries", ReadingOwner::class]);
-    
+
     Route::get('content', ContentComponent::class)->name('content');
     Route::get('content/topic/{topic}', TopicComponent::class)->name('content.topic');
     Route::get('content/reading/{reading}', ContentReadingComponent::class)->name('content.reading')->middleware(PublishedReading::class);
-    
+
     // Route::get('content/questionnarie/{questionnarie}', ContentQuestionnarieComponent::class)->name('content.questionnarie');
     Route::get('content/questionnarie/{questionnarie}', [QuestionnarieController::class, 'show'])->name('content.questionnarie')->middleware(['can:fill.questionnarie', PublishedQuestionnarie::class]);
-    Route::post('content/questionnarie/{questionnarie}', [QuestionnarieController::class, 'store'])->name('store.questionnarie')->middleware(['can:fill.questionnarie', PublishedQuestionnarie::class]);//se guarda el cuestionario llenado por el estudiante
+    Route::post('content/questionnarie/{questionnarie}', [QuestionnarieController::class, 'store'])->name('store.questionnarie')->middleware(['can:fill.questionnarie', PublishedQuestionnarie::class]); //se guarda el cuestionario llenado por el estudiante
 
+    Route::get('qualifications', [QualificationController::class, 'index'])->name('qualifications');
+    Route::get('qualification/{score}', [QualificationController::class, 'show'])->name('qualification.show');
     Route::get('test', UploadImage::class);
 });
 

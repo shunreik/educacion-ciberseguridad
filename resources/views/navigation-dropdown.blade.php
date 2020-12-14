@@ -46,6 +46,12 @@
                         Contenido
                     </x-jet-nav-link>
                     {{-- @endcan --}}
+
+                    {{-- @can('manage.questionnaries') --}}
+                    <x-jet-nav-link href="{{ route('qualifications') }}" :active="request()->routeIs('qualifications')">
+                        Calificaciones
+                    </x-jet-nav-link>
+                    {{-- @endcan --}}
                     
                 </div>
             </div>
@@ -183,6 +189,12 @@
             {{-- @can('manage.questionnaries') --}}
             <x-jet-responsive-nav-link href="{{ route('content') }}" :active="request()->routeIs('content')">
                 Contenido
+            </x-jet-responsive-nav-link>
+            {{-- @endcan --}}
+
+            {{-- @can('manage.questionnaries') --}}
+            <x-jet-responsive-nav-link href="{{ route('qualifications') }}" :active="request()->routeIs('qualifications')">
+                Calificaciones
             </x-jet-responsive-nav-link>
             {{-- @endcan --}}
 

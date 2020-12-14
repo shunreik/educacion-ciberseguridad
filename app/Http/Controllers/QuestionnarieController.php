@@ -93,9 +93,10 @@ class QuestionnarieController extends Controller
         }
 
         $qualification = round($correctAnswers * (10 / $numberOfQuestions), 1); //Se redondea a dos décimales
-        $score->qualification = $qualification;//Se actualiza la nota del registro
+        $score->qualification = $qualification; //Se actualiza la nota del registro
         $score->save();
-        dd("Tu calificación es: $qualification", $validated);
+        // dd("Tu calificación es: $qualification", $validated);
         //Se debe redirigir a la vista de calificaciones
+        return redirect()->route('qualifications')->with('success', 'Completaste correctamente el cuestionario');
     }
 }
