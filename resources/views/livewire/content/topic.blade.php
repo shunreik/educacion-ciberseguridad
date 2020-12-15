@@ -14,7 +14,22 @@
         <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
             <div class="md:col-span-1">
                 <div class="px-4 sm:px-0">
-                    <h3 class="mt-2 text-2xl font-medium text-gray-900">{{ $topicTitle }}</h3>
+
+                    <div class="grid lg:grid-cols-2 gap-1 mb-4">
+                        <div class="mt-2 text-2xl font-medium text-gray-900">
+                            {{ $topicTitle }}
+                        </div>
+
+                        <div class="box my-4 lg:my-0">
+                            <div class="box-wrapper">
+                                <div class=" bg-white rounded-full flex items-center w-full p-3 shadow-sm border border-gray-200">
+                                  <div  class="outline-none focus:outline-none"><svg class=" w-5 text-gray-600 h-5" fill="none" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" stroke="currentColor" viewBox="0 0 24 24"><path d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"></path></svg></div>
+                                  <input type="search" name="" id="" wire:model="search" placeholder="Buscar lectura en base al título" class="w-full pl-4 text-sm outline-none focus:outline-none bg-transparent">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
                     <p class="mt-1 text-sm text-gray-600">
                         {{ $topicDescription }}
                     </p>
