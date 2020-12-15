@@ -6,9 +6,12 @@ use App\Http\Requests\ReadingRequest;
 use App\Models\Reading;
 use Livewire\Component;
 use Illuminate\Http\Request;
+use Livewire\WithPagination;
 
 class ReadingComponent extends Component
 {
+    use WithPagination;
+    
     public $readingId, $title;
     public $privateMode = false, $publicMode = false;
     public $view = 'disable';

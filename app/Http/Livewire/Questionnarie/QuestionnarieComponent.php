@@ -5,9 +5,12 @@ namespace App\Http\Livewire\Questionnarie;
 use App\Models\Questionnarie;
 use Livewire\Component;
 use Illuminate\Http\Request;
+use Livewire\WithPagination;
 
 class QuestionnarieComponent extends Component
 {
+    use WithPagination;
+    
     public $readingId, $questionnarieId;
     public $confirmEditModal = false;
     public $view = 'confirmEdit';
