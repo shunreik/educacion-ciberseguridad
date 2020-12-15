@@ -17,6 +17,13 @@ class StudentComponent extends Component
     //opciones de filtrado de usuario
     public $all = true;
     public $actived = false, $disabled = false;
+    //Opciones para la busqueda de estudiantes
+    public $typeSearch = '', $search = '';
+
+    protected $queryString = [
+        'search' => ['except' => ''],
+        'typeSearch' => ['except' => ''],
+    ];
 
     /**
      * Método que renderiza la vista principal
@@ -144,6 +151,13 @@ class StudentComponent extends Component
     public function filterUsers(){
         $role = Role::where('name', 'estudiante')->first();
         $students = $role->users();
+
+        if(!empty($this->search)){
+            if(empty($this->typeSearch)){
+                $this->typeSearch = 'surname';
+            }
+            $students = $students->where("$this->typeSearch", 'LIKE', "$this->search%");
+        }
 
         if($this->all){
             $students = $students;
