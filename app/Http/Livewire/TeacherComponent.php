@@ -25,6 +25,13 @@ class TeacherComponent extends Component
     public $all = true,
         $actived = false,
         $disabled = false;
+    //Opciones para la busqueda de estudiantes
+    public $typeSearch = '', $search = '';
+
+    protected $queryString = [
+        'search' => ['except' => ''],
+        'typeSearch' => ['except' => ''],
+    ];
 
     public function render()
     {
@@ -229,6 +236,13 @@ class TeacherComponent extends Component
     {
         $roleTeacher = Role::where('name', 'profesor')->first();
         $teachers = $roleTeacher->users();
+
+        if(!empty($this->search)){
+            if(empty($this->typeSearch)){
+                $this->typeSearch = 'surname';
+            }
+            $teachers = $teachers->where("$this->typeSearch", 'LIKE', "$this->search%");
+        }
 
         if ($this->all) {
             $teachers = $teachers;
