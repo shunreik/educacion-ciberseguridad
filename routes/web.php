@@ -37,7 +37,7 @@ Route::middleware(['auth:sanctum', 'verified'])->get('/dashboard', function () {
     return view('dashboard');
 })->name('dashboard');
 
-Route::middleware(['auth:sanctum', 'verified'])->group(function () {
+Route::middleware(['auth:sanctum', 'verified', 'user_status'])->group(function () {
     Route::get('students', StudentComponent::class)->name('student')->middleware('can:manage.students');
     Route::get('teachers', TeacherComponent::class)->name('teacher')->middleware('can:manage.teachers');
     Route::get('readings', ReadingComponent::class)->name('reading')->middleware('can:manage.readings');
