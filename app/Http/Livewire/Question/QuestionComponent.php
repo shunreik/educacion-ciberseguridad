@@ -240,9 +240,10 @@ class QuestionComponent extends Component
         $isCompleted = false;
         if (count($array) >= 3) {
             foreach ($array as $question) {
-                if ($question->answer && count($question->options) > 0) {
+                if (!is_null($question->answer) && count($question->options) > 0) {
                     $isCompleted = true;
                 } else {
+                    $isCompleted = false;
                     break; //termino el bucle de for
                 }
             }
