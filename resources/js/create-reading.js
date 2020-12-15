@@ -20,7 +20,7 @@ if (document.getElementById("form-create-reading")) {
     //Al enviar el formulario
     fromCreate.addEventListener('submit', function (e) {
         e.preventDefault();//Se espera que se llenen los campos requeridos
-
+        document.getElementById("save").disabled = true; //Se oculta el botón de guardar
         //Se agrega el data del formData
         var formData = new FormData(fromCreate);
         sendNewImages.forEach(function (image) {
@@ -49,6 +49,7 @@ if (document.getElementById("form-create-reading")) {
 
         }).catch(function (error) {
             if (error.response) {
+                document.getElementById("save").disabled = false;//Se habilita el botón guardar
                 if (error.response.data.errors) {//se obtienen los errores de validaciones de laravel (Request)
                     var errorsForm = error.response.data.errors;
                     console.log(error.response.data.errors);

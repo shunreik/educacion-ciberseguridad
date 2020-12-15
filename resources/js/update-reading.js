@@ -35,6 +35,7 @@ if (document.getElementById("form-update-reading")) {
     //Al enviar el formulario
     fromUpdate.addEventListener('submit', function (e) {
         e.preventDefault();//Se espera que se llenen los campos requeridos
+        document.getElementById("save").disabled = true;
 
         //Se agrega el data del formData
         var formData = new FormData(fromUpdate);
@@ -69,6 +70,8 @@ if (document.getElementById("form-update-reading")) {
         }).catch(function (error) {
             console.log(error.response);
             if (error.response) {
+                document.getElementById("save").disabled = false;
+                uploadElem.nextElementSibling.classList.remove('hidden');
                 if (error.response.data.errors) {//se obtienen los errores de validaciones de laravel (Request)
                     var errorsForm = error.response.data.errors;
                     console.log(error.response.data.errors);

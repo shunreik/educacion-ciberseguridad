@@ -42,7 +42,7 @@ class Image extends Model
     public function getPathImage()
     {
         $path = $this->path;
-        $pathImage = Storage::disk('public')->url($path);
+        $pathImage = Storage::disk('s3')->url($path);
         return $pathImage;
     }
 }
