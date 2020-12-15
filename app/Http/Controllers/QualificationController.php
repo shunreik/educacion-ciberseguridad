@@ -15,7 +15,7 @@ class QualificationController extends Controller
     {
         // Retrieve the currently authenticated user...
         $user = Auth::user();
-        $scores = $user->scores()->paginate(10);
+        $scores = $user->scores()->latest()->paginate(10);
         return view('livewire.qualification.index', [
             'scores' => $scores,
         ]);

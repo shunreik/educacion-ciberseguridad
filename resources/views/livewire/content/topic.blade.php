@@ -43,6 +43,16 @@
                                 <a href="{{ route('content.reading', $reading->id) }}" class="text-blue-600 cursor-pointer mx-2 hover:underline">Ver más</a>
                             </div>
 
+                            @can('fill.questionnarie')
+                                @if (!is_null($reading->questionnarie))
+                                        @if ($reading->questionnarie->status)
+                                        <span class="bg-green-200 text-green-800 px-3 py-1 rounded-full uppercase text-xs">
+                                            Cuestionario
+                                        </span>
+                                        @endif
+                                @endif
+                            @endcan
+
                             @if ($reading->level->weighing >= 0 && $reading->level->weighing < 50)
                             <span class="bg-yellow-200 text-yellow-800 px-3 py-1 rounded-full uppercase text-xs">
                                 {{ $reading->level->name }}
