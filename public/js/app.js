@@ -21785,8 +21785,8 @@ if (document.getElementById("form-update-reading")) {
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-__webpack_require__(/*! C:\Users\JosueOb\Desktop\PROYECTOS\EDUCACION-CIBERSEGURIDAD\resources\js\app.js */"./resources/js/app.js");
-module.exports = __webpack_require__(/*! C:\Users\JosueOb\Desktop\PROYECTOS\EDUCACION-CIBERSEGURIDAD\resources\css\app.css */"./resources/css/app.css");
+__webpack_require__(/*! C:\Users\Michelle Arias\Desktop\TESIS\educacion-ciberseguridad\resources\js\app.js */"./resources/js/app.js");
+module.exports = __webpack_require__(/*! C:\Users\Michelle Arias\Desktop\TESIS\educacion-ciberseguridad\resources\css\app.css */"./resources/css/app.css");
 
 
 /***/ })
