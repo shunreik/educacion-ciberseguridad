@@ -4,6 +4,8 @@ namespace App\Http\Livewire\Reading;
 
 use App\Http\Requests\ReadingRequest;
 use App\Models\Reading;
+use App\Models\Topic;
+use App\Models\User;
 use Livewire\Component;
 use Illuminate\Http\Request;
 use Livewire\WithPagination;
@@ -16,10 +18,23 @@ class ReadingComponent extends Component
     public $privateMode = false, $publicMode = false;
     public $view = 'disable';
 
+    //opciones de filtrado
+    public $all = true,
+        $actived = false,
+        $disabled = false;
+
+    //Opciones de búsqueda
+    public $typeSearch = '', $search = '';
+
+    protected $queryString = [
+        'search' => ['except' => ''],
+        'typeSearch' => ['except' => ''],
+    ];
+
     public function render(Request $request)
     {
         $user = $request->user(); //se obtiene al usuario que está realizando la petición
-        $readings = $user->readings()->latest()->paginate(10);
+        $readings = $this->filterReadings($user);
 
         // $readings = Reading::paginate(10);
         return view('livewire.reading.component', [
@@ -76,5 +91,66 @@ class ReadingComponent extends Component
         $reading->save();
         $this->publicMode = false;
         session()->flash('success', 'Lectura publicada correctamente');
+    }
+
+    /**
+     * Método que permite listar a todas las lecturas
+     */
+    public function allReadings()
+    {
+        $this->all = true;
+        $this->actived = false;
+        $this->disabled = false;
+    }
+
+    /**
+     * Método que permite el filtrado de lecturas publicadas
+     */
+    public function activatedReadings()
+    {
+        $this->actived = true;
+        $this->disabled = false;
+        $this->all = false;
+    }
+
+    /**
+     * Método que permitr el filtrado de lecturas ocultadas o desactivadas
+     */
+    public function disabledReadings()
+    {
+        $this->disabled = true;
+        $this->actived = false;
+        $this->all = false;
+    }
+
+    public function filterReadings(User $user){
+        $readings = $user->readings();
+
+        if(!empty($this->search)){
+
+            switch ($this->typeSearch) {
+                case 'topic':
+                    $topics = Topic::where('title', 'LIKE', "$this->search%")->get()->toArray();
+                    $idTopicsFound = array_column($topics, 'id');
+                    $readings = $readings->whereIn('topic_id', $idTopicsFound);
+                    break;
+                
+                default://por defecto es el título de la lectura para realizar la búsqueda
+                    $readings = $readings->where("title", 'LIKE', "%$this->search%");
+                    break;
+            }
+        }
+
+        if ($this->all) {
+            $readings = $readings;
+        }
+        if ($this->actived) {
+            $readings = $readings->where('status', true);
+        }
+        if ($this->disabled) {
+            $readings = $readings->where('status', false);
+        }
+        
+        return $readings->latest()->paginate(10);
     }
 }
