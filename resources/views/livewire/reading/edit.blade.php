@@ -26,6 +26,21 @@
                         <div class="px-4 py-5 bg-white sm:p-6">
                             <div class="grid grid-cols-6 gap-6">
 
+                               <!-- Topic -->
+                               <div class="col-span-6 sm:col-span-5">
+                                <x-jet-label for="topic" value="Temática" />
+                                <select name="topic_id" id="topic" class="form-select rounded-md shadow-sm mt-1 w-full">
+                                  @foreach ($topics as $topic)
+                                      @if ($topic->id === $reading->topic->id)
+                                          <option value="{{ $topic->id}}" selected>{{ $topic->title}}</option> 
+                                      @else
+                                          <option value="{{ $topic->id}}">{{ $topic->title}}</option> 
+                                      @endif
+                                  @endforeach
+                                </select>
+                                <p class="mt-2 text-sm text-red-600 hidden"></p>
+                              </div>
+
                                 <!-- Tile -->
                                 <div class="col-span-6 sm:col-span-5">
                                     <x-jet-label for="title" value="Título" />
@@ -38,21 +53,6 @@
                                     <x-jet-label for="description" value="Description" />
                                     <textarea name="description" id="description" class="resize border rounded-md mt-1 block w-full" rows="10">{{ $reading->description }}</textarea>
                                     <p class="mt-2 text-sm text-red-600 hidden"></p>
-                                </div>
-
-                                <!-- Topic -->
-                                <div class="col-span-6 sm:col-span-5">
-                                  <x-jet-label for="topic" value="Temática" />
-                                  <select name="topic_id" id="topic" class="form-select rounded-md shadow-sm mt-1 w-full">
-                                    @foreach ($topics as $topic)
-                                        @if ($topic->id === $reading->topic->id)
-                                            <option value="{{ $topic->id}}" selected>{{ $topic->title}}</option> 
-                                        @else
-                                            <option value="{{ $topic->id}}">{{ $topic->title}}</option> 
-                                        @endif
-                                    @endforeach
-                                  </select>
-                                  <p class="mt-2 text-sm text-red-600 hidden"></p>
                                 </div>
 
                                 <!-- Level -->
@@ -82,6 +82,7 @@
                                     @endif
 
                                     <x-jet-label for="images" value="Imágenes (Opcional)" />
+                                    <span class="mt-1 text-sm text-gray-400">Puedes subir hasta 3 imágenes, con un peso máximo de 1MB por cada imagen</span>
                                     <!-- scroll area -->
                                     <section class="h-full overflow-auto p-8 w-full flex flex-col" id="multi-upload">
 
