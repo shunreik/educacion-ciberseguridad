@@ -29,6 +29,7 @@
                                     <select name="" id="" wire:model="typeSearch" class="text-sm outline-none focus:outline-none bg-transparent mx-2">
                                       <option value="title" selected>Título</option>
                                       <option value="autor">Autor</option>
+                                      <option value="level">Nivel</option>
                                      </select>
                                   </div>
                                 </div>
@@ -36,14 +37,22 @@
                         </div>
                     </div>
 
-                    <p class="mt-1 text-sm text-gray-600">
+                    <p class="mt-1 text-sm text-gray-600 mb-2">
                         {{ $topicDescription }}
                     </p>
+
+                    <div class="flex justify-center mt-4">
+                        <x-filters.status>
+                            <x-buttons.filter class="{{$listReadings ? 'active' : ''}}" wire:click='allReadings'>Todos</x-buttons.filter>
+                            <x-buttons.filter color='green' class="{{$listCuestionnaries ? 'active' : ''}}" wire:click='onlyCuestionnaries'>Cuestionario</x-buttons.filter>
+                        </x-filters.status>
+                    </div>
                 </div>
             </div>
 
-            <div class="container my-12 mx-auto px-4 md:px-12">
-                <div class="flex flex-wrap -mx-1 lg:-mx-4">
+            <div class="container my-2 mx-auto px-4 md:px-12">
+                @if (count($readings) > 0)
+                    <div class="flex flex-wrap -mx-1 lg:-mx-4">
                     @foreach ($readings as $reading)
                         <x-cards.reading>
                             <x-slot name="title">{{ $reading->title }}</x-slot>
@@ -90,9 +99,14 @@
                             </span>
                             @endif
 
-                        </x-cards.reading>
+                            </x-cards.reading>
                     @endforeach
-                </div>
+                    </div>
+                @else
+                    <p class="mt-6 text-sm text-gray-600 mb-4 text-center">Sin resultados</p>
+                @endif
+                    
+                
                 <div class="my-3">
                     {{-- Personalización del paginator de tailwind --}}
                     {{ $readings->links() }}
