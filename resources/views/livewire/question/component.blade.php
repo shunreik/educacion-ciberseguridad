@@ -66,7 +66,7 @@
                                     @if ($questionnarie->status)
                                         <span class="text-green-600"> Estado: publicado</span>
                                     @else
-                                        <span class="text-red-600"> Estado: privado</span>
+                                        <span class="text-red-600"> Estado: oculto</span>
                                     @endif
                                 @endif
                             </div>

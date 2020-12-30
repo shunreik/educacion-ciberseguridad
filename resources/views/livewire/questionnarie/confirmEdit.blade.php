@@ -4,7 +4,7 @@
     </x-slot>
 
     <x-slot name="content">
-        Para realizar cambios en un cuestionario publicado, se procede a privarlo para impedir su acceso a los estudiantes. Al terminar de realizar
+        Para realizar cambios en un cuestionario publicado, se procede a ocultarlo para impedir su acceso a los estudiantes. Al terminar de realizar
         los cambios debes publicarlo nuevamente.
     </x-slot>
 

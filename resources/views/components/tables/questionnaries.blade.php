@@ -24,7 +24,7 @@
                       @if ($reading->questionnarie->status)
                           <x-badge-user-status message='Público'/>
                         @else
-                          <x-badge-user-status color='pink' message='Privado'/>
+                          <x-badge-user-status color='pink' message='Oculto'/>
                       @endif
                   @else
                     <span class="px-4 text-gray-600 text-sm text-center">N/A</span>

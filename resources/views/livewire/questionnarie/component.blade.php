@@ -46,8 +46,8 @@
                     <div class="flex justify-center mb-4">
                         <x-filters.status>
                             <x-buttons.filter class="{{$all ? 'active' : ''}}" wire:click='allCuestionnaries'>Todos</x-buttons.filter>
-                            <x-buttons.filter color='green' class="{{$actived ? 'active' : ''}}" wire:click='activatedCuestionnaries'>Activos</x-buttons.filter>
-                            <x-buttons.filter color='pink' class="{{$disabled ? 'active' : ''}}" wire:click="disabledCuestionnaries">Inactivos</x-buttons.filter>
+                            <x-buttons.filter color='green' class="{{$actived ? 'active' : ''}}" wire:click='activatedCuestionnaries'>Públicos</x-buttons.filter>
+                            <x-buttons.filter color='pink' class="{{$disabled ? 'active' : ''}}" wire:click="disabledCuestionnaries">Ocultos</x-buttons.filter>
                         </x-filters.status>
                     </div>
                    
