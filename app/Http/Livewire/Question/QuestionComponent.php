@@ -135,11 +135,9 @@ class QuestionComponent extends Component
     {
         $this->resetErrorBag('answerContent');
 
-        $question = Question::find($id);
-        $this->questionId = $question->id;
-        $this->questionContent = $question->content;
-        $this->answerContent = $question->answer->content;
-        $this->answerId = $question->answer->id;
+        $answer = Answer::find($id);
+        $this->answerContent = $answer->content;
+        $this->answerId = $answer->id;
         $this->view = 'answer.edit';
         $this->editAnswerMode = true;
     }
