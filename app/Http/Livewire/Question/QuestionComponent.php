@@ -139,6 +139,7 @@ class QuestionComponent extends Component
         $answer = Answer::find($id);
         $this->answerContent = $answer->content;
         $this->answerId = $answer->id;
+        $this->questionContent = $answer->question->content;
         $this->view = 'answer.edit';
         $this->editAnswerMode = true;
     }
