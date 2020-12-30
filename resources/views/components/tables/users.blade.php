@@ -7,7 +7,7 @@
           <table class="min-w-full divide-y divide-gray-200">
             <thead>
               <tr>
-                <x-tables.th content='Username'/>
+                <x-tables.th content='Usuario'/>
                 <x-tables.th content='Apellido'/>
                 <x-tables.th content='Nombre'/>
                 <x-tables.th content='Correo'/>

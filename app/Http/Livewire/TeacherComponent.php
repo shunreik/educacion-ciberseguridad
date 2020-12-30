@@ -60,6 +60,7 @@ class TeacherComponent extends Component
 
     public function create()
     {
+        $this->resetValidation();
         $this->view = 'create';
         $this->createMode = true;
         $this->default();
@@ -89,6 +90,7 @@ class TeacherComponent extends Component
 
     public function edit($id)
     {
+        $this->resetValidation();
         $this->view = 'edit';
         $this->editMode = true;
         $teacher = User::find($id);

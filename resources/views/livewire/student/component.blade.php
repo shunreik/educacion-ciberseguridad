@@ -34,7 +34,7 @@
                                     <select name="" id="" wire:model="typeSearch" class="text-sm outline-none focus:outline-none bg-transparent mx-2">
                                       <option value="surname" selected>Apellido</option>
                                       <option value="name">Nombre</option>
-                                      <option value="nickname">Username</option>
+                                      <option value="nickname">Usuario</option>
                                      </select>
                                   </div>
                                 </div>

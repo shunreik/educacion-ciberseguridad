@@ -41,12 +41,15 @@
                         {{ $topicDescription }}
                     </p>
 
-                    <div class="flex justify-center mt-4">
-                        <x-filters.status>
-                            <x-buttons.filter class="{{$listReadings ? 'active' : ''}}" wire:click='allReadings'>Todos</x-buttons.filter>
-                            <x-buttons.filter color='green' class="{{$listCuestionnaries ? 'active' : ''}}" wire:click='onlyCuestionnaries'>Cuestionario</x-buttons.filter>
-                        </x-filters.status>
-                    </div>
+                    @can('fill.questionnarie')
+                        <div class="flex justify-center mt-4">
+                            <x-filters.status>
+                                <x-buttons.filter class="{{$listReadings ? 'active' : ''}}" wire:click='allReadings'>Todos</x-buttons.filter>
+                                <x-buttons.filter color='green' class="{{$listCuestionnaries ? 'active' : ''}}" wire:click='onlyCuestionnaries'>Cuestionario</x-buttons.filter>
+                            </x-filters.status>
+                        </div>
+                    @endcan
+                    
                 </div>
             </div>
 

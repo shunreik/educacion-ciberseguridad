@@ -52,6 +52,7 @@ class QuestionComponent extends Component
 
     public function createQuestion()
     {
+        $this->resetErrorBag('questionContent');
         $this->view = 'question.create';
         $this->questionContent = '';
         $this->createQuestionMode = true;
