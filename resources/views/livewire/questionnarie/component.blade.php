@@ -28,12 +28,13 @@
                                   <div  class="outline-none focus:outline-none"><svg class=" w-5 text-gray-600 h-5" fill="none" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" stroke="currentColor" viewBox="0 0 24 24"><path d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"></path></svg></div>
                                   <input type="search" name="" id="" wire:model="search" placeholder="Buscar lectura en base al título" class="w-full pl-4 text-sm outline-none focus:outline-none bg-transparent">
                                   
-                                  {{-- <div class="select">
+                                  <div class="select">
                                     <select name="" id="" wire:model="typeSearch" class="text-sm outline-none focus:outline-none bg-transparent mx-2">
                                       <option value="title" selected>Título</option>
                                       <option value="topic">Temática</option>
+                                      <option value="level">Nivel</option>
                                      </select>
-                                  </div> --}}
+                                  </div>
                                 </div>
                             </div>
                         </div>

@@ -3,6 +3,7 @@
 namespace App\Http\Livewire\Reading;
 
 use App\Http\Requests\ReadingRequest;
+use App\Models\Level;
 use App\Models\Reading;
 use App\Models\Topic;
 use App\Models\User;
@@ -13,7 +14,7 @@ use Livewire\WithPagination;
 class ReadingComponent extends Component
 {
     use WithPagination;
-    
+
     public $readingId, $title;
     public $privateMode = false, $publicMode = false;
     public $view = 'disable';
@@ -123,10 +124,11 @@ class ReadingComponent extends Component
         $this->all = false;
     }
 
-    public function filterReadings(User $user){
+    public function filterReadings(User $user)
+    {
         $readings = $user->readings();
 
-        if(!empty($this->search)){
+        if (!empty($this->search)) {
 
             switch ($this->typeSearch) {
                 case 'topic':
@@ -134,8 +136,15 @@ class ReadingComponent extends Component
                     $idTopicsFound = array_column($topics, 'id');
                     $readings = $readings->whereIn('topic_id', $idTopicsFound);
                     break;
-                
-                default://por defecto es el título de la lectura para realizar la búsqueda
+                    
+                case 'level':
+                    //Se debe buscar a los profesores en base a su nickname
+                    $levels = Level::where('name', 'LIKE', "$this->search%")->get()->toArray();
+                    $idLevelsFound = array_column($levels, 'id');
+                    $readings = $readings->whereIn('level_id', $idLevelsFound);
+                    break;
+
+                default: //por defecto es el título de la lectura para realizar la búsqueda
                     $readings = $readings->where("title", 'LIKE', "%$this->search%");
                     break;
             }
@@ -150,7 +159,7 @@ class ReadingComponent extends Component
         if ($this->disabled) {
             $readings = $readings->where('status', false);
         }
-        
+
         return $readings->latest()->paginate(10);
     }
 }

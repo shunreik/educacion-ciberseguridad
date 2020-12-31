@@ -53,6 +53,7 @@
                                     <select name="" id="" wire:model="typeSearch" class="text-sm outline-none focus:outline-none bg-transparent mx-2">
                                       <option value="title" selected>Título</option>
                                       <option value="topic">Temática</option>
+                                      <option value="level">Nivel</option>
                                      </select>
                                   </div>
                                 </div>

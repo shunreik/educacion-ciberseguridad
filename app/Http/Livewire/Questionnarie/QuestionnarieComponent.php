@@ -2,7 +2,9 @@
 
 namespace App\Http\Livewire\Questionnarie;
 
+use App\Models\Level;
 use App\Models\Questionnarie;
+use App\Models\Topic;
 use App\Models\User;
 use Livewire\Component;
 use Illuminate\Http\Request;
@@ -12,7 +14,7 @@ use Illuminate\Database\Eloquent\Builder;
 class QuestionnarieComponent extends Component
 {
     use WithPagination;
-    
+
     public $readingId, $questionnarieId;
     public $confirmEditModal = false;
     public $view = 'confirmEdit';
@@ -23,10 +25,11 @@ class QuestionnarieComponent extends Component
         $disabled = false;
 
     //Opciones de búsqueda
-    public $search = '';
+    public $typeSearch = '', $search = '';
 
     protected $queryString = [
         'search' => ['except' => ''],
+        'typeSearch' => ['except' => ''],
     ];
 
     public function render(Request $request)
@@ -91,11 +94,30 @@ class QuestionnarieComponent extends Component
         $this->all = false;
     }
 
-    public function filterCuestionnaries(User $user){
+    public function filterCuestionnaries(User $user)
+    {
         $readings = $user->readings();
 
-        if(!empty($this->search)){
-            $readings = $readings->where("title", 'LIKE', "%$this->search%");
+        if (!empty($this->search)) {
+
+            switch ($this->typeSearch) {
+                case 'topic':
+                    $topics = Topic::where('title', 'LIKE', "$this->search%")->get()->toArray();
+                    $idTopicsFound = array_column($topics, 'id');
+                    $readings = $readings->whereIn('topic_id', $idTopicsFound);
+                    break;
+
+                case 'level':
+                    //Se debe buscar a los profesores en base a su nickname
+                    $levels = Level::where('name', 'LIKE', "$this->search%")->get()->toArray();
+                    $idLevelsFound = array_column($levels, 'id');
+                    $readings = $readings->whereIn('level_id', $idLevelsFound);
+                    break;
+
+                default: //por defecto es el título de la lectura para realizar la búsqueda
+                    $readings = $readings->where("title", 'LIKE', "%$this->search%");
+                    break;
+            }
         }
 
         if ($this->all) {
@@ -111,7 +133,7 @@ class QuestionnarieComponent extends Component
                 $query->where('status', false);
             });
         }
-        
+
         return $readings->latest()->paginate(10);
     }
 }
