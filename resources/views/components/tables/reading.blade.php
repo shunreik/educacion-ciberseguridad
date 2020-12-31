@@ -10,7 +10,7 @@
                 <x-tables.th content='Título'/>
                 <x-tables.th content='Temática'/>
                 <x-tables.th content='Nivel'/>
-                <x-tables.th content='Estado'/>
+                <x-tables.th content='Estado lectura'/>
                 <x-tables.th content='Opciones'/>
               </tr>
             </thead>

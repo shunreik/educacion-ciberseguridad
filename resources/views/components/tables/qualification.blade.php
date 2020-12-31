@@ -8,6 +8,8 @@
             <thead>
               <tr>
                 <x-tables.th content='Lectura'/>
+                <x-tables.th content='Temática'/>
+                <x-tables.th content='Nivel'/>
                 <x-tables.th content='Fecha'/>
                 <x-tables.th content='Calificación'/>
                 <x-tables.th  content='Opción'/>
@@ -19,6 +21,12 @@
               <tr>
                 <td class="px-6 py-4 whitespace-nowrap">
                   <div class="text-sm text-gray-900">{{ $score->questionnarie->reading->title }}</div>
+                </td>
+                <td class="px-6 py-4 whitespace-nowrap">
+                  <div class="text-sm text-gray-900">{{ $score->questionnarie->reading->topic->title }}</div>
+                </td>
+                <td class="px-6 py-4 whitespace-nowrap">
+                  <div class="text-sm text-gray-900">{{ $score->questionnarie->reading->level->name }}</div>
                 </td>
                 <td class="px-6 py-4 whitespace-nowrap">
                   <div class="text-sm text-gray-900">{{ $score->created_at->format('d M Y') }}</div>

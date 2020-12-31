@@ -8,7 +8,9 @@
             <thead>
               <tr>
                 <x-tables.th content='Lectura'/>
-                <x-tables.th content='Estado'/>
+                <x-tables.th content='Temática'/>
+                <x-tables.th content='Nivel'/>
+                <x-tables.th content='Estado cuestionario'/>
                 <x-tables.th content='Opciones'/>
               </tr>
             </thead>
@@ -18,6 +20,12 @@
               <tr>
                 <td class="px-6 py-4 whitespace-nowrap">
                   <div class="text-sm text-gray-900">{{ $reading->title }}</div>
+                </td>
+                <td class="px-6 py-4 whitespace-nowrap">
+                  <div class="text-sm text-gray-900">{{ $reading->topic->title }}</div>
+                </td>
+                <td class="px-6 py-4 whitespace-nowrap">
+                  <div class="text-sm text-gray-900">{{ $reading->level->name }}</div>
                 </td>
                 <td class="px-6 py-4 whitespace-nowrap">
                   @if ($reading->questionnarie)

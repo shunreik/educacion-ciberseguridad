@@ -7,7 +7,7 @@
         <div class="grid grid-cols-6 gap-6 mb-3">
             <div class="col-span-6 sm:col-span-3 flex flex-wrap content-center">
                 <x-jet-section-title>
-                    <x-slot name='title'>Username</x-slot>
+                    <x-slot name='title'>Usuario</x-slot>
                     <x-slot name='description'>{{ $nickname }}</x-slot>
                 </x-jet-section-title>
             </div>
