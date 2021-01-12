@@ -11,7 +11,7 @@ class ResetPasswordNotification extends ResetPasswordBase
 {
     use Queueable;
 
-    //Se modifica el mensaje de restablecimiento de contrasenia
+    //Se modifica el mensaje de restablecimiento de contraseña
     /**
      * Get the reset password notification mail message for the given URL.
      *
@@ -26,7 +26,7 @@ class ResetPasswordNotification extends ResetPasswordBase
             ->line('Está recibiendo este correo electrónico porque recibimos una solicitud de restablecimiento de contraseña para su cuenta.')
             ->action('Restablecer contraseña', $url)
             ->line(Lang::get('Este enlace de restablecimiento de contraseña caducará en :count minutos.', ['count' => config('auth.passwords.'.config('auth.defaults.passwords').'.expire')]))
-            ->line('Si no ha solicitado un restablecimiento de contraseña, no se requiere ninguna otra acción.')
+            ->line('Si no ha solicitado un restablecimiento de contraseña, ignore este correo.')
             ->salutation('Saludos');
     }
 }

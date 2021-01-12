@@ -4,11 +4,11 @@
     </x-slot>
 
     <x-slot name="content">
-        <p class="my-2">Para que el cuestionario pueda ser público debe cumplir con los siguientes aspectos:</p>
+        <p class="my-2">Para publicar el cuestionario debe cumplir con los siguientes aspectos:</p>
         <ul class="text-sm">
             <li>* Tener un mínimo de tres preguntas registradas</li>
             <li>* Cada pregunta debe tener una respuesta registrada</li>
-            <li>* Cada pregunta debe tener por lo menos una opción registrada</li>
+            <li>* Cada pregunta debe tener al menos una opción registrada</li>
         </ul>
         <p class="my-2">Si cumple con dichos aspectos, puede publicar el cuestionario.</p>
     </x-slot>

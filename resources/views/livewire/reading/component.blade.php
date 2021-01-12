@@ -23,7 +23,7 @@
                     </div>
                     <div class="flex items-center" >
                         <div class="flex-grow mt-4 text-gray-500 mb-2">
-                            Puedes agregar una nueva lectura seleccionando la siguiente opción.
+                            Puedes agregar una nueva lectura seleccionando la siguiente opción:
                         </div>
                         {{-- <x-jet-button type='button' wire:click='create' wire:loading.attr="disabled">Agregar lectura</x-jet-button> --}}
                         <x-jet-button type='button' wire:click="create">Agregar lectura</x-jet-button>
@@ -40,7 +40,7 @@
 
                     <div class="grid lg:grid-cols-2 gap-1">
                         <div class="mt-2 text-2xl">
-                            Listado de tus lecturas registradas
+                            Listado de lecturas registradas
                         </div>
 
                         <div class="box my-4 lg:my-0">
@@ -61,7 +61,7 @@
                         </div>
                     </div>
                     <div class="mt-4 text-gray-500 mb-2">
-                        A continuación puedes obsevar el listado de lecturas que registrastes.
+                        A continuación, puedes obsevar el listado de lecturas registradas:
                     </div>
 
                     {{-- Opciones de filtrado --}}

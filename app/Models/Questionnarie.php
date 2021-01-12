@@ -28,7 +28,7 @@ class Questionnarie extends Model
     /**
      * Relaciones entre modelos
      */
-    //Un questionario le pertenece a una lectura
+    //Un cuestionario le pertenece a una lectura
     public function reading()
     {
         return $this->belongsTo(Reading::class);
@@ -39,7 +39,7 @@ class Questionnarie extends Model
     {
         return $this->hasMany(Question::class);
     }
-    //Un cuestionario puede tener más de una calificaión por parte del estudiante
+    //Un cuestionario puede tener una calificación por cada estudiante
     public function scores()
     {
         return $this->hasMany(Score::class);

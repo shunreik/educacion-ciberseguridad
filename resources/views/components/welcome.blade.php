@@ -4,14 +4,11 @@
     </div> --}}
 
     <div class="mt-2 text-2xl">
-        {{ config('app.name', 'Laravel') }}
+        Bienvenido
     </div>
 
     <div class="mt-4 text-gray-500 mb-2">
-        Este proyecto propone implementar una aplicación web educativa orientada al aprendizaje en seguridad informática, permitiendo generar estrategias de identificación y defensa ante ataques de ingeniería social y suplantación de identidad. 
-    </div>
-    <div class="mt-4 text-gray-500 mb-2">
-        A continuación, se te presenta lo que puedes realizar:
+        A continuación, se presentan los módulos asignados a tu usuario:
     </div>
 </div>
 
@@ -20,14 +17,14 @@
     @can('manage.students')
     <x-cards.module>
         <x-slot name='icon'>
-            <img src="https://img.icons8.com/material/50/000000/view-module.png" class="w-8 h-8"/>
+            <img src="https://img.icons8.com/material/24/000000/student-male--v1.png" class="w-8 h-8"/>
         </x-slot>
         <x-slot name='title'><a href="{{ route('student') }}">Módulo Estudiante</a></x-slot>
         <x-slot name="description">
-            Puedes listar a todos los estudiantes registrados, observar a detalle la información de un estudiante, activar o desactivar a un determinado esrudiante para impedir o permitir su acceso a la aplicación web.
+            Aquí puedes visualizar todos los estudiantes registrados con su información detallada y activar o desactivar a un determinado estudiante para permitir o impedir su acceso a la Aplicación Web.
         </x-slot>
         <x-link-module href="{{ route('student') }}">
-            Visitar módulo
+            Ir a Estudiantes
         </x-link-module>
     </x-cards.module>
     @endcan
@@ -35,14 +32,14 @@
     @can('manage.teachers')
     <x-cards.module class="border-gray-200 md:border-t-0 md:border-l border-b">
         <x-slot name='icon'>
-            <img src="https://img.icons8.com/material/50/000000/view-module.png" class="w-8 h-8"/>
+            <img src="https://img.icons8.com/material/24/000000/school-house.png" class="w-8 h-8"/>
         </x-slot>
         <x-slot name='title'><a href="{{ route('teacher') }}">Módulo Profesor</a></x-slot>
         <x-slot name="description">
-            Puedes listar a todos los profesores registrados, visualizar, registrar, actualizar a un determinado profesor. Además, puede activar o descativar a los profesores para permitir o impedir su acceso a la aplicación web.
+            Aquí puedes visualizar todos los profesores registrados con su información a detalle y actualizarla. Además puedes añadir nuevos registros y activar o desactivar a un determinado profesor para permitir o impedir su acceso a la Aplicación Web.
         </x-slot>
         <x-link-module href="{{ route('teacher') }}">
-            Visitar módulo
+            Ir a Profesores
         </x-link-module>
     </x-cards.module>
     @endcan
@@ -50,14 +47,14 @@
     @can('manage.readings')
     <x-cards.module class="border-gray-200">
         <x-slot name='icon'>
-            <img src="https://img.icons8.com/material/50/000000/view-module.png" class="w-8 h-8"/>
+            <img src="https://img.icons8.com/material/24/000000/read--v1.png" class="w-8 h-8"/>
         </x-slot>
         <x-slot name='title'><a href="{{ route('reading') }}">Módulo Lectura</a></x-slot>
         <x-slot name="description">
-            Puedes listar a todas las lecturas registradas, visualizar, registrar, actualizar a un determinado registro. También, puede privar o publicar a las lecturas para permitir o impedir su visibilidad a los estudiantes.
+            Aquí puedes visualizar todas las lecturas que has registrado con su contenido a detalle y actualizarlo. Además puedes añadir nuevos registros y publicar u ocultar una determinada lectura para permitir o impedir su visibilidad en el Módulo Contenido.
         </x-slot>
         <x-link-module href="{{ route('reading') }}">
-            Visitar módulo
+            Ir a Lecturas
         </x-link-module>
     </x-cards.module>
     @endcan
@@ -65,14 +62,14 @@
     @can('manage.questionnaries')
     <x-cards.module class="border-gray-200 md:border-l border-b">
         <x-slot name='icon'>
-            <img src="https://img.icons8.com/material/50/000000/view-module.png" class="w-8 h-8"/>
+            <img src="https://img.icons8.com/material/24/000000/school--v1.png" class="w-8 h-8"/>
         </x-slot>
         <x-slot name='title'><a href="{{ route('questionnarie') }}">Módulo Cuestionario</a></x-slot>
         <x-slot name="description">
-            Puedes listar a todas los cuestionarios registradas, agregar o editar un cuestionario asignado a una determinada lectura. También, puedes publicar tu cuestionario o privarlo para que sea accedido por los estudiantes.
+            Aquí puedes visualizar todos los cuestionarios que has registrado con su contenido a detalle y actualizarlo. Además puedes añadir nuevos registros y publicar u ocultar un determinado cuestionario para permitir o impedir su visibilidad a los estudiantes.
         </x-slot>
         <x-link-module href="{{ route('questionnarie') }}">
-            Visitar módulo
+            Ir a Cuestionarios
         </x-link-module>
     </x-cards.module>
     @endcan
@@ -80,14 +77,14 @@
     {{-- @can('manage.readings') --}}
     <x-cards.module class="border-gray-200 border-t border-r">
         <x-slot name='icon'>
-            <img src="https://img.icons8.com/material/50/000000/view-module.png" class="w-8 h-8"/>
+            <img src="https://img.icons8.com/material/24/000000/table-of-content.png" class="w-8 h-8"/>
         </x-slot>
         <x-slot name='title'><a href="{{ route('content') }}">Módulo Contenido</a></x-slot>
         <x-slot name="description">
-            Visualiza, según la temática, las lecturas registradas por parte de los profesores de la aplicación web.
+            Aquí puedes visualizar según la temática, las lecturas registradas por los profesores.
         </x-slot>
         <x-link-module href="{{ route('content') }}">
-            Visitar módulo
+            Ir a Contenido
         </x-link-module>
     </x-cards.module>
     {{-- @endcan --}}
@@ -95,14 +92,14 @@
     @can('show.qualification')
     <x-cards.module class="border-gray-200 md:border-l">
         <x-slot name='icon'>
-            <img src="https://img.icons8.com/material/50/000000/view-module.png" class="w-8 h-8"/>
+            <img src="https://img.icons8.com/material/24/000000/contract--v1.png" class="w-8 h-8"/>
         </x-slot>
         <x-slot name='title'><a href="{{ route('questionnarie') }}">Módulo Calificaciones</a></x-slot>
         <x-slot name="description">
-            Puedes listar tus calificaiones de los cuestionarios completados.
+            Aquí puedes visualizar las calificaciones obtenidas y la retroalimentación de los cuestionarios que has resuelto.
         </x-slot>
         <x-link-module href="{{ route('qualifications') }}">
-            Visitar módulo
+            Ir a Calificaciones
         </x-link-module>
     </x-cards.module>
     @endcan

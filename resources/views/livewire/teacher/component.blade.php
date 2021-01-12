@@ -23,7 +23,7 @@
                     </div>
                     <div class="flex items-center" >
                         <div class="flex-grow mt-4 text-gray-500 mb-2">
-                            Puedes agregar a un nuevo profesor seleccionando la siguiente opción.
+                            Puedes agregar a un nuevo profesor seleccionando la siguiente opción:
                         </div>
                         <x-jet-button type='button' wire:click='create' wire:loading.attr="disabled">Agregar profesor</x-jet-button>
                     </div>
@@ -61,7 +61,7 @@
                     </div>
 
                     <div class="mt-4 text-gray-500 mb-2">
-                        A continuación puedes obsevar el listado de profesores registrados.
+                        A continuación, puedes obsevar el listado de profesores registrados.
                     </div>
 
                     {{-- Opciones de filtrado --}}

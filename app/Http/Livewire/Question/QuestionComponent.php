@@ -31,11 +31,11 @@ class QuestionComponent extends Component
     public $createOptionMode = false, $editOptionMode = false;
     //Vista
     public $view = 'question.create';
-    //Publicar o privar al cuestionario
+    //Publicar u ocultar al cuestionario
     public $publishMode = false;
 
     //Route Model Binding
-    // En los componentes de Livewire, usa en mount()lugar de un constructor de clase __construct()como puede estar acostumbrado.
+    // En los componentes de Livewire, usa en mount()lugar de un constructor de clase __construct()
     public function mount(Reading $reading)
     {
         $this->reading = $reading;

@@ -105,7 +105,7 @@ class ReadingComponent extends Component
     }
 
     /**
-     * Método que permite el filtrado de lecturas publicadas
+     * Filtrar: publico
      */
     public function activatedReadings()
     {
@@ -115,7 +115,7 @@ class ReadingComponent extends Component
     }
 
     /**
-     * Método que permitr el filtrado de lecturas ocultadas o desactivadas
+     * Filtrar: privado
      */
     public function disabledReadings()
     {
@@ -132,19 +132,20 @@ class ReadingComponent extends Component
 
             switch ($this->typeSearch) {
                 case 'topic':
+                //Búsqueda por temática
                     $topics = Topic::where('title', 'LIKE', "$this->search%")->get()->toArray();
                     $idTopicsFound = array_column($topics, 'id');
                     $readings = $readings->whereIn('topic_id', $idTopicsFound);
                     break;
                     
                 case 'level':
-                    //Se debe buscar a los profesores en base a su nickname
+                    //Búsqueda por nivel
                     $levels = Level::where('name', 'LIKE', "$this->search%")->get()->toArray();
                     $idLevelsFound = array_column($levels, 'id');
                     $readings = $readings->whereIn('level_id', $idLevelsFound);
                     break;
 
-                default: //por defecto es el título de la lectura para realizar la búsqueda
+                default: //Búsqueda por título
                     $readings = $readings->where("title", 'LIKE', "%$this->search%");
                     break;
             }

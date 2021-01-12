@@ -12,7 +12,7 @@ class ContentComponent extends Component
     public function render()
     {
         //Solo de obtienen los topics que tengan lecturas asignadas y además
-        //estas lecturas estén activas (publicadas)
+        //estas lecturas esten públicas
         $topics = Topic::whereHas('readings', function (Builder $query) {
             $query->where('status', true);
         })->get();

@@ -113,7 +113,7 @@ class User extends Authenticatable implements MustVerifyEmail, CanResetPassword
             ->all();
         // dd($roles);
 
-        //Se obtiene al modelo del usuario
+        //Se obtiene el modelo del usuario
         $model = $this->getModel();
         // dd($model);
 
@@ -196,7 +196,7 @@ class User extends Authenticatable implements MustVerifyEmail, CanResetPassword
         $this->notify(new VerifyEmail);
     }
 
-    //Se modeifica el método que envía el correo de restablecimiento de contrasenia
+    //Se modeifica el método que envía el correo de restablecimiento de contraseña
     /**
      * Send the password reset notification.
      *

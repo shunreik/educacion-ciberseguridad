@@ -102,19 +102,20 @@ class QuestionnarieComponent extends Component
 
             switch ($this->typeSearch) {
                 case 'topic':
+                //Busqueda por tematica
                     $topics = Topic::where('title', 'LIKE', "$this->search%")->get()->toArray();
                     $idTopicsFound = array_column($topics, 'id');
                     $readings = $readings->whereIn('topic_id', $idTopicsFound);
                     break;
 
                 case 'level':
-                    //Se debe buscar a los profesores en base a su nickname
+                    //Busqueda por nivel
                     $levels = Level::where('name', 'LIKE', "$this->search%")->get()->toArray();
                     $idLevelsFound = array_column($levels, 'id');
                     $readings = $readings->whereIn('level_id', $idLevelsFound);
                     break;
 
-                default: //por defecto es el título de la lectura para realizar la búsqueda
+                default: //Busqueda por titulo
                     $readings = $readings->where("title", 'LIKE', "%$this->search%");
                     break;
             }

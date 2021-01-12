@@ -14,7 +14,7 @@ class TopicComponent extends Component
     use WithPagination;
 
     public $topicId, $topicTitle, $topicDescription;
-    //opciones de filtro
+    //Opciones de filtro
     public $listReadings = true, $listCuestionnaries = false;
     //Opciones de búsqueda
     public $typeSearch = '', $search = '';
@@ -40,7 +40,7 @@ class TopicComponent extends Component
 
             switch ($this->typeSearch) {
                 case 'autor':
-                    //Se debe buscar a los profesores en base a su nickname
+                    //Busqueda por usuario
                     $teacheRole = Role::where('name', 'profesor')->first();
                     $teachers = $teacheRole->users();
                     $teacherSearch = $teachers->where("nickname", 'LIKE', "$this->search%")->get()->toArray();
@@ -49,13 +49,13 @@ class TopicComponent extends Component
                     break;
 
                 case 'level':
-                    //Se debe buscar a los profesores en base a su nickname
+                    //Búsqueda por nivel
                     $levels = Level::where('name', 'LIKE', "$this->search%")->get()->toArray();
                     $idLevelsFound = array_column($levels, 'id');
                     $readings = $readings->whereIn('level_id', $idLevelsFound);
                     break;
 
-                default: //por defecto es el título de la lectura para realizar la búsqueda
+                default: //Busqueda por título
                     $readings = $readings->where("title", 'LIKE', "%$this->search%");
                     break;
             }

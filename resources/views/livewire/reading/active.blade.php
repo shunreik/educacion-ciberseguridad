@@ -4,7 +4,7 @@
     </x-slot>
 
     <x-slot name="content">
-        La lectura con el título de: <span class="font-bold">{{ $title }}</span>, va ser publicado para los estudiantes.
+        La lectura con el título de: <span class="font-bold">{{ $title }}</span>, va a ser publicada para los estudiantes.
     </x-slot>
 
     <x-slot name="footer">

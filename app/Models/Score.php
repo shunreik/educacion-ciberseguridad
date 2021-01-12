@@ -30,12 +30,12 @@ class Score extends Model
     {
         return $this->belongsTo(User::class);
     }
-    //Una nota/calificación le pertenece a un questionario
+    //Una nota/calificación le pertenece a un cuestionario
     public function questionnarie()
     {
         return $this->belongsTo(Questionnarie::class);
     }
-    //Un puntaje o calificación puede tener adjuntada varias respuestas del estudiante
+    //Una calificación por cada estudiante
     public function studentResponses()
     {
         return $this->hasMany(StudentResponse::class);

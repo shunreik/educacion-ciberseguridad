@@ -5,7 +5,7 @@
     </x-slot>
 
     <x-slot name="description">
-        Actualiza la información de perfil y la dirección de correo electrónico de tu cuenta.
+        Actualiza la información y el correo electrónico de tu cuenta.
         {{-- {{ __('Update your account\'s profile information and email address.') }} --}}
     </x-slot>
 

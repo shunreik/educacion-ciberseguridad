@@ -12,7 +12,7 @@
                     <h3 class="mt-2 text-2xl font-medium text-gray-900">Temáticas</h3>
             
                     <p class="mt-1 text-sm text-gray-600">
-                        Lorem ipsum dolor sit amet consectetur adipisicing elit. Corrupti illum alias perspiciatis ut error exercitationem commodi deleniti at sequi officiis fugiat ratione, soluta maxime vel odio, hic nulla nostrum? Modi!
+                        ¿Alguna vez te has preguntado como obtienen tu información por internet, como se oculta tu clave o si existen secretos en las imagenes?. En esta sección lo descubrirás. Da clic en la temática de tu interés y no pares de aprender!
                     </p>
                 </div>
             </div>
@@ -31,7 +31,7 @@
                                         <h3 class="text-3xl text-gray-700 font-semibold leading-tight my-3">{{ count($topic->readings()->where('status', true)->get() )}}</h3>
                                         <p class="text-xs text-green-500 leading-tight">Lecturas</p>
                                         <a href="{{route('content.topic', $topic->id)}}" class="mt-3 w-1/2 inline-flex ml-2 items-center px-4 py-2 bg-gray-800 border border-transparent rounded-md font-semibold text-xs text-white uppercase tracking-widest hover:bg-gray-700 active:bg-gray-900 focus:outline-none focus:border-gray-900 focus:shadow-outline-gray disabled:opacity-25 transition ease-in-out duration-150">
-                                            <span class="mx-auto">Listar</span>
+                                            <span class="mx-auto">Ver Lecturas</span>
                                         </a>
                                     </div>
                                 </div>

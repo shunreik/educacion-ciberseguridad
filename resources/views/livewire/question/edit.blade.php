@@ -1,10 +1,10 @@
 <x-jet-dialog-modal wire:model="editQuestionMode">
     <x-slot name="title">
-        <h1 class="uppercase">Actualizar pregunta</h1>
+        <h1 class="uppercase">Editar pregunta</h1>
     </x-slot>
 
     <x-slot name="content">
-        {{-- Formulario para registrar una pregunta --}}
+        {{-- Editar preguntas --}}
         <div class="col-span-6 sm:col-span-4">
             <x-jet-label for="questionContent" value="Pregunta" />
             <x-jet-input id="questionContent" type="text" class="mt-1 block w-full" wire:model="questionContent" />
@@ -19,7 +19,7 @@
         </x-jet-secondary-button>
 
         <x-jet-button type='button' wire:loading.attr="disabled" wire:click="updateQuestion">
-            Actualizar
+            Editar
         </x-jet-button>
     </x-slot>
 </x-jet-dialog-modal>

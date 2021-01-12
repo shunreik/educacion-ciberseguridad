@@ -24,8 +24,8 @@ class QuestionnarieController extends Controller
             $options = $question->options;
 
             $answer = collect($question->answer()->get()); //para que se almacene el objeto de clase Answer
-            $concat = $options->concat($answer); //Se concatena las dos colleciones
-            $concat = $concat->shuffle(); // se mezclan randónicamente las opciones y respuesta
+            $concat = $options->concat($answer); //Se concatena las dos colecciones
+            $concat = $concat->shuffle(); // se generan alatoriamente la respuesta y opciones
 
             $questionnarieForm[$index] = [
                 'question' => $question,
@@ -92,7 +92,7 @@ class QuestionnarieController extends Controller
             // var_dump("Pregunta: $question", "Respuesta: $answer");
         }
 
-        $qualification = round($correctAnswers * (10 / $numberOfQuestions), 1); //Se redondea a dos décimales
+        $qualification = round($correctAnswers * (10 / $numberOfQuestions), 1); //Se redondea a entero
         $score->qualification = $qualification; //Se actualiza la nota del registro
         $score->save();
         // dd("Tu calificación es: $qualification", $validated);

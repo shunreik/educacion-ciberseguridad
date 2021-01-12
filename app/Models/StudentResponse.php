@@ -26,7 +26,7 @@ class StudentResponse extends Model
     /**
      * Relaciones entre modelos
      */
-    //Una respuesta del estudiante le pertenece a un puntaje o calificación
+    //Una respuesta del estudiante pertenece a una calificación
     public function score()
     {
         return $this->belongsTo(Score::class);

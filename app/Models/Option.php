@@ -45,7 +45,7 @@ class Option extends Model
     /**
      * Relaciones entre modelos
      */
-    //una option le pertenece a una pregunta
+    //una opcion le pertenece a una pregunta
     public function question()
     {
         return $this->belongsTo(Question::class);

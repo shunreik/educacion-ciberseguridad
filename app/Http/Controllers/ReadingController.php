@@ -40,7 +40,7 @@ class ReadingController extends Controller
         $reading->topic_id = $validate['topic_id'];
         $reading->level_id = $validate['level_id'];
         $reading->save();
-        //Se guardan la imagenes del reading
+        //Se guardan la imagen del reading
         if ($request->hasFile('newImages')) {
             foreach ($request->file('newImages') as $image) {
                 $image = new Image([
@@ -94,18 +94,18 @@ class ReadingController extends Controller
         $reading->level_id = $validate['level_id'];
         $reading->save();
 
-        //Se verifica si alguna imagen de la lectura haya sido eliminada
+        //Se verifica si alguna imagen de la lectura ha sido eliminada
         $oldImagesReceived = $request['oldImages'];
         $oldImagesReading = $reading->images;
 
-        //En caso de recibir un arreglo de imágenes antiguas de la lectura
+        //En caso de recibir un arreglo de imagenes antiguas de la lectura
         if ($request->has('oldImages')) {
-            //Se procede a recorrer las imágenes registrdas de la lectura
+            //Se procede a recorrer las imágenes registradas de la lectura
             foreach ($oldImagesReading as $oldImageReading) {
-                //Por cada imágen se verifica si ha sido borrada
+                //Por cada imagen se verifica si ha sido borrada
                 $pathOldImage = $oldImageReading->path;
                 if ($this->searchDeletedImages($pathOldImage, $oldImagesReceived)) {
-                    //En caso de que si se haya eliminado se procede a borrar la imágen del servidor y BDD
+                    //Si ha sido eliminada se borra la imagen del servidor y BDD
                     $reading->images()->where('path', $pathOldImage)->delete();
                     if (Storage::disk('s3')->exists($pathOldImage)) {
                         Storage::disk('s3')->delete($pathOldImage);
@@ -113,10 +113,9 @@ class ReadingController extends Controller
                 }
             }
         } else {
-            //En caso de no recibir un arreglo de imágenes antiguas del reading, se verifica si la lectura no tenga
-            //imágenes registradas con anterioridad
+            //Verifica que la lectura no tenga imagenes registradas con anterioridad
             if (count($oldImagesReading) > 0) {
-                //Si el reporte contiene imágenes, se procede a eliminar todas las imágenes
+                //Si contiene imágenes, se procede a eliminar todas las imágenes
                 $reading->images()->delete();
                 foreach ($oldImagesReading as $oldImageReading) {
                     $pathOldImage = $oldImageReading->path;

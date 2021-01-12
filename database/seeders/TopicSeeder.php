@@ -19,11 +19,11 @@ class TopicSeeder extends Seeder
          */
         Topic::create([
             'title' => 'Ataques informáticos',
-            'description' => 'Un ataque informático consiste en aprovechar alguna debilidad o falla (vulnerabilidad) en el software, en el hardware, e incluso, en las personas que forman parte de un ambiente informático.'
+            'description' => 'Un ataque informático consiste en aprovechar cualquier vulnerabilidad en el software, hardware, e incluso, en las personas que forman parte de un ambiente informático, con la finalidad de obtener información.'
         ]);
         Topic::create([
             'title' => 'Criptografía',
-            'description' => 'La criptografía se ha definido, tradicionalmente, como el ámbito de la criptología que se ocupa de las técnicas de cifrado o codificado destinadas a alterar las representaciones lingüísticas de ciertos mensajes con el fin de hacerlos ininteligibles a receptores no autorizados.'
+            'description' => 'La criptografía se ha definido, tradicionalmente, como las técnicas de cifrado para alterar las representaciones lingüísticas de ciertos mensajes con el fin de hacerlos ilegibles a receptores no autorizados.'
         ]);
         Topic::create([
             'title' => 'Esteganografía',

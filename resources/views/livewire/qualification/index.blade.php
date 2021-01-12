@@ -19,11 +19,11 @@
             <div class="bg-white overflow-hidden shadow-xl sm:rounded-lg">
                 <div class="p-6 sm:px-20 bg-white border-b border-gray-200">
                     <div class="mt-2 text-2xl">
-                        Listado de tus calificaciones
+                        Calificaciones:
                     </div>
 
                     <div class="mt-4 text-gray-500 mb-2">
-                        A continuación puedes obsevar el puntaje obtenido en los cuestionarios completados.
+                        Aquí puedes visualizar el puntaje obtenido en cada cuestionario que has resuelto. Además, al dar clic en Ver puedes obtener su respectiva retroalimentación.
                     </div>
 
                     <x-tables.qualification :scores="$scores"/>

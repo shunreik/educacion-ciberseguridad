@@ -1,10 +1,10 @@
 <x-jet-dialog-modal wire:model="privateMode">
     <x-slot name="title">
-        <h1 class="uppercase">Confirmar la ocultación de la lectura</h1>
+        <h1 class="uppercase">Confirmar ocultar lectura</h1>
     </x-slot>
 
     <x-slot name="content">
-        La lectura con el título de: <span class="font-bold">{{ $title }}</span>, va ser oculto para los estudiantes.
+        La lectura con el título de: <span class="font-bold">{{ $title }}</span>, va a ser oculta para los estudiantes.
     </x-slot>
 
     <x-slot name="footer">

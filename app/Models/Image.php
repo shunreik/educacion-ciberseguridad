@@ -37,7 +37,7 @@ class Image extends Model
     }
     
     /**
-     * Se obtiene la direción de la imagen
+     * Se obtiene la dirección de la imagen
      */
     public function getPathImage()
     {

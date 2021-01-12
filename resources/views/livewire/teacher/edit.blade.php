@@ -4,7 +4,7 @@
     </x-slot>
 
     <x-slot name="content">
-        {{-- Formulario para editar profesor --}}
+        {{-- Editar profesores --}}
         <x-forms.teacher />
     </x-slot>
 
@@ -15,7 +15,7 @@
         </x-jet-secondary-button>
 
         <x-jet-button type='button' wire:click='update' wire:loading.attr="disabled">
-            Actualizar
+            Editar
         </x-jet-button>
     </x-slot>
 </x-jet-dialog-modal>

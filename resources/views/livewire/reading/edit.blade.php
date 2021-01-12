@@ -15,7 +15,7 @@
         <div class='md:grid md:grid-cols-3 md:gap-6'>
             <x-jet-section-title>
                 <x-slot name="title">Formulario</x-slot>
-                <x-slot name="description">A continuación, puedes actualizar a la lectura seleccionada</x-slot>
+                <x-slot name="description">A continuación, puedes actualizar lectura seleccionada</x-slot>
             </x-jet-section-title>
         
             <div class="mt-5 md:mt-0 md:col-span-2">

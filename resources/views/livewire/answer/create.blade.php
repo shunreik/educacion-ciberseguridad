@@ -5,7 +5,7 @@
     </x-slot>
 
     <x-slot name="content">
-        {{-- Formulario para registrar una respuesta --}}
+        {{-- Registrar de respuesta --}}
         <div class="col-span-6 sm:col-span-4">
             <x-jet-label for="answerContent" value="Respuesta" />
             <x-jet-input id="answerContent" type="text" class="mt-1 block w-full" wire:model="answerContent"/>
@@ -13,7 +13,7 @@
         </div>
 
         <p class="text-sm text-gray-500 mt-6">
-            Recuarda que al agregar la respuesta no podrás eliminarla, solo podrás modificar.
+            Recuerda: Al agregar la respuesta no podrás eliminarla, solo modificarla.
         </p>
     </x-slot>
 

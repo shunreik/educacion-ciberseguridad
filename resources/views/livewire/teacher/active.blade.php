@@ -4,7 +4,7 @@
     </x-slot>
 
     <x-slot name="content">
-        El usuario <span class="font-bold">{{ $nickname }}</span> va ser activado, permitiendo su acceso a la aplicación web.
+        El profesor <span class="font-bold">{{ $nickname }}</span> va a ser activado, permitiendo su acceso a la Aplicación Web.
     </x-slot>
 
     <x-slot name="footer">

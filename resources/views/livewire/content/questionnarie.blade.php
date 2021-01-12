@@ -20,10 +20,12 @@
                     </div>
 
                     <div class="mt-4 text-gray-500 mb-3">
-                        A continuación puedes obsevar las preguntas que componen al cuestionario
+                        Este cuestionario te permite averiguar cuanto has aprendido. 
+
+                        Selecciona unicamente una opción por pregunta y asegúrate de responderlas todas.
                     </div>
 
-                    {{-- Formulario --}}
+                    {{-- Cuestionario --}}
 
                     <form action="{{ route('store.questionnarie', $questionnarie->id) }}" method="POST">
                         @csrf

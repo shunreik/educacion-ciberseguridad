@@ -5,14 +5,13 @@
     </x-slot>
 
     <x-slot name="description">
-        Gestione y cierre la sesión de sus sesiones activas en otros navegadores y dispositivos
+        Visualiza y cierra tus sesiones activas en otros navegadores y dispositivos.
         {{-- {{ __('Manage and logout your active sessions on other browsers and devices.') }} --}}
     </x-slot>
 
     <x-slot name="content">
         <div class="max-w-xl text-sm text-gray-600">
-            Si es necesario, puede cerrar sesión en todas las demás sesiones iniciadas en navegador o dispositivo. Algunas de sus sesiones recientes se enumeran a continuación; sin embargo, esta lista puede no ser exhaustiva. Si cree que su cuenta se ha visto comprometida, también debe actualizar su contraseña.
-            {{-- {{ __('If necessary, you may logout of all of your other browser sessions across all of your devices. Some of your recent sessions are listed below; however, this list may not be exhaustive. If you feel your account has been compromised, you should also update your password.') }} --}}
+            Da clic aquí si deseas cerrar las sesiones activas en otros navegadores y dispositivos. Si notas alguna actividad sospechosa te recomendamos cambiar tu contraseña.
         </div>
 
         @if (count($this->sessions) > 0)
@@ -58,7 +57,7 @@
 
         <div class="flex items-center mt-5">
             <x-jet-button wire:click="confirmLogout" wire:loading.attr="disabled">
-                Cerrar sesiones iniciadas anteriormente
+                Cerrar sesiones
                 {{-- {{ __('Logout Other Browser Sessions') }} --}}
             </x-jet-button>
 

@@ -40,7 +40,7 @@
                         </div>
                     </div>
                     <div class="mt-4 text-gray-500 mb-2">
-                        A continuación puedes agregar o editar el cuestionario en cada una de tus lecturas.
+                        A continuación, puedes agregar o editar el cuestionario en cada una de tus lecturas.
                     </div>
 
                     {{-- Opciones de filtrado --}}

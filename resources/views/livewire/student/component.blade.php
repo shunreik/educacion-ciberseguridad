@@ -43,7 +43,7 @@
                     </div>
 
                     <div class="mt-4 text-gray-500 mb-4">
-                        A continuación puedes obsevar el listado de estudiantes registrados.
+                        A continuación, puedes obsevar el listado de estudiantes registrados.
                     </div>
 
                     {{-- Opciones de filtrado --}}

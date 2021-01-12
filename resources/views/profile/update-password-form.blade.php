@@ -5,7 +5,7 @@
     </x-slot>
 
     <x-slot name="description">
-        Asegúrate de que tu cuenta esté usando una contraseña larga y aleatoria para mantenerse segura.
+        Asegúrate que tu contraseña contenga al menos una mayúscula, un número y una longitud de 8 caracteres.
         {{-- {{ __('Ensure your account is using a long, random password to stay secure.') }} --}}
     </x-slot>
 

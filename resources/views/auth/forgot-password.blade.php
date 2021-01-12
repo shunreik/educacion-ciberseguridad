@@ -5,8 +5,7 @@
         </x-slot>
 
         <div class="mb-4 text-sm text-gray-600">
-            ¿Olvidaste tu contraseña? No hay problema. Simplemente háganos saber su correo electrónico y le enviaremos un enlace de restablecimiento de contraseña.
-            {{-- {{ __('Forgot your password? No problem. Just let us know your email address and we will email you a password reset link that will allow you to choose a new one.') }} --}}
+            ¿Olvidaste tu contraseña? No hay problema. Escribe tu correo electrónico y te enviaremos un enlace para reestablecer tu contraseña.
         </div>
 
         @if (session('status'))

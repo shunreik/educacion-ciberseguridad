@@ -24,7 +24,7 @@ class VerifyEmail extends VerifyEmailBase
             ->greeting('Verificación de correo electrónico')
             ->line('Por favor, haga clic en el botón de abajo para verificar su dirección de correo electrónico.')
             ->action('Verificar la dirección de correo electrónico', $url)
-            ->line('Si no ha creado una cuenta, no se requiere ninguna otra acción.')
+            ->line('Si no ha creado una cuenta, ignore este correo.')
             ->salutation('Saludos');
     }
 }

@@ -4,7 +4,7 @@
     </x-slot>
 
     <x-slot name="content">
-        {{-- Formulario para registrar un nuevo profesor --}}
+        {{-- Registrar profesores --}}
         <x-forms.teacher />
     </x-slot>
 

@@ -1,11 +1,11 @@
 <x-jet-dialog-modal wire:model="editAnswerMode">
     <x-slot name="title">
-        <h1 class="uppercase">Actualizar respuesta</h1>
+        <h1 class="uppercase">Editar respuesta</h1>
         <h4 class="mt-2 text-gray-600">{{ $questionContent }}</h4>
     </x-slot>
 
     <x-slot name="content">
-        {{-- Formulario para registrar una respuesta --}}
+        {{-- Editar respuesta --}}
         <div class="col-span-6 sm:col-span-4">
             <x-jet-label for="answerContent" value="Respuesta" />
             <x-jet-input id="answerContent" type="text" class="mt-1 block w-full" wire:model="answerContent"/>
@@ -20,7 +20,7 @@
         </x-jet-secondary-button>
 
         <x-jet-button type='button' wire:loading.attr="disabled" wire:click="updateAnswer">
-            Actualizar
+            Editar
         </x-jet-button>
     </x-slot>
 </x-jet-dialog-modal>

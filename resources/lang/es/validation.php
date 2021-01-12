@@ -151,6 +151,9 @@ return [
     'attributes' => [
         'name' => 'nombre',
         'surname' => 'apellido',
+        'email' => 'correo',
+        'nickname' => 'usuario',
+        'photo' => 'foto',
     ],
 
 ];

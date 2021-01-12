@@ -4,7 +4,7 @@
     </x-slot>
 
     <x-slot name="content">
-        {{-- Formulario para registrar una pregunta --}}
+        {{-- Registrar preguntas --}}
         <div class="col-span-6 sm:col-span-4">
             <x-jet-label for="questionContent" value="Pregunta" />
             <x-jet-input id="questionContent" type="text" class="mt-1 block w-full" wire:model="questionContent" />
@@ -12,7 +12,7 @@
         </div>
 
         <p class="text-sm text-gray-500 mt-6">
-            Recuarda que al agregar una nueva pregunta no podrás eliminarla, solo podrás modificar.
+            Recuerda: Al agregar una pregunta no podrás eliminarla, solo modificarla.
         </p>
     </x-slot>
 

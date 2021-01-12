@@ -5,7 +5,7 @@
     </x-slot>
 
     <x-slot name="content">
-        {{-- Formulario para registrar una respuesta --}}
+        {{-- Registrar opciones --}}
         <div class="col-span-6 sm:col-span-4">
             <x-jet-label for="optionContent" value="Opción" />
             <x-jet-input id="optionContent" type="text" class="mt-1 block w-full" wire:model="optionContent"/>
@@ -13,7 +13,7 @@
         </div>
 
         <p class="text-sm text-gray-500 mt-6">
-            Recuarda que al agregar la opción no podrás eliminarla, solo podrás modificarla.
+            Recuerda: Al agregar una opción no podrás eliminarla, solo modificarla.
         </p>
     </x-slot>
 

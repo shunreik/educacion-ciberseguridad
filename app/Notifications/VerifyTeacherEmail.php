@@ -51,11 +51,11 @@ class VerifyTeacherEmail extends VerifyEmailBase
         return (new MailMessage)
             ->subject(env('APP_NAME').' - '.$this->subject)
             ->greeting($this->subject)
-            ->line('A continuación puedes observar tus credenciales de acceso:')
+            ->line('A continuación, puedes observar tus credenciales de acceso:')
             ->line('Correo electróncico: '.$this->email)
             ->line('Contraseña: '.$this->password)
             ->action('Verificar la dirección de correo electrónico', $url)
-            ->line('Recuerda cambiar tu contraseña una vez ingreses a '.env('APP_NAME'))
+            ->line('Recuerda cambiar tu contraseña al ingresar a: '.env('APP_NAME'))
             ->salutation('Saludos');
     }
 }

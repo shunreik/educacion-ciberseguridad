@@ -82,7 +82,7 @@ class Password implements Rule
                 && !$this->requireNumeric
                 && !$this->requireSpecialCharacter:
                 // El atributo :debe tener al menos :length caracteres y contener al menos un carácter en mayúsculas.
-                return __('La contraseña debe tener al menos :length caracteres y contener al menos un carácter en mayúscula.', [
+                return __('La contraseña debe tener al menos :length caracteres y contener al menos un caracter en mayúscula.', [
                     'length' => $this->length,
                 ]);
 
@@ -96,28 +96,28 @@ class Password implements Rule
             case $this->requireSpecialCharacter
                 && !$this->requireUppercase
                 && !$this->requireNumeric:
-                return __('La contraseña debe tener al menos :length caracteres y contener al menos un carácter especial.', [
+                return __('La contraseña debe tener al menos :length caracteres y contener al menos un caracter especial.', [
                     'length' => $this->length,
                 ]);
 
             case $this->requireUppercase
                 && $this->requireNumeric
                 && !$this->requireSpecialCharacter:
-                return __('La contraseña debe tener al menos :length caracteres y contener al menos un carácter en mayúscula y un número.', [
+                return __('La contraseña debe tener al menos :length caracteres y contener al menos un caracter en mayúscula y un número.', [
                     'length' => $this->length,
                 ]);
 
             case $this->requireUppercase
                 && $this->requireSpecialCharacter
                 && !$this->requireNumeric:
-                return __('La contraseña debe tener al menos :length caracteres y contener al menos un carácter en mayúscula y un carácter especial.', [
+                return __('La contraseña debe tener al menos :length caracteres y contener al menos un caracter en mayúscula y un caracter especial.', [
                     'length' => $this->length,
                 ]);
 
             case $this->requireUppercase
                 && $this->requireNumeric
                 && $this->requireSpecialCharacter:
-                return __('La contraseña debe tener al menos :length caracteres y contener al menos un carácter en mayúscula, un número y un carácter especial.', [
+                return __('La contraseña debe tener al menos :length caracteres y contener al menos un caracter en mayúscula, un número y un caracter especial.', [
                     'length' => $this->length,
                 ]);
 

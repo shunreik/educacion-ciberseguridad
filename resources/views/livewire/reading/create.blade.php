@@ -15,7 +15,7 @@
         <div class='md:grid md:grid-cols-3 md:gap-6'>
             <x-jet-section-title>
                 <x-slot name="title">Formulario</x-slot>
-                <x-slot name="description">A continuación, puedes registrar una nueva lecturas</x-slot>
+                <x-slot name="description">A continuación, puedes registrar una nueva lectura</x-slot>
             </x-jet-section-title>
         
             <div class="mt-5 md:mt-0 md:col-span-2">
@@ -70,7 +70,7 @@
                                 <section class="h-full overflow-auto p-8 w-full flex flex-col" id="multi-upload">
 
                                   <ul id="gallery-upload" class="flex flex-1 flex-wrap">
-                                      {{-- Agregar imágenes actuguas del reading--}}
+                                      {{-- Agregar imágenes del reading--}}
                                   </ul>
 
                                   <input id="hidden-input" type="file" multiple class="hidden" />

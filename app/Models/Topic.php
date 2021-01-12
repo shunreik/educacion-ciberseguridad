@@ -32,7 +32,7 @@ class Topic extends Model
    /**
     * Relaciones entre modelos
     */
-    //Una temática puede tener varias lectururas
+    //Una temática puede tener varias lecturas
     public function readings()
     {
         return $this->hasMany(Reading::class);

@@ -4,7 +4,7 @@
     </x-slot>
 
     <x-slot name="content">
-        El usuario <span class="font-bold">{{ $nickname }}</span> va ser desactivado, impidiendo su acceso a la aplicación web.
+        El estudiante <span class="font-bold">{{ $nickname }}</span> va a ser desactivado, impidiendo su acceso a la Aplicación Web.
     </x-slot>
 
     <x-slot name="footer">

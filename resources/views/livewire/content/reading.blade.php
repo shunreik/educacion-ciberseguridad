@@ -49,7 +49,7 @@
                         </div>
                         <div class="col-span-6 sm:col-span-3">
                             <x-jet-section-title>
-                                <x-slot name='title'>Fecha de publicación: </x-slot>
+                                <x-slot name='title'>Publicado el: </x-slot>
                                 <x-slot name='description'>{{ $readingDate }}</x-slot>
                             </x-jet-section-title>
                         </div>
@@ -121,7 +121,7 @@
                                     <div class="flex items-center mb-4" >
                                         <div class="flex-grow">
                                             <div class="mt-2 text-md">
-                                                Ahora puede reforzar tus conociemintos de esta lectura llenado el siguiente cuestionario. Para ello, selecciona la siguiente opción.
+                                                Felicidades! Has aprendido algo nuevo, comprueba tus conocimientos resolviendo el siguiente cuestionario:
                                             </div>
                                         </div>
                                         <a href="{{ route('content.questionnarie', $readingQuestionnarie->id) }}" class="bg-green-300 hover:bg-green-400 rounded-md capitalize px-3 py-2 mr-2">
