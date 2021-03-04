@@ -44,7 +44,7 @@
                                         <span class="text-green-500 font-semibold">Sesión actual</span>
                                         {{-- <span class="text-green-500 font-semibold">{{ __('This device') }}</span> --}}
                                     @else
-                                        Ultima sessión {{ $session->last_active }}
+                                        Ultima sesión {{ $session->last_active }}
                                         {{-- {{ __('Last active') }} {{ $session->last_active }} --}}
                                     @endif
                                 </div>
@@ -75,7 +75,7 @@
             </x-slot>
 
             <x-slot name="content">
-                Introduce tu contraseña para confirmar que quieres cerrar todas las sessiones iniciadas con anterioridad en otros dispositivos.
+                Introduce tu contraseña para confirmar que quieres cerrar todas las sesiones iniciadas con anterioridad en otros dispositivos.
                 Recuerda que se mantiene la sesión actual.
                 {{-- {{ __('Please enter your password to confirm you would like to logout of your other browser sessions across all of your devices.') }} --}}
 
@@ -124,7 +124,7 @@
                 </x-jet-secondary-button>
 
                 <x-jet-button class="ml-2" wire:click="logoutOtherBrowserSessions" wire:loading.attr="disabled">
-                    Cerrar sessiones anteriores
+                    Cerrar sesiones anteriores
                     {{-- {{ __('Logout Other Browser Sessions') }} --}}
                 </x-jet-button>
             </x-slot>
