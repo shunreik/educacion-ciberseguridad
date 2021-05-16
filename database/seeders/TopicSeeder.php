@@ -27,7 +27,7 @@ class TopicSeeder extends Seeder
         ]);
         Topic::create([
             'title' => 'Esteganografía',
-            'description' => 'La esteganografía trata el estudio y aplicación de técnicas que permiten ocultar mensajes u objetos, dentro de otros, llamados portadores, de modo que no se perciba su existencia.'
+            'description' => 'La esteganografía trata del estudio y aplicación de técnicas que permiten ocultar mensajes u objetos, dentro de otros, llamados portadores, de modo que no se perciba su existencia.'
         ]);
     }
 }
